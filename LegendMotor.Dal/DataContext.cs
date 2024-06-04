@@ -17,6 +17,7 @@ namespace LegendMotor.Dal
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //Composite primary key
             modelBuilder.Entity<BinLocationStaff>()
                 .HasKey(m => new { m.BinLocationCode, m.StaffId, });
         }
