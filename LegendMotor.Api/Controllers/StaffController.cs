@@ -23,6 +23,7 @@ namespace LegendMotor.Api.Controllers
             _logger = logger;
             _http = httpContextAccessor.HttpContext;
             _ctx = ctx;
+
         }
 
         [HttpGet]
