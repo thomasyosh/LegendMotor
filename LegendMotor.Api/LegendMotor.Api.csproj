@@ -19,4 +19,8 @@
     <ProjectReference Include="..\LegendMotor.Dal\LegendMotor.Dal.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dtos\" />
+  </ItemGroup>
+
 </Project>
