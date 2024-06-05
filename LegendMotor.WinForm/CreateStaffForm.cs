@@ -117,7 +117,16 @@ namespace LegendMotor.WinForm
                 binLocationStaff.StaffId = staff.StaffId;
                 _ctx.BinLocationStaff.Add(binLocationStaff);
             }
-            _ctx.SaveChanges();
+
+            try
+            {
+                _ctx.SaveChanges();
+                MessageBox.Show("New staff created successfully.");
+            }catch (Exception ex)
+            {
+                MessageBox.Show("[Warning] Something is wrong.");
+            }
+            
 
         }
 

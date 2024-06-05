@@ -38,7 +38,7 @@ namespace LegendMotor.WinForm
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Staff staff = _ctx.Staff.FirstOrDefault(staff => staff.Name == "storemen");
+            Staff staff = _ctx.Staff.FirstOrDefault(staff => staff.Name == "admin");
             try
             {
                 if (staff != null)

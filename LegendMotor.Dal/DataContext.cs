@@ -1,10 +1,6 @@
 ﻿using LegendMotor.Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Data.Sqlite;
 
 namespace LegendMotor.Dal
 {
@@ -12,7 +8,11 @@ namespace LegendMotor.Dal
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("Server=localhost;Database=legendmotor;Uid=root;Pwd=pass1234;");
+            //optionsBuilder.UseMySQL("Server=localhost;Database=legendmotor;Uid=root;Pwd=pass1234;");
+
+            //you will not be able to open the sqlite database file if you put it in C drive, windows will not permit you to read/write the db file
+            var db = new SqliteConnection("Data Source=file:D:\\legendmotor.db;Mode=ReadWrite;");
+            optionsBuilder.UseSqlite(db);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
