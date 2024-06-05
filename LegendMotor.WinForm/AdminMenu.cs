@@ -27,7 +27,8 @@ namespace LegendMotor.WinForm
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
+            UpdateStaffForm updateStaffForm = new UpdateStaffForm();
+            updateStaffForm.Show();
         }
     }
 }

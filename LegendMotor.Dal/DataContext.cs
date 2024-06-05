@@ -23,6 +23,10 @@ namespace LegendMotor.Dal
             //Composite primary key
             modelBuilder.Entity<BinLocationStaff>()
                 .HasKey(m => new { m.BinLocationCode, m.StaffId, });
+
+            modelBuilder.Entity<Staff>()
+                .HasIndex(staff => new {staff.Email, staff.Name})
+                .IsUnique();
         }
 
         public DbSet<Staff> Staff { get; set; }
