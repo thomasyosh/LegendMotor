@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/LegendMotor.Api/LegendMotor.Api.csproj
+/LegendMotor.WinForm/LegendMotor.WinForm.csproj
+/LegendMotor.Dal/LegendMotor.Dal.csproj
+/LegendMotor.Api/Startup.cs

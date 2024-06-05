@@ -1,4 +1,5 @@
-﻿using LegendMotor.Dal;
+﻿using LegendMotor.Api.Dtos;
+using LegendMotor.Dal;
 using LegendMotor.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -33,15 +34,16 @@ namespace LegendMotor.WinForm
                     spare2 => spare2.SpareId,
                     (spare, spare2) => new { BinLocationSpare = spare, Spare = spare2 })
                         .Where(p => p.BinLocationSpare.BinLocationCode.Equals(binLocationCode))
-                        .Select(s => new
+                        .Select(s => new BinLocationSpareDto
                         {
-                            s.BinLocationSpare.SpareId,
-                            s.Spare.Name,
-                            s.Spare.Description,
-                            s.Spare.Category,
-                            s.Spare.Weight,
-                            s.BinLocationSpare.Stock,
-                            s.BinLocationSpare.ROL
+                             SpareId     =      s.BinLocationSpare.SpareId,
+                             Name        =      s.Spare.Name,
+                             Description =      s.Spare.Description,
+                             Category    =      s.Spare.Category,
+                             Weight      =      s.Spare.Weight,
+                             Stock       =      s.BinLocationSpare.Stock,
+                             ROL         =      s.BinLocationSpare.ROL
+
                         }
                     ).Where(s => s.Category.Equals(category) && s.Name.Equals(name))
                      .ToList();
