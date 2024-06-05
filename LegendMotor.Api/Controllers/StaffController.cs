@@ -1,4 +1,6 @@
-﻿using LegendMotor.Dal;
+﻿using AutoMapper;
+using LegendMotor.Api.Dtos;
+using LegendMotor.Dal;
 using LegendMotor.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,12 +19,19 @@ namespace LegendMotor.Api.Controllers
         private readonly ILogger<StaffController> _logger;
         private readonly HttpContext _http;
         private readonly DataContext _ctx;
-        public StaffController(ILogger<StaffController> logger, IHttpContextAccessor httpContextAccessor,
-            DataContext ctx)
+        private readonly IMapper _mapper;
+        public StaffController(
+                                ILogger<StaffController> logger,
+                                IHttpContextAccessor httpContextAccessor,
+                                DataContext ctx,
+                                IMapper mapper
+
+            )
         {
             _logger = logger;
             _http = httpContextAccessor.HttpContext;
             _ctx = ctx;
+            _mapper = mapper;
 
         }
 
@@ -43,12 +52,14 @@ namespace LegendMotor.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateStaff([FromBody] Staff staff)
+        public async Task<IActionResult> CreateStaff([FromBody] StaffCreateDto staff)
         {
-            _ctx.Staff.Add(staff);
+            var domainStaff = _mapper.Map<Staff>(staff);
+            domainStaff.StaffId = Guid.NewGuid().ToString();
+            _ctx.Staff.Add(domainStaff);
             await _ctx.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetStaffById), new { id = staff.StaffId }, staff);
+            return CreatedAtAction(nameof(GetStaffById), new { id = domainStaff.StaffId }, domainStaff);
         }
 
         [HttpPut]

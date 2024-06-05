@@ -33,6 +33,7 @@ namespace LegendMotor.Api
             });
             services.AddHttpContextAccessor();
             services.AddDbContext<DataContext>();
+            services.AddAutoMapper(typeof(Startup));
 
         }
 
