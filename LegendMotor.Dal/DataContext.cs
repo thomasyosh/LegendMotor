@@ -11,7 +11,10 @@ namespace LegendMotor.Dal
             //optionsBuilder.UseMySQL("Server=localhost;Database=legendmotor;Uid=root;Pwd=pass1234;");
 
             //you will not be able to open the sqlite database file if you put it in C drive, windows will not permit you to read/write the db file
-            var db = new SqliteConnection("Data Source=file:..\\LegendMotor.Dal\\legendmotor.db;Mode=ReadWrite;");
+            DirectoryInfo soultion = new DirectoryInfo(System.AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.Parent;
+            string path = soultion.ToString();
+            string sqliteDb = Path.Combine(path, "LegendMotor.Dal", "legendmotor.db");
+            string db = "Data Source=file:" + sqliteDb + ";Mode=ReadWrite;";
             optionsBuilder.UseSqlite(db);
         }
 
