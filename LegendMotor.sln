@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LegendMotor.Dal", "LegendMo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LegendMotor.Domain", "LegendMotor.Domain\LegendMotor.Domain.csproj", "{14B958EF-5C5B-432A-A02D-ED489E7B27EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegendMotor.Api", "LegendMotor.Api\LegendMotor.Api.csproj", "{9A8C7EC3-094B-42C6-9B4B-68366D5F5A47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LegendMotor.Api", "LegendMotor.Api\LegendMotor.Api.csproj", "{9A8C7EC3-094B-42C6-9B4B-68366D5F5A47}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyControl", "EasyControl\EasyControl.csproj", "{1838A946-6C55-46D3-9E57-E6BFBC81D2D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{9A8C7EC3-094B-42C6-9B4B-68366D5F5A47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A8C7EC3-094B-42C6-9B4B-68366D5F5A47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A8C7EC3-094B-42C6-9B4B-68366D5F5A47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1838A946-6C55-46D3-9E57-E6BFBC81D2D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1838A946-6C55-46D3-9E57-E6BFBC81D2D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1838A946-6C55-46D3-9E57-E6BFBC81D2D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1838A946-6C55-46D3-9E57-E6BFBC81D2D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

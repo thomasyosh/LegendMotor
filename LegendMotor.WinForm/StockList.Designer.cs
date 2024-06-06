@@ -31,6 +31,8 @@
             button1 = new Button();
             textBox1 = new TextBox();
             textBox2 = new TextBox();
+            dataGridView1 = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // button1
@@ -59,16 +61,28 @@
             textBox2.TabIndex = 2;
             textBox2.TextChanged += textBox2_TextChanged;
             // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(125, 130);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Size = new Size(603, 215);
+            dataGridView1.TabIndex = 3;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            // 
             // StockList
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(dataGridView1);
             Controls.Add(textBox2);
             Controls.Add(textBox1);
             Controls.Add(button1);
             Name = "StockList";
             Text = "StockList";
+            Load += StockList_Load;
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -78,5 +92,6 @@
         private Button button1;
         private TextBox textBox1;
         private TextBox textBox2;
+        private DataGridView dataGridView1;
     }
 }
