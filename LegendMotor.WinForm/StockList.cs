@@ -26,7 +26,7 @@ namespace LegendMotor.WinForm
             this._ctx = new DataContext();
         }
 
-        private void GetStocks(string name, char category)
+        private List<BinLocationSpareDto> GetStocks(string name, char category)
         {
             string binLocationCode = StaffManager.Instance.GetBinLocationCode();
             var item = _ctx.BinLocationSpare.Join(_ctx.Spare,
@@ -47,6 +47,7 @@ namespace LegendMotor.WinForm
                         }
                     ).Where(s => s.Category.Equals(category) && s.Name.Equals(name))
                      .ToList();
+            return item;
 
         }
 
@@ -55,7 +56,7 @@ namespace LegendMotor.WinForm
         {
             char category = textBox1.Text[0];
             string name = textBox2.Text.Trim();
-            GetStocks(name, category);
+            List<BinLocationSpareDto> binLocationSpareDto =  GetStocks(name, category);
 
         }
 
