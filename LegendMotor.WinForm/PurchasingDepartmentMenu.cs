@@ -7,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using LegendMotor.Domain.Models;
 
-namespace EasyControl.Model
+namespace LegendMotor.WinForm
 {
     public partial class PurchasingDepartmentMenu : Form
     {

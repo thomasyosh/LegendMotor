@@ -100,6 +100,106 @@ namespace LegendMotor.Dal.Migrations
                     b.ToTable("BinLocationStaff");
                 });
 
+            modelBuilder.Entity("LegendMotor.Domain.Models.Dealer", b =>
+                {
+                    b.Property<string>("DealerCode")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Fax")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Telex")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("DealerCode");
+
+                    b.ToTable("Dealer");
+                });
+
+            modelBuilder.Entity("LegendMotor.Domain.Models.IncomingOrder", b =>
+                {
+                    b.Property<string>("OrderId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("DealerCode")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("DeliveryAddress")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("InvoiceAddress")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("InvoiceId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("InvoiceName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("OrderHeaderId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Remark")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("staffId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("OrderId");
+
+                    b.ToTable("IncomingOrder");
+                });
+
+            modelBuilder.Entity("LegendMotor.Domain.Models.OrderHeader", b =>
+                {
+                    b.Property<string>("OrderHeaderId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("OrderHeaderId");
+
+                    b.ToTable("OrderHeader");
+                });
+
             modelBuilder.Entity("LegendMotor.Domain.Models.Position", b =>
                 {
                     b.Property<string>("PositionCode")
@@ -123,7 +223,8 @@ namespace LegendMotor.Dal.Migrations
                     b.Property<string>("SpareId")
                         .HasColumnType("TEXT");
 
-                    b.Property<char>("Category")
+                    b.Property<string>("Category")
+                        .IsRequired()
                         .HasMaxLength(1)
                         .HasColumnType("TEXT");
 
@@ -141,9 +242,9 @@ namespace LegendMotor.Dal.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Url")
+                    b.Property<byte[]>("Url")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("BLOB");
 
                     b.Property<int>("Weight")
                         .HasColumnType("INTEGER");
@@ -151,6 +252,22 @@ namespace LegendMotor.Dal.Migrations
                     b.HasKey("SpareId");
 
                     b.ToTable("Spare");
+                });
+
+            modelBuilder.Entity("LegendMotor.Domain.Models.SparePrice", b =>
+                {
+                    b.Property<string>("SpareID")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SupplierCode")
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("PurchasingPrice")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("SpareID", "SupplierCode");
+
+                    b.ToTable("SparePrice");
                 });
 
             modelBuilder.Entity("LegendMotor.Domain.Models.Staff", b =>
@@ -196,6 +313,32 @@ namespace LegendMotor.Dal.Migrations
                         .IsUnique();
 
                     b.ToTable("Staff");
+                });
+
+            modelBuilder.Entity("LegendMotor.Domain.Models.Supplier", b =>
+                {
+                    b.Property<string>("SupplierCode")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("SupplierCode");
+
+                    b.ToTable("Supplier");
                 });
 #pragma warning restore 612, 618
         }

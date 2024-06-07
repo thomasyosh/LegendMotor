@@ -15,11 +15,11 @@ namespace LegendMotor.Domain.Models
         public string Name { get; set;}
         [MaxLength(1)]
         [DefaultValue("A")]
-        public char Category { get; set; }
+        public string Category { get; set; }
         public string Description { get; set; }
         public int Weight { get; set; }
         public int Price { get; set; }
-        public string Url { get; set; }
+        public byte[] Url { get; set; }
         public int Count { get; set; }
 
     }

@@ -1,4 +1,4 @@
-﻿namespace EasyControl.Model
+﻿namespace LegendMotor.WinForm
 {
     partial class PurchasingDepartmentMenu
     {

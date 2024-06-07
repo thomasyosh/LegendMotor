@@ -4,155 +4,202 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static Org.BouncyCastle.Math.EC.ECCurve;
 
-namespace LegendMotor.WinForm
+namespace LegendMotor.WinForm;
+
+public partial class CreateStaffForm : Form
 {
-    public partial class CreateStaffForm : Form
+    private readonly DataContext _ctx;
+    private List<string> positionCodes = new List<string>();
+    private List<string> binLocationCodes = new List<string>();
+    private List<string> areaCodes = new List<string>();
+    private string gender = "";
+    public CreateStaffForm()
     {
-        DataContext _ctx;
-        private List<string> positionCodes = new List<string>();
-        private List<string> binLocationCodes = new List<string>();
-        private List<string> areaCodes = new List<string>();
-        private string gender = "";
-        private string binLocationCode = "";
-        public CreateStaffForm()
+        InitializeComponent();
+        this._ctx = new DataContext();
+    }
+
+    private void CreateStaffForm_Load(object sender, EventArgs e)
+    {
+        var positions = _ctx.Position;
+        foreach (var position in positions)
         {
-            InitializeComponent();
-            _ctx = new DataContext();
+            positionCodes.Add(position.PositionCode);
+            comboBox1.Items.Add(position.Name);
+        }
+        var areas = _ctx.Area;
+
+        foreach (var area in areas)
+        {
+            areaCodes.Add(area.AreaCode);
+            comboBox2.Items.Add(area.Name);
         }
 
-        private void CreateStaffForm_Load(object sender, EventArgs e)
+
+        var binLocations = _ctx.BinLocation;
+        foreach (var binLocation in binLocations)
         {
-            positionCodes = _ctx.Position.Select(position => position.PositionCode).ToList();
-            areaCodes = _ctx.Area.Select(areaCode => areaCode.AreaCode).ToList();
-            binLocationCodes = _ctx.BinLocation.Select(binLocationCode => binLocationCode.BinLocationCode).ToList();
-            Console.WriteLine(positionCodes);
-            foreach (string positionCode in positionCodes)
-            {
-                comboBox1.Items.Add(positionCode);
-            }
-
-            foreach (string areaCode in areaCodes)
-            {
-                comboBox2.Items.Add(areaCode);
-            }
-
-            foreach (string binLocationCode in binLocationCodes)
-            {
-                comboBox3.Items.Add(binLocationCode);
-            }
-
-
-
+            binLocationCodes.Add(binLocation.BinLocationCode);
+            comboBox3.Items.Add(binLocation.Name);
         }
+    }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+    private void button2_Click(object sender, EventArgs e)
+    {
+        string name = textBox1.Text;
+        string email = textBox4.Text;
+        string address = textBox3.Text;
+        string phone = textBox2.Text;
+        string password = textBox5.Text;
+        if (comboBox1.SelectedIndex == -1 || comboBox2.SelectedIndex == -1)
         {
-            if (comboBox1.SelectedIndex <= -1 || comboBox1.SelectedIndex >= positionCodes.Count)
+            MessageBox.Show("Please select a position and area");
+            return;
+        }
+        string positionCode = positionCodes[comboBox1.SelectedIndex];
+        string areaCode = areaCodes[comboBox2.SelectedIndex];
+        if (gender.Equals("") || name.Equals("") || email.Equals("") || address.Equals("") || phone.Equals("") || password.Equals(""))
+        {
+            MessageBox.Show("Please fill in all fields");
+            return;
+        }
+        string binLocationCode = "";
+        if (positionCode.Equals("storemen") || positionCode.Equals("src"))
+        {
+            if (comboBox3.SelectedIndex <= -1 || comboBox3.SelectedIndex >= binLocationCodes.Count)
             {
+                MessageBox.Show("Please select a bin location");
                 return;
             }
-
-
-
-        }
-
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioButton1.Checked)
-            {
-                gender = "M";
-                radioButton2.Checked = false;
-            }
-        }
-
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioButton2.Checked)
-            {
-                gender = "F";
-                radioButton1.Checked = false;
-            }
-
-        }
-
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            string positionCode = positionCodes[comboBox1.SelectedIndex];
-            string areaCode = areaCodes[comboBox2.SelectedIndex];
             binLocationCode = binLocationCodes[comboBox3.SelectedIndex];
-            Staff staff = new Staff();
-            staff.StaffId = Guid.NewGuid().ToString();
-            staff.Email = textBox1.Text;
-            staff.Password = textBox2.Text;
-            staff.Name = textBox3.Text;
-            staff.Phone = textBox5.Text;
-            staff.Address = textBox4.Text;
-            staff.Gemder = gender;
-            staff.PositionCode = positionCode;
-            staff.AreaCode = areaCode;
-            _ctx.Staff.Add(staff);
-            
+        }
+        string staffId = Guid.NewGuid().ToString();
+        string hashedPassword = "abcd1234";
+        Console.WriteLine(password);
+        Staff staff = new Staff();
+        staff.StaffId = staffId;
+        staff.Name = name;
+        staff.Password = hashedPassword;
+        staff.Gemder = gender;
+        staff.Email = email;
+        staff.Phone = phone;
+        staff.Address = address;
+        staff.AreaCode = areaCode;
+        staff.PositionCode = positionCode;
 
-            if (!binLocationCode.Equals(""))
+        try
+        {
+            int failed = 0;
             {
-                BinLocationStaff binLocationStaff = new BinLocationStaff();
-                binLocationStaff.BinLocationCode = binLocationCode;
-                binLocationStaff.StaffId = staff.StaffId;
-                _ctx.BinLocationStaff.Add(binLocationStaff);
+                _ctx.Staff.Add(staff);
+                try
+                {
+                    _ctx.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    failed++;
+                    Console.WriteLine("Error inserting data into Database!");
+                }
+
+
+                if (!binLocationCode.Equals(""))
+                {
+                    BinLocationStaff binLocationStaff = new BinLocationStaff();
+                    binLocationStaff.BinLocationCode = binLocationCode;
+                    binLocationStaff.StaffId = staffId;
+                    _ctx.BinLocationStaff.Add(binLocationStaff);
+                    try
+                    {
+                        _ctx.SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        failed++;
+                        Console.WriteLine("Error inserting data into Database!");
+                    }
+
+                }
+                if (failed == 0)
+                {
+                    MessageBox.Show("Staff created successfully");
+                    this.Close();
+                }
+                else
+                {
+                    Console.WriteLine(failed);
+                    MessageBox.Show("Failed to create staff");
+                }
             }
-
-            try
-            {
-                _ctx.SaveChanges();
-                MessageBox.Show("New staff created successfully.");
-            }catch (Exception ex)
-            {
-                MessageBox.Show("[Warning] Something is wrong.");
-            }
-            
-
         }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        catch (Exception ex)
         {
-
+            Console.WriteLine(ex.StackTrace);
+            MessageBox.Show(ex.Message);
         }
+    }
+    private void button1_Click(object sender, EventArgs e)
+    {
+        textBox5.Text = "abcd1234";
+    }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
+    private void radioButton1_CheckedChanged(object sender, EventArgs e)
+    {
+        if (radioButton1.Checked)
         {
-
+            gender = "M";
+            radioButton2.Checked = false;
         }
+    }
 
-        private void textBox3_TextChanged(object sender, EventArgs e)
+    private void radioButton2_CheckedChanged(object sender, EventArgs e)
+    {
+        if (radioButton2.Checked)
         {
-
+            gender = "F";
+            radioButton1.Checked = false;
         }
+    }
 
-        private void textBox4_TextChanged(object sender, EventArgs e)
+    private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (comboBox1.SelectedIndex <= -1 || comboBox1.SelectedIndex >= positionCodes.Count)
         {
-
+            return;
         }
-
-        private void textBox5_TextChanged(object sender, EventArgs e)
+        if (positionCodes[comboBox1.SelectedIndex].Trim().Equals("storemen") || positionCodes[comboBox1.SelectedIndex].Trim().Equals("src"))
         {
-
+            comboBox3.Visible = true;
+            label7.Visible = true;
+        }
+        else
+        {
+            comboBox3.Visible = false;
+            comboBox3.SelectedIndex = -1;
+            label7.Visible = false;
         }
     }
 }
+
+/*
+    
+
+
+
+    
+    }*/
+

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using LegendMotor.Api.Dtos;
 using LegendMotor.Dal;
+using LegendMotor.Dal.Repository;
+using LegendMotor.Domain.Abstractions.Repositories;
 using LegendMotor.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -19,13 +21,15 @@ namespace LegendMotor.Api.Controllers
         private readonly HttpContext _http;
         private readonly DataContext _ctx;
         private readonly IMapper _mapper;
+        private readonly IBinLocationRepository _binLocationRepository;
 
-        public BinLocationController(ILogger<StaffController> logger, IHttpContextAccessor http, DataContext ctx, IMapper mapper)
+        public BinLocationController(ILogger<StaffController> logger, IHttpContextAccessor http, DataContext ctx, IMapper mapper, BinLocationRepository binLocationRepository)
         {
             _logger = logger;
             _http = http.HttpContext;
             _ctx = ctx;
             _mapper = mapper;
+            _binLocationRepository = binLocationRepository;
         }
 
         [HttpGet("/api/GetAllBinLocation")]
@@ -52,6 +56,7 @@ namespace LegendMotor.Api.Controllers
         [HttpPost("/api/CreateBinLocationSpare")]
         public async Task<IActionResult> CreateBinLocationSpare([FromBody] BinLocationSpare binLocationSpare)
         {
+            binLocationSpare.Id = Guid.NewGuid();
             _ctx.BinLocationSpare.Add(binLocationSpare);
             await _ctx.SaveChangesAsync();
             return Ok();
@@ -65,9 +70,9 @@ namespace LegendMotor.Api.Controllers
             return Ok();
         }
 
-        [Route("{binLocationCode}/{name}/{category}")]
+        [Route("{binLocationCode}/{spareName}/{category}")]
         [HttpGet]
-        public async Task<ActionResult<List<BinLocationSpareDto>>> GetStockList(string binLocationCode, string name, char category)
+        public async Task<ActionResult<List<BinLocationSpareDto>>> GetStockList(string binLocationCode, string spareName, char category)
         {
                     var item = _ctx.BinLocationSpare.Join(_ctx.Spare,
                     spare => spare.SpareId,
@@ -84,7 +89,7 @@ namespace LegendMotor.Api.Controllers
                             Stock = s.BinLocationSpare.Stock,
                             ROL = s.BinLocationSpare.ROL
                         }
-                    ).Where(s => s.Category.Equals(category) && s.Name.Equals(name))
+                    ).Where(s => s.Category.Equals(category) && s.Name.Equals(spareName))
                      .ToList();
             return Ok(item);
         }

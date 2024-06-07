@@ -1,0 +1,88 @@
+dbug: 7/6/2024 13:58:06.595 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 8.0.6 initialized 'DataContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite:8.0.6' with options: None
+dbug: 7/6/2024 13:58:06.644 CoreEventId.QueryCompilationStarting[10111] (Microsoft.EntityFrameworkCore.Query) 
+      Compiling query expression: 
+      'DbSet<Staff>()
+          .FirstOrDefault(staff => staff.Name.Equals(__username_0) && staff.Password.Equals(__password_1))'
+dbug: 7/6/2024 13:58:06.976 CoreEventId.QueryExecutionPlanned[10107] (Microsoft.EntityFrameworkCore.Query) 
+      Generated query execution expression: 
+      'queryContext => new SingleQueryingEnumerable<Staff>(
+          (RelationalQueryContext)queryContext, 
+          RelationalCommandCache.QueryExpression(
+              Projection Mapping:
+                  EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: Staff.StaffId (string) Required PK AfterSave:Throw, 0], [Property: Staff.Address (string) Required, 1], [Property: Staff.AreaCode (string) Required, 2], [Property: Staff.Email (string) Required Index, 3], [Property: Staff.Gemder (string) Required, 4], [Property: Staff.Name (string) Required Index, 5], [Property: Staff.Password (string) Required, 6], [Property: Staff.Phone (string) Required, 7], [Property: Staff.PositionCode (string) Required, 8] }
+              SELECT TOP(1) s.StaffId, s.Address, s.AreaCode, s.Email, s.Gemder, s.Name, s.Password, s.Phone, s.PositionCode
+              FROM Staff AS s
+              WHERE (s.Name == @__username_0) && (s.Password == @__password_1)), 
+          null, 
+          Func<QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator, Staff>, 
+          LegendMotor.Dal.DataContext, 
+          False, 
+          False, 
+          True
+      )
+          .SingleOrDefault()'
+dbug: 7/6/2024 13:58:07.016 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 7/6/2024 13:58:07.033 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (14ms).
+dbug: 7/6/2024 13:58:07.036 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'main' on server 'file:D:\LegendMotor\LegendMotor.Dal\legendmotor.db'.
+dbug: 7/6/2024 13:58:07.051 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'main' on server 'D:\LegendMotor\LegendMotor.Dal\legendmotor.db'.
+dbug: 7/6/2024 13:58:07.057 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteReader'.
+dbug: 7/6/2024 13:58:07.063 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteReader' (4ms).
+dbug: 7/6/2024 13:58:07.067 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteReader' (11ms).
+dbug: 7/6/2024 13:58:07.076 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[@__username_0='?' (Size = 4), @__password_1='?' (Size = 6)], CommandType='Text', CommandTimeout='30']
+      SELECT "s"."StaffId", "s"."Address", "s"."AreaCode", "s"."Email", "s"."Gemder", "s"."Name", "s"."Password", "s"."Phone", "s"."PositionCode"
+      FROM "Staff" AS "s"
+      WHERE "s"."Name" = @__username_0 AND "s"."Password" = @__password_1
+      LIMIT 1
+info: 7/6/2024 13:58:07.098 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (22ms) [Parameters=[@__username_0='?' (Size = 4), @__password_1='?' (Size = 6)], CommandType='Text', CommandTimeout='30']
+      SELECT "s"."StaffId", "s"."Address", "s"."AreaCode", "s"."Email", "s"."Gemder", "s"."Name", "s"."Password", "s"."Phone", "s"."PositionCode"
+      FROM "Staff" AS "s"
+      WHERE "s"."Name" = @__username_0 AND "s"."Password" = @__password_1
+      LIMIT 1
+dbug: 7/6/2024 13:58:07.102 RelationalEventId.DataReaderClosing[20301] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Closing data reader to 'main' on server 'D:\LegendMotor\LegendMotor.Dal\legendmotor.db'.
+dbug: 7/6/2024 13:58:07.108 RelationalEventId.DataReaderDisposing[20300] (Microsoft.EntityFrameworkCore.Database.Command) 
+      A data reader for 'main' on server 'D:\LegendMotor\LegendMotor.Dal\legendmotor.db' is being disposed after spending 5ms reading results.
+dbug: 7/6/2024 13:58:07.111 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'main' on server 'D:\LegendMotor\LegendMotor.Dal\legendmotor.db'.
+dbug: 7/6/2024 13:58:07.114 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'main' on server 'file:D:\LegendMotor\LegendMotor.Dal\legendmotor.db' (3ms).
+dbug: 7/6/2024 13:58:11.771 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'main' on server 'file:D:\LegendMotor\LegendMotor.Dal\legendmotor.db'.
+dbug: 7/6/2024 13:58:11.771 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'main' on server 'D:\LegendMotor\LegendMotor.Dal\legendmotor.db'.
+dbug: 7/6/2024 13:58:11.771 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteReader'.
+dbug: 7/6/2024 13:58:11.771 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteReader' (0ms).
+dbug: 7/6/2024 13:58:11.771 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteReader' (0ms).
+dbug: 7/6/2024 13:58:11.771 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[@__username_0='?' (Size = 4), @__password_1='?' (Size = 8)], CommandType='Text', CommandTimeout='30']
+      SELECT "s"."StaffId", "s"."Address", "s"."AreaCode", "s"."Email", "s"."Gemder", "s"."Name", "s"."Password", "s"."Phone", "s"."PositionCode"
+      FROM "Staff" AS "s"
+      WHERE "s"."Name" = @__username_0 AND "s"."Password" = @__password_1
+      LIMIT 1
+info: 7/6/2024 13:58:11.772 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (0ms) [Parameters=[@__username_0='?' (Size = 4), @__password_1='?' (Size = 8)], CommandType='Text', CommandTimeout='30']
+      SELECT "s"."StaffId", "s"."Address", "s"."AreaCode", "s"."Email", "s"."Gemder", "s"."Name", "s"."Password", "s"."Phone", "s"."PositionCode"
+      FROM "Staff" AS "s"
+      WHERE "s"."Name" = @__username_0 AND "s"."Password" = @__password_1
+      LIMIT 1
+dbug: 7/6/2024 13:58:11.811 CoreEventId.StartedTracking[10806] (Microsoft.EntityFrameworkCore.ChangeTracking) 
+      Context 'DataContext' started tracking 'Staff' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+dbug: 7/6/2024 13:58:11.845 RelationalEventId.DataReaderClosing[20301] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Closing data reader to 'main' on server 'D:\LegendMotor\LegendMotor.Dal\legendmotor.db'.
+dbug: 7/6/2024 13:58:11.845 RelationalEventId.DataReaderDisposing[20300] (Microsoft.EntityFrameworkCore.Database.Command) 
+      A data reader for 'main' on server 'D:\LegendMotor\LegendMotor.Dal\legendmotor.db' is being disposed after spending 72ms reading results.
+dbug: 7/6/2024 13:58:11.845 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'main' on server 'D:\Le
