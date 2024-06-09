@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LegendMotor.WinForm")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+568ff402965c1a3201a728eb67ebc143c075858e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+362e9239dd55c807a53c57640ff158533e51d9af")]
 [assembly: System.Reflection.AssemblyProductAttribute("LegendMotor.WinForm")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LegendMotor.WinForm")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

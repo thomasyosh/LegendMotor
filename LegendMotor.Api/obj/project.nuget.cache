@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QUe0qd6t+Ja1zI24IyzXMHIXQ4ItZ4AcE8u1ZpcYqKfenW00pjm929bQT0YFAkcXHARMiDGspu5rrSq+rzXnMA==",
+  "dgSpecHash": "zOv6GbIXUpMeYqm4hBDBrtYv/lSbKMUCzb4NlMcT67ohRTgPsFy39YDrCp+Ts4HVk6vjCSwCyPKgKxsYqHAYHQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj",
+  "projectFilePath": "E:\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\thoma\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\thoma\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",

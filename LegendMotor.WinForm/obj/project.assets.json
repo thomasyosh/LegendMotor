@@ -5045,11 +5045,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.WinForm\\LegendMotor.WinForm.csproj",
+      "projectUniqueName": "E:\\LegendMotor\\LegendMotor.WinForm\\LegendMotor.WinForm.csproj",
       "projectName": "LegendMotor.WinForm",
-      "projectPath": "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.WinForm\\LegendMotor.WinForm.csproj",
+      "projectPath": "E:\\LegendMotor\\LegendMotor.WinForm\\LegendMotor.WinForm.csproj",
       "packagesPath": "C:\\Users\\thoma\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.WinForm\\obj\\",
+      "outputPath": "E:\\LegendMotor\\LegendMotor.WinForm\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\thoma\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5066,14 +5066,14 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "projectReferences": {
-            "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj": {
-              "projectPath": "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj"
+            "E:\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj": {
+              "projectPath": "E:\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj"
             },
-            "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj": {
-              "projectPath": "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj"
+            "E:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj": {
+              "projectPath": "E:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj"
             },
-            "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {
-              "projectPath": "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj"
+            "E:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {
+              "projectPath": "E:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj"
             }
           }
         }

@@ -188,8 +188,8 @@ public partial class SearchSpareForm : Form
     private void childForm_FormClosed(object sender, FormClosedEventArgs e)
     {
         this.Show();
-        /*
+        
         GetSpares(textBox1.Text, comboBox1.Text);
-        */
+        
     }
 }

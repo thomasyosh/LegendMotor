@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "HWaKBk7dRbcQVEorGY8CkVI+8FetwfK8vXqyI4EIntua3e0Pb1TEefCN/7oU2GI9X7sPAL5hGrDcxCvKe4wfwQ==",
+  "dgSpecHash": "vdg8xsAZ+GT72h4EuyOpWWpaq0XnU+xWDZa/MvUjK1cVeDedOiGkw/zu6f3nm0S1rg3qwbdaf7+/bvvzUtJaoQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj",
+  "projectFilePath": "E:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\thoma\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",
     "C:\\Users\\thoma\\.nuget\\packages\\google.protobuf\\3.25.1\\google.protobuf.3.25.1.nupkg.sha512",

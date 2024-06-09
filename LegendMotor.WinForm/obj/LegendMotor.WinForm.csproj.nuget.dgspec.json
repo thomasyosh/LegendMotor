@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.WinForm\\LegendMotor.WinForm.csproj": {}
+    "E:\\LegendMotor\\LegendMotor.WinForm\\LegendMotor.WinForm.csproj": {}
   },
   "projects": {
-    "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj": {
+    "E:\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj",
+        "projectUniqueName": "E:\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj",
         "projectName": "LegendMotor.Api",
-        "projectPath": "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj",
+        "projectPath": "E:\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj",
         "packagesPath": "C:\\Users\\thoma\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Api\\obj\\",
+        "outputPath": "E:\\LegendMotor\\LegendMotor.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\thoma\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj": {
-                "projectPath": "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj"
+              "E:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj": {
+                "projectPath": "E:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj"
               }
             }
           }
@@ -81,14 +81,14 @@
         }
       }
     },
-    "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj": {
+    "E:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj",
+        "projectUniqueName": "E:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj",
         "projectName": "LegendMotor.Dal",
-        "projectPath": "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj",
+        "projectPath": "E:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj",
         "packagesPath": "C:\\Users\\thoma\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Dal\\obj\\",
+        "outputPath": "E:\\LegendMotor\\LegendMotor.Dal\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\thoma\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -105,8 +105,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {
-                "projectPath": "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj"
+              "E:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {
+                "projectPath": "E:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj"
               }
             }
           }
@@ -179,14 +179,14 @@
         }
       }
     },
-    "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {
+    "E:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj",
+        "projectUniqueName": "E:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj",
         "projectName": "LegendMotor.Domain",
-        "projectPath": "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj",
+        "projectPath": "E:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj",
         "packagesPath": "C:\\Users\\thoma\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Domain\\obj\\",
+        "outputPath": "E:\\LegendMotor\\LegendMotor.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\thoma\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -239,14 +239,14 @@
         }
       }
     },
-    "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.WinForm\\LegendMotor.WinForm.csproj": {
+    "E:\\LegendMotor\\LegendMotor.WinForm\\LegendMotor.WinForm.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.WinForm\\LegendMotor.WinForm.csproj",
+        "projectUniqueName": "E:\\LegendMotor\\LegendMotor.WinForm\\LegendMotor.WinForm.csproj",
         "projectName": "LegendMotor.WinForm",
-        "projectPath": "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.WinForm\\LegendMotor.WinForm.csproj",
+        "projectPath": "E:\\LegendMotor\\LegendMotor.WinForm\\LegendMotor.WinForm.csproj",
         "packagesPath": "C:\\Users\\thoma\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.WinForm\\obj\\",
+        "outputPath": "E:\\LegendMotor\\LegendMotor.WinForm\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\thoma\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -263,14 +263,14 @@
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
             "projectReferences": {
-              "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj": {
-                "projectPath": "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj"
+              "E:\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj": {
+                "projectPath": "E:\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj"
               },
-              "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj": {
-                "projectPath": "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj"
+              "E:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj": {
+                "projectPath": "E:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj"
               },
-              "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {
-                "projectPath": "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj"
+              "E:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {
+                "projectPath": "E:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj"
               }
             }
           }

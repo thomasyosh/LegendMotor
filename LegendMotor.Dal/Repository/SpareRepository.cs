@@ -17,6 +17,7 @@ namespace LegendMotor.Dal.Repository
         public Spare CreateSpare(Spare spare)
         {
             _ctx.Spare.Add(spare);
+            _ctx.SaveChanges();
             return spare;
         }
 

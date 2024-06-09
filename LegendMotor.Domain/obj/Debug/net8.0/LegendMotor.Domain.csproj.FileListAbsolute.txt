@@ -34,3 +34,15 @@ C:\Users\thoma\Music\LegendMotor\LegendMotor.Domain\obj\Debug\net8.0\LegendMotor
 C:\Users\thoma\Music\LegendMotor\LegendMotor.Domain\obj\Debug\net8.0\refint\LegendMotor.Domain.dll
 C:\Users\thoma\Music\LegendMotor\LegendMotor.Domain\obj\Debug\net8.0\LegendMotor.Domain.pdb
 C:\Users\thoma\Music\LegendMotor\LegendMotor.Domain\obj\Debug\net8.0\ref\LegendMotor.Domain.dll
+E:\LegendMotor\LegendMotor.Domain\bin\Debug\net8.0\LegendMotor.Domain.deps.json
+E:\LegendMotor\LegendMotor.Domain\bin\Debug\net8.0\LegendMotor.Domain.dll
+E:\LegendMotor\LegendMotor.Domain\bin\Debug\net8.0\LegendMotor.Domain.pdb
+E:\LegendMotor\LegendMotor.Domain\obj\Debug\net8.0\LegendMotor.Domain.GeneratedMSBuildEditorConfig.editorconfig
+E:\LegendMotor\LegendMotor.Domain\obj\Debug\net8.0\LegendMotor.Domain.AssemblyInfoInputs.cache
+E:\LegendMotor\LegendMotor.Domain\obj\Debug\net8.0\LegendMotor.Domain.AssemblyInfo.cs
+E:\LegendMotor\LegendMotor.Domain\obj\Debug\net8.0\LegendMotor.Domain.csproj.CoreCompileInputs.cache
+E:\LegendMotor\LegendMotor.Domain\obj\Debug\net8.0\LegendMotor.Domain.sourcelink.json
+E:\LegendMotor\LegendMotor.Domain\obj\Debug\net8.0\LegendMotor.Domain.dll
+E:\LegendMotor\LegendMotor.Domain\obj\Debug\net8.0\refint\LegendMotor.Domain.dll
+E:\LegendMotor\LegendMotor.Domain\obj\Debug\net8.0\LegendMotor.Domain.pdb
+E:\LegendMotor\LegendMotor.Domain\obj\Debug\net8.0\ref\LegendMotor.Domain.dll

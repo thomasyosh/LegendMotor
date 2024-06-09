@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {}
+    "E:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {
+    "E:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj",
+        "projectUniqueName": "E:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj",
         "projectName": "LegendMotor.Domain",
-        "projectPath": "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj",
+        "projectPath": "E:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj",
         "packagesPath": "C:\\Users\\thoma\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\thoma\\Music\\LegendMotor\\LegendMotor.Domain\\obj\\",
+        "outputPath": "E:\\LegendMotor\\LegendMotor.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\thoma\\AppData\\Roaming\\NuGet\\NuGet.Config",

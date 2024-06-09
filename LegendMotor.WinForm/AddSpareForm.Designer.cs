@@ -28,206 +28,201 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btn_upload = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button2 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.SuspendLayout();
+            label1 = new Label();
+            textBox1 = new TextBox();
+            label2 = new Label();
+            richTextBox1 = new RichTextBox();
+            dataGridView1 = new DataGridView();
+            label3 = new Label();
+            textBox2 = new TextBox();
+            textBox3 = new TextBox();
+            label4 = new Label();
+            button1 = new Button();
+            label5 = new Label();
+            pictureBox1 = new PictureBox();
+            btn_upload = new Button();
+            label6 = new Label();
+            comboBox1 = new ComboBox();
+            button2 = new Button();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 184);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(62, 19);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Name: ";
+            label1.AutoSize = true;
+            label1.Location = new Point(12, 184);
+            label1.Name = "label1";
+            label1.Size = new Size(62, 19);
+            label1.TabIndex = 0;
+            label1.Text = "Name: ";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(121, 181);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(500, 30);
-            this.textBox1.TabIndex = 1;
+            textBox1.Location = new Point(121, 181);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(500, 30);
+            textBox1.TabIndex = 1;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 269);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(103, 19);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Description: ";
+            label2.AutoSize = true;
+            label2.Location = new Point(12, 269);
+            label2.Name = "label2";
+            label2.Size = new Size(103, 19);
+            label2.TabIndex = 2;
+            label2.Text = "Description: ";
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(121, 266);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(500, 96);
-            this.richTextBox1.TabIndex = 3;
-            this.richTextBox1.Text = "";
+            richTextBox1.Location = new Point(121, 266);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.Size = new Size(500, 96);
+            richTextBox1.TabIndex = 3;
+            richTextBox1.Text = "";
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 505);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(609, 352);
-            this.dataGridView1.TabIndex = 4;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(12, 505);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowTemplate.Height = 24;
+            dataGridView1.Size = new Size(609, 352);
+            dataGridView1.TabIndex = 4;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 378);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 19);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Price: ";
+            label3.AutoSize = true;
+            label3.Location = new Point(12, 378);
+            label3.Name = "label3";
+            label3.Size = new Size(56, 19);
+            label3.TabIndex = 5;
+            label3.Text = "Price: ";
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(121, 375);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(74, 30);
-            this.textBox2.TabIndex = 6;
+            textBox2.Location = new Point(121, 375);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(74, 30);
+            textBox2.TabIndex = 6;
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(121, 424);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(74, 30);
-            this.textBox3.TabIndex = 8;
+            textBox3.Location = new Point(121, 424);
+            textBox3.Name = "textBox3";
+            textBox3.Size = new Size(74, 30);
+            textBox3.TabIndex = 8;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 427);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(72, 19);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Weight: ";
+            label4.AutoSize = true;
+            label4.Location = new Point(12, 427);
+            label4.Name = "label4";
+            label4.Size = new Size(72, 19);
+            label4.TabIndex = 7;
+            label4.Text = "Weight: ";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(514, 863);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(107, 44);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            button1.Location = new Point(514, 863);
+            button1.Name = "button1";
+            button1.Size = new Size(107, 44);
+            button1.TabIndex = 9;
+            button1.Text = "Add";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 478);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(75, 19);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Supplier:";
+            label5.AutoSize = true;
+            label5.Location = new Point(12, 478);
+            label5.Name = "label5";
+            label5.Size = new Size(75, 19);
+            label5.TabIndex = 10;
+            label5.Text = "Supplier:";
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.Window;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(435, 163);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 11;
-            this.pictureBox1.TabStop = false;
+            pictureBox1.BackColor = SystemColors.Window;
+            pictureBox1.Location = new Point(12, 12);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(435, 163);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 11;
+            pictureBox1.TabStop = false;
             // 
             // btn_upload
             // 
-            this.btn_upload.Location = new System.Drawing.Point(453, 133);
-            this.btn_upload.Name = "btn_upload";
-            this.btn_upload.Size = new System.Drawing.Size(168, 42);
-            this.btn_upload.TabIndex = 12;
-            this.btn_upload.Text = "Upload";
-            this.btn_upload.UseVisualStyleBackColor = true;
-            this.btn_upload.Click += new System.EventHandler(this.btn_upload_Click);
+            btn_upload.Location = new Point(453, 133);
+            btn_upload.Name = "btn_upload";
+            btn_upload.Size = new Size(168, 42);
+            btn_upload.TabIndex = 12;
+            btn_upload.Text = "Upload";
+            btn_upload.UseVisualStyleBackColor = true;
+            btn_upload.Click += btn_upload_Click;
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 227);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(80, 19);
-            this.label6.TabIndex = 13;
-            this.label6.Text = "Category:";
+            label6.AutoSize = true;
+            label6.Location = new Point(12, 227);
+            label6.Name = "label6";
+            label6.Size = new Size(80, 19);
+            label6.TabIndex = 13;
+            label6.Text = "Category:";
             // 
             // comboBox1
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "A",
-            "B",
-            "C",
-            "D"});
-            this.comboBox1.Location = new System.Drawing.Point(121, 224);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 27);
-            this.comboBox1.TabIndex = 14;
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "A", "B", "C", "D" });
+            comboBox1.Location = new Point(121, 224);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(121, 27);
+            comboBox1.TabIndex = 14;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(121, 464);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(194, 33);
-            this.button2.TabIndex = 15;
-            this.button2.Text = "Add Suppler price";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            button2.Location = new Point(121, 464);
+            button2.Name = "button2";
+            button2.Size = new Size(194, 33);
+            button2.TabIndex = 15;
+            button2.Text = "Add Suppler price";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // AddSpareForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 19F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(633, 914);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.btn_upload);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label1);
-            this.Font = new System.Drawing.Font("PMingLiU", 14F);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(5);
-            this.Name = "AddSpareForm";
-            this.Text = "Add Spare";
-            this.Load += new System.EventHandler(this.AddSpareForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(10F, 19F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(633, 749);
+            Controls.Add(button2);
+            Controls.Add(comboBox1);
+            Controls.Add(label6);
+            Controls.Add(btn_upload);
+            Controls.Add(pictureBox1);
+            Controls.Add(label5);
+            Controls.Add(button1);
+            Controls.Add(textBox3);
+            Controls.Add(label4);
+            Controls.Add(textBox2);
+            Controls.Add(label3);
+            Controls.Add(dataGridView1);
+            Controls.Add(richTextBox1);
+            Controls.Add(label2);
+            Controls.Add(textBox1);
+            Controls.Add(label1);
+            Font = new Font("新細明體", 14F);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(5);
+            Name = "AddSpareForm";
+            Text = "Add Spare";
+            Load += AddSpareForm_Load;
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

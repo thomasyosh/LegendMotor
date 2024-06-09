@@ -58,8 +58,6 @@ namespace LegendMotor.WinForm
 
         private void LoadSpare()
         {
-
-                string query = "SELECT * FROM Spare WHERE SpareId = @SpareId";
                 Spare item = _spareRepository.GetSpareBySpareId(spareId);
                     if (item!=null)
                     {
@@ -73,7 +71,6 @@ namespace LegendMotor.WinForm
                         pictureBox1.Image = Image.FromStream(new MemoryStream(img));
                     }
                 
-                query = "SELECT * FROM Spare_Price WHERE SpareId = @SpareId";
                 var sparePrice = _sparePriceRepository.GetSparePriceBySpareId(spareId);
                     if (sparePrice !=null)
                     {
@@ -140,7 +137,6 @@ namespace LegendMotor.WinForm
             suppliers.Clear();
             supplierColumn.Items.Clear();
             dataGridView1.Rows.Clear();          
-            string query = "SELECT * FROM Supplier";
             var supplierItem = _supplierRepository.GetAllSupplier();
 
                 foreach (var item in supplierItem)

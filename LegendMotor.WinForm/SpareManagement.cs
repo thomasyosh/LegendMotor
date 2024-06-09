@@ -87,16 +87,16 @@ public partial class SpareManagement : Form
         spares.Clear();
         dataGridView1.Rows.Clear();
         var items = _spareRepository.GetAllSpare();
-            foreach (var item in items)
-            {
-                ListSpare spare = new ListSpare();
-                spare.Name =item.Name;
+        foreach (var item in items)
+        {
+            ListSpare spare = new ListSpare();
+            spare.Name = item.Name;
             spare.Description = item.Description;
-                spare.SpareId = item.SpareId.Trim();
-                spare.Count = item.Count;
-                spares.Add(spare);
-                dataGridView1.Rows.Add(spare.SpareId, spare.Name, spare.Description, spare.Count.ToString());
-            }
+            spare.SpareId = item.SpareId.Trim();
+            spare.Count = item.Count;
+            spares.Add(spare);
+            dataGridView1.Rows.Add(spare.SpareId, spare.Name, spare.Description, spare.Count.ToString());
+        }
     }
 
     private void childForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -118,20 +118,19 @@ public partial class SpareManagement : Form
         string category = comboBox1.Text;
         spares.Clear();
         dataGridView1.Rows.Clear();
-       string query = "SELECT * FROM Spare WHERE Name LIKE '%" + name + "%' AND Category LIKE '%" + category + "%'";
         var items = _spareRepository.GetSparesByNameAndCategory(name, category);
 
-            foreach (var item in items)
-            {
-                ListSpare spare = new ListSpare();
-                spare.Name = item.Name;
-                spare.Description = item.Description;
-                spare.SpareId = item.SpareId;
-                spare.Count = item.Quantity;
+        foreach (var item in items)
+        {
+            ListSpare spare = new ListSpare();
+            spare.Name = item.Name;
+            spare.Description = item.Description;
+            spare.SpareId = item.SpareId;
+            spare.Count = item.Quantity;
 
-                spares.Add(spare);
-                dataGridView1.Rows.Add(spare.SpareId, spare.Name, spare.Description, spare.Count.ToString());
-            }
+            spares.Add(spare);
+            dataGridView1.Rows.Add(spare.SpareId, spare.Name, spare.Description, spare.Count.ToString());
+        }
     }
 
     private void button2_Click(object sender, EventArgs e)
@@ -150,5 +149,12 @@ public partial class SpareManagement : Form
             addSpareForm.FormClosed += new FormClosedEventHandler(childForm_FormClosed);
             addSpareForm.Show();
         }
+    }
+
+    private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+    {
+        AddSpareForm addSpareForm = new AddSpareForm(null);
+        addSpareForm.FormClosed += new FormClosedEventHandler(childForm_FormClosed);
+        addSpareForm.Show();
     }
 }
