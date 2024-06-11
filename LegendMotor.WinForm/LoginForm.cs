@@ -19,8 +19,8 @@ public partial class LoginForm : Form
     private readonly DataContext _ctx;
     public LoginForm()
     {
-         InitializeComponent();
-            this._ctx = new DataContext();
+        InitializeComponent();
+        this._ctx = new DataContext();
 
 
     }
@@ -36,19 +36,19 @@ public partial class LoginForm : Form
         {
             btn_login.PerformClick();
         }
-    }   
+    }
 
     private void btn_login_Click(object sender, EventArgs e)
     {
 
         string username = txt_username.Text;
         string password = txt_password.Text;
-            Console.WriteLine(password);
-            Staff loginUser = _ctx.Staff.FirstOrDefault(staff => staff.Name.Equals(username) && staff.Password.Equals(password));
+        Console.WriteLine(password);
+        Staff loginUser = _ctx.Staff.FirstOrDefault(staff => staff.Name.Equals(username) && staff.Password.Equals(password));
 
         try
         {
-            if (loginUser !=null)
+            if (loginUser != null)
             {
                 MessageBox.Show("Login Successful");
                 StaffManager.Instance.SetStaff(loginUser);
@@ -58,7 +58,8 @@ public partial class LoginForm : Form
             {
                 MessageBox.Show("Login Failed");
             }
-        } catch (Exception ex)
+        }
+        catch (Exception ex)
         {
             Console.WriteLine(ex.StackTrace);
             MessageBox.Show(ex.Message);
@@ -70,15 +71,17 @@ public partial class LoginForm : Form
         BinLocationStaff binLocation = _ctx.BinLocationStaff.FirstOrDefault(binLocation => binLocation.StaffId.Equals(StaffManager.Instance.GetStaffId()));
         try
         {
-            if (binLocation !=null)
+            if (binLocation != null)
             {
 
                 StaffManager.Instance.SetBinLocationCode(binLocation.BinLocationCode);
             }
-        } catch (Exception ex)
+        }
+        catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
-        } finally
+        }
+        finally
         {
             txt_password.Text = "";
             txt_username.Text = "";
@@ -146,5 +149,10 @@ public partial class LoginForm : Form
     {
         System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.GetCultureInfo("zh-Hans-HK");
         System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("zh-Hans-HK");
+    }
+
+    private void label1_Click(object sender, EventArgs e)
+    {
+
     }
 }
