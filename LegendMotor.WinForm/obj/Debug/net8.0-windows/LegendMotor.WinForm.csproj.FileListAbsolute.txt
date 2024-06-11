@@ -167,7 +167,6 @@ D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.
 D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.IncomingOrderDetails.resources
 D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.LoginForm.resources
 D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.Properties.Resources.resources
-D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\EasyControl.PurchasingDepartment.resources
 D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.SalesManagerMenu.resources
 D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.SalesOfficerMenu.resources
 D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.SearchSpareForm.resources
@@ -686,3 +685,12 @@ E:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\refint\LegendMotor.W
 E:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.pdb
 E:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.genruntimeconfig.cache
 E:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\ref\LegendMotor.WinForm.dll
+D:\legendmotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.AddBinLocationSpareForm.resources
+D:\legendmotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.AddSpareForm.resources
+D:\legendmotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.AddSupplierForm.resources
+D:\legendmotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.AreaManagerMenu.resources
+D:\legendmotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.BinLocationManagement.resources
+D:\legendmotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.PurchasingDepartment.resources
+D:\legendmotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.PurchasingDepartmentMenu.resources
+D:\legendmotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.SpareManagement.resources
+D:\legendmotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.ViewSupplier.resources
