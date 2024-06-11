@@ -10,7 +10,7 @@ namespace LegendMotor.Dal.Repository
 {
     public class SparePriceRepository : ISparePriceRepository
     {
-        private readonly DataContext _ctx;
+        private readonly DataContext _ctx = new DataContext();
 
         public SparePrice CreateSparePrice(SparePrice sparePrice)
         {
