@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LegendMotor.Dal;
+using BCrypt.Net;
 
 namespace LegendMotor.WinForm;
 
@@ -44,19 +45,23 @@ public partial class LoginForm : Form
         string username = txt_username.Text;
         string password = txt_password.Text;
         Console.WriteLine(password);
-        Staff loginUser = _ctx.Staff.FirstOrDefault(staff => staff.Name.Equals(username) && staff.Password.Equals(password));
+        Staff loginUser = _ctx.Staff.FirstOrDefault(staff => staff.Name.Equals(username));
 
         try
         {
             if (loginUser != null)
             {
-                MessageBox.Show("Login Successful");
-                StaffManager.Instance.SetStaff(loginUser);
-                this.getBinLocationCode();
+                if (BCrypt.Net.BCrypt.Verify(password, loginUser.Password))
+                {
+                    MessageBox.Show("Login Successful");
+                    StaffManager.Instance.SetStaff(loginUser);
+                    this.getBinLocationCode();
+                }
             }
+
             else
             {
-                MessageBox.Show("Login Failed");
+                MessageBox.Show("Username or password incorrect");
             }
         }
         catch (Exception ex)

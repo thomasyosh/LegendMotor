@@ -202,8 +202,8 @@ namespace LegendMotor.WinForm
 
                 foreach (BinLocationSpare binLocationSpare in binLocationSpares)
                 {
-                    string query = "INSERT INTO BinLocation_Spare (Id, BinLocationCode, SpareId, Stock, ROL, DL) VALUES (@Id, @BinLocationCode, @SpareId, @Stock, @ROL, @DL)";
                     binLocationSpare.Id = Guid.NewGuid();
+                    binLocationSpare.BinLocationCode = binLocationCode;
                     _binLocationSpareRepository.CreateBinLocationSpare(binLocationSpare);
                 }
                 this.Close();

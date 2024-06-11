@@ -50,6 +50,9 @@
     <Compile Update="SalesOfficerMenu.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="SalesOverview.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="SearchSpareForm.cs">
       <SubType>Form</SubType>
     </Compile>

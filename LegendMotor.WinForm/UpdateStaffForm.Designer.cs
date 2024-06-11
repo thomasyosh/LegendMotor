@@ -91,8 +91,9 @@ partial class UpdateStaffForm
         button1.Name = "button1";
         button1.Size = new Size(130, 30);
         button1.TabIndex = 39;
-        button1.Text = "Generate";
+        button1.Text = "Default password";
         button1.UseVisualStyleBackColor = true;
+        button1.Click += button1_Click;
         // 
         // textBox5
         // 

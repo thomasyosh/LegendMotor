@@ -21,7 +21,7 @@ namespace LegendMotor.WinForm
     public partial class AddSpareForm : Form
     {
         private readonly ISparePriceRepository _sparePriceRepository;
-        private readonly ISpareRepository  _spareRepository;
+        private readonly ISpareRepository _spareRepository;
         private readonly ISupplierRepository _supplierRepository;
         private List<Supplier> suppliers = new List<Supplier>();
         private List<SupplierPrice> supplierPrices = new List<SupplierPrice>();
@@ -58,35 +58,35 @@ namespace LegendMotor.WinForm
 
         private void LoadSpare()
         {
-                Spare item = _spareRepository.GetSpareBySpareId(spareId);
-                    if (item!=null)
-                    {
-                        textBox1.Text = item.Name;
-                        richTextBox1.Text = item.Description;
-                        comboBox1.Text = item.Category;
-                        comboBox1.SelectedIndex = comboBox1.FindStringExact(item.Category);
-                        textBox2.Text = item.Price.ToString();
-                        textBox3.Text = item.Weight.ToString();
-                        byte[] img = (item.Url);
-                        pictureBox1.Image = Image.FromStream(new MemoryStream(img));
-                    }
-                
-                var sparePrice = _sparePriceRepository.GetSparePriceBySpareId(spareId);
-                    if (sparePrice !=null)
-                    {
-                        SupplierPrice supplierPrice = new SupplierPrice();
-                        supplierPrice.SupplierCode = sparePrice.SupplierCode;
-                        supplierPrice.Price = float.Parse(sparePrice.PurchasingPrice.ToString());
-                        supplierPrices.Add(supplierPrice);
-                    }
-          
+            Spare item = _spareRepository.GetSpareBySpareId(spareId);
+            if (item != null)
+            {
+                textBox1.Text = item.Name;
+                richTextBox1.Text = item.Description;
+                comboBox1.Text = item.Category;
+                comboBox1.SelectedIndex = comboBox1.FindStringExact(item.Category);
+                textBox2.Text = item.Price.ToString();
+                textBox3.Text = item.Weight.ToString();
+                byte[] img = (item.Url);
+                pictureBox1.Image = Image.FromStream(new MemoryStream(img));
+            }
+
+            var sparePrice = _sparePriceRepository.GetSparePriceBySpareId(spareId);
+            if (sparePrice != null)
+            {
+                SupplierPrice supplierPrice = new SupplierPrice();
+                supplierPrice.SupplierCode = sparePrice.SupplierCode;
+                supplierPrice.Price = float.Parse(sparePrice.PurchasingPrice.ToString());
+                supplierPrices.Add(supplierPrice);
+            }
+
 
             for (int i = 0; i < supplierPrices.Count; i++)
             {
                 dataGridView1.Rows.Add();
                 dataGridView1.Rows[i].Cells[0].Value = suppliers.Find(x => x.SupplierCode == supplierPrices[i].SupplierCode).Name;
                 dataGridView1.Rows[i].Cells[1].Value = supplierPrices[i].Price;
-            }   
+            }
         }
 
         private void AddSpareForm_Load(object sender, EventArgs e)
@@ -113,7 +113,8 @@ namespace LegendMotor.WinForm
 
             dataGridView1.Columns.Add(supplierColumn);
             dataGridView1.Columns.Add(priceColumn);
-            if (StaffManager.Instance.GetStaffPosition() == "pd") { 
+            if (StaffManager.Instance.GetStaffPosition() == "pd")
+            {
                 DataGridViewButtonColumn deleteButton = new DataGridViewButtonColumn();
                 deleteButton.Text = "Delete";
                 deleteButton.UseColumnTextForButtonValue = true;
@@ -129,21 +130,21 @@ namespace LegendMotor.WinForm
             if (spareId != null)
             {
                 LoadSpare();
-            }   
+            }
         }
 
         private void GetSupplier()
         {
             suppliers.Clear();
             supplierColumn.Items.Clear();
-            dataGridView1.Rows.Clear();          
+            dataGridView1.Rows.Clear();
             var supplierItem = _supplierRepository.GetAllSupplier();
 
-                foreach (var item in supplierItem)
-                {
-                    supplierColumn.Items.Add(item.Name);
-                    suppliers.Add(item);
-                }
+            foreach (var item in supplierItem)
+            {
+                supplierColumn.Items.Add(item.Name);
+                suppliers.Add(item);
+            }
         }
 
         private void btn_upload_Click(object sender, EventArgs e)
@@ -156,7 +157,7 @@ namespace LegendMotor.WinForm
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
             if (supplierPrices.Count == 0)
             {
@@ -172,7 +173,7 @@ namespace LegendMotor.WinForm
                 }
             }
             float price = 0;
-            float weight = 0; 
+            float weight = 0;
             string name = textBox1.Text;
             string description = richTextBox1.Text;
             string category = comboBox1.Text;
@@ -181,7 +182,8 @@ namespace LegendMotor.WinForm
             try
             {
                 price = float.Parse(priceString);
-            } catch (FormatException ex)
+            }
+            catch (FormatException ex)
             {
                 MessageBox.Show("Price must be a number");
                 return;
@@ -200,96 +202,99 @@ namespace LegendMotor.WinForm
                 MessageBox.Show("Please fill in all fields");
                 return;
             }
-                var spareItem = _spareRepository.GetAllSpare();
-                int failed = 0;
-                if (this.spareId == null)
-                {
-                    int count = 0;
-                    count++;
-                    string spareId = category + count.ToString("00000");
-                    Spare spare = new Spare();
-                    spare.SpareId = spareId;
-                    spare.Name = name;
-                    spare.Description = description;
-                    spare.Category = category;
-                    spare.Price = (int) price;
-                    spare.Weight = (int) weight;
-                    spare.Url =  ImageToByteArray(pictureBox1.Image);
-                    spare.Count = count;
+            var spareItem = _spareRepository.GetAllSpare();
+            int failed = 0;
+            if (this.spareId == null)
+            {
+                int count = 0;
+                count++;
+                string spareId = Guid.NewGuid().ToString();
+                Spare spare = new Spare();
+                spare.SpareId = spareId;
+                spare.Name = name;
+                spare.Description = description;
+                spare.Category = category;
+                spare.Price = (int)price;
+                spare.Weight = (int)weight;
+                spare.Url = ImageToByteArray(pictureBox1.Image);
+                spare.Count = count;
                 try
                 {
                     _spareRepository.CreateSpare(spare);
+                    MessageBox.Show("Spare added successfully!");
                 }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error inserting data into Database!");
+                    failed++;
+                }
+
+                for (int i = 0; i < supplierPrices.Count; i++)
+                {
+
+                    SparePrice sparePrice = new SparePrice();
+                    sparePrice.SpareID = spareId;
+                    sparePrice.SupplierCode = supplierPrices[i].SupplierCode;
+
+                    try
+                    {
+                        _sparePriceRepository.CreateSparePrice(sparePrice);
+                    }
                     catch (Exception ex)
                     {
                         Console.WriteLine("Error inserting data into Database!");
                         failed++;
                     }
+                }
+            }
+            else
+            {
 
-                    for (int i = 0; i < supplierPrices.Count; i++)
-                    {
-                        
-                    SparePrice sparePrice = new SparePrice();
-                    sparePrice.SpareID = spareId;
-                    sparePrice.SupplierCode = supplierPrices[i].SupplierCode;
-                    
-                    try{
-                        _sparePriceRepository.CreateSparePrice(sparePrice);
-                    }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine("Error inserting data into Database!");
-                            failed++;
-                        }
-                    }
-                } else
-                {
-                 
-                    Spare updateSpare = _spareRepository.GetSpareBySpareId(spareId);
-                    updateSpare.SpareId = spareId;
-                    updateSpare.Name = name;
-                    updateSpare.Description = description;
-                    updateSpare.Category = category;
-                    updateSpare.Price = (int) price;
-                    updateSpare.Weight = (int) weight;
-                    updateSpare.Url = ImageToByteArray(pictureBox1.Image);
-                    updateSpare.Count = supplierPrices.Count;
-                   
+                Spare updateSpare = _spareRepository.GetSpareBySpareId(spareId);
+                updateSpare.SpareId = spareId;
+                updateSpare.Name = name;
+                updateSpare.Description = description;
+                updateSpare.Category = category;
+                updateSpare.Price = (int)price;
+                updateSpare.Weight = (int)weight;
+                updateSpare.Url = ImageToByteArray(pictureBox1.Image);
+                updateSpare.Count = supplierPrices.Count;
+
                 try
                 {
                     _spareRepository.UpdateSpareBySpare(updateSpare);
                 }
 
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("Error inserting data into Database!");
-                        failed++;
-                    }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error inserting data into Database!");
+                    failed++;
+                }
 
-                     _spareRepository.DeleteSpareBySpareId(spareId);
+                _spareRepository.DeleteSpareBySpareId(spareId);
 
-                    for (int i = 0; i < supplierPrices.Count; i++)
-                    {
-                        SparePrice sparePrice = new SparePrice();
-                        sparePrice.SpareID = spareId;
-                        sparePrice.SupplierCode = supplierPrices[i].SupplierCode;
-                        sparePrice.PurchasingPrice = supplierPrices[i].Price;
+                for (int i = 0; i < supplierPrices.Count; i++)
+                {
+                    SparePrice sparePrice = new SparePrice();
+                    sparePrice.SpareID = spareId;
+                    sparePrice.SupplierCode = supplierPrices[i].SupplierCode;
+                    sparePrice.PurchasingPrice = supplierPrices[i].Price;
                     try
                     {
                         _sparePriceRepository.CreateSparePrice(sparePrice);
                     }
 
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine("Error inserting data into Database!");
-                            failed++;
-                        }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Error inserting data into Database!");
+                        failed++;
                     }
                 }
-                if (failed == 0)
-                {
-                    this.Close();
-                }
+            }
+            if (failed == 0)
+            {
+                this.Close();
+            }
         }
 
         public byte[] ImageToByteArray(Image imageIn)
@@ -321,7 +326,8 @@ namespace LegendMotor.WinForm
                     // do stuff
                     dataGridView1.Invalidate();
                 }
-            } else if (e.ColumnIndex == 1)
+            }
+            else if (e.ColumnIndex == 1)
             {
                 DataGridViewTextBoxCell tb = (DataGridViewTextBoxCell)dataGridView1.Rows[e.RowIndex].Cells[1];
                 if (tb.Value != null)
@@ -331,7 +337,7 @@ namespace LegendMotor.WinForm
                     dataGridView1.Invalidate();
                 }
             }
-            
+
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -354,5 +360,6 @@ namespace LegendMotor.WinForm
             supplierPrices.Add(supplierPrice);
             dataGridView1.Rows.Add();
         }
+
     }
 }

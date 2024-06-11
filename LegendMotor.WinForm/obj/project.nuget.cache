@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "okctEADB1X8=",
+  "dgSpecHash": "52Oc36EyObM=",
   "success": true,
-  "projectFilePath": "D:\\legendmotor\\LegendMotor.WinForm\\LegendMotor.WinForm.csproj",
+  "projectFilePath": "D:\\test\\LegendMotor.WinForm\\LegendMotor.WinForm.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\TWKLI_01\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
+    "C:\\Users\\TWKLI_01\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\TWKLI_01\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",
     "C:\\Users\\TWKLI_01\\.nuget\\packages\\google.protobuf\\3.25.1\\google.protobuf.3.25.1.nupkg.sha512",
     "C:\\Users\\TWKLI_01\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

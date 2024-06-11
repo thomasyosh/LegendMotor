@@ -135,7 +135,7 @@ public partial class UpdateStaffForm : Form
         string password = textBox5.Text;
         string positionCode = positionCodes[comboBox1.SelectedIndex];
         string areaCode = areas[comboBox2.SelectedIndex].AreaCode;
-        if (name.Equals("") || gender.Equals("") || address.Equals("") || phone.Equals("") || positionCode.Equals("") || areaCode.Equals(""))
+        if (password.Equals("") || name.Equals("") || gender.Equals("") || address.Equals("") || phone.Equals("") || positionCode.Equals("") || areaCode.Equals(""))
         {
             MessageBox.Show("Please fill in all fields");
             return;
@@ -145,23 +145,19 @@ public partial class UpdateStaffForm : Form
         {
             binLocationCode = binLocationCodes[comboBox3.SelectedIndex];
         }
-        string hashedPassword = password.Length > 0 ? "abcd1234" : null;
         Console.WriteLine(password);
         var queryStaff = _ctx.Staff.FirstOrDefault(staff => staff.StaffId == selectedStaff.StaffId);
-        queryStaff.Password = password;
+        queryStaff.Password = BCrypt.Net.BCrypt.HashPassword(password);
         queryStaff.Name = name;
         queryStaff.Phone = phone;
         queryStaff.Address = address;
         queryStaff.AreaCode = areaCode;
         queryStaff.PositionCode = positionCode;
         _ctx.Staff.Update(queryStaff);
-        if (hashedPassword != null)
-        {
-            queryStaff.Password = hashedPassword;
-        }
         try
         {
             int failed = 0;
+
             _ctx.SaveChanges();
             if (!binLocationCode.Equals(""))
             {
@@ -223,5 +219,10 @@ public partial class UpdateStaffForm : Form
     private void label7_Click(object sender, EventArgs e)
     {
 
+    }
+
+    private void button1_Click(object sender, EventArgs e)
+    {
+        textBox5.Text = "abcd1234";
     }
 }

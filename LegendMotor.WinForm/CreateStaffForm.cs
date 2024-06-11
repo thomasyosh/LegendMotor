@@ -1,17 +1,7 @@
 ﻿using LegendMotor.Dal;
 using LegendMotor.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static Org.BouncyCastle.Math.EC.ECCurve;
+using BCrypt.Net;
+
 
 namespace LegendMotor.WinForm;
 
@@ -88,7 +78,7 @@ public partial class CreateStaffForm : Form
         Staff staff = new Staff();
         staff.StaffId = staffId;
         staff.Name = name;
-        staff.Password = hashedPassword;
+        staff.Password = BCrypt.Net.BCrypt.HashPassword(hashedPassword);
         staff.Gemder = gender;
         staff.Email = email;
         staff.Phone = phone;
@@ -194,12 +184,4 @@ public partial class CreateStaffForm : Form
         }
     }
 }
-
-/*
-    
-
-
-
-    
-    }*/
 

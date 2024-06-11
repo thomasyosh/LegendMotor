@@ -44,6 +44,7 @@
             label6 = new Label();
             comboBox1 = new ComboBox();
             button2 = new Button();
+            button3 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -126,13 +127,10 @@
             // 
             // button1
             // 
-            button1.Location = new Point(514, 863);
+            button1.Location = new Point(0, 0);
             button1.Name = "button1";
-            button1.Size = new Size(107, 44);
-            button1.TabIndex = 9;
-            button1.Text = "Add";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 17;
             // 
             // label5
             // 
@@ -192,11 +190,22 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
+            // button3
+            // 
+            button3.Location = new Point(341, 464);
+            button3.Name = "button3";
+            button3.Size = new Size(106, 33);
+            button3.TabIndex = 16;
+            button3.Text = "Save record";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
             // AddSpareForm
             // 
             AutoScaleDimensions = new SizeF(10F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(633, 749);
+            Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(comboBox1);
             Controls.Add(label6);
@@ -243,5 +252,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button2;
+        private Button button3;
     }
 }

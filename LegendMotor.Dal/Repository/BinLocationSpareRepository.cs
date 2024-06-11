@@ -15,6 +15,7 @@ namespace LegendMotor.Dal.Repository
         public BinLocationSpare CreateBinLocationSpare(BinLocationSpare binLocationSpare)
         {
             _ctx.BinLocationSpare.Add(binLocationSpare);
+            _ctx.SaveChanges();
             return binLocationSpare;
         }
 
