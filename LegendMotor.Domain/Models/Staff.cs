@@ -18,5 +18,9 @@ namespace LegendMotor.Domain.Models
         public string Address { get; set; }
         public string AreaCode { get; set; }
         public string PositionCode { get; set; }
+        public DateTime CreateAt { get; set; }
+        public DateTime UpdateAt { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }

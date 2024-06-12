@@ -51,18 +51,21 @@ public partial class LoginForm : Form
         {
             if (loginUser != null)
             {
-                if (BCrypt.Net.BCrypt.Verify(password, loginUser.Password))
+                if (!BCrypt.Net.BCrypt.Verify(password, loginUser.Password))
                 {
-                    MessageBox.Show("Login Successful");
-                    StaffManager.Instance.SetStaff(loginUser);
-                    this.getBinLocationCode();
+                    MessageBox.Show("Username or password incorrect");
                 }
-            }
-
-            else
-            {
-                MessageBox.Show("Username or password incorrect");
-            }
+                else if (!loginUser.IsActive)
+                {
+                    MessageBox.Show("Account is locked");
+                }
+                else
+                {
+                        MessageBox.Show("Login Successful");
+                        StaffManager.Instance.SetStaff(loginUser);
+                        this.getBinLocationCode();
+                }
+}
         }
         catch (Exception ex)
         {

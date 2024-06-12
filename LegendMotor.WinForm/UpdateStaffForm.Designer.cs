@@ -49,6 +49,8 @@ partial class UpdateStaffForm
         label2 = new Label();
         label1 = new Label();
         comboBox4 = new ComboBox();
+        label10 = new Label();
+        comboBox5 = new ComboBox();
         SuspendLayout();
         // 
         // radioButton2
@@ -136,7 +138,7 @@ partial class UpdateStaffForm
         // 
         // button2
         // 
-        button2.Location = new Point(312, 392);
+        button2.Location = new Point(312, 465);
         button2.Name = "button2";
         button2.Size = new Size(263, 43);
         button2.TabIndex = 34;
@@ -152,6 +154,7 @@ partial class UpdateStaffForm
         comboBox2.Name = "comboBox2";
         comboBox2.Size = new Size(263, 27);
         comboBox2.TabIndex = 33;
+        comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
         // 
         // comboBox1
         // 
@@ -247,11 +250,32 @@ partial class UpdateStaffForm
         comboBox4.TabIndex = 43;
         comboBox4.SelectedValueChanged += comboBox4_SelectedValueChanged;
         // 
+        // label10
+        // 
+        label10.AutoSize = true;
+        label10.Location = new Point(12, 410);
+        label10.Name = "label10";
+        label10.Size = new Size(80, 19);
+        label10.TabIndex = 44;
+        label10.Text = "Is Active:";
+        // 
+        // comboBox5
+        // 
+        comboBox5.DropDownStyle = ComboBoxStyle.DropDownList;
+        comboBox5.FormattingEnabled = true;
+        comboBox5.Location = new Point(127, 407);
+        comboBox5.Name = "comboBox5";
+        comboBox5.Size = new Size(263, 27);
+        comboBox5.TabIndex = 45;
+        comboBox5.SelectedIndexChanged += comboBox5_SelectedIndexChanged;
+        // 
         // UpdateStaffForm
         // 
         AutoScaleDimensions = new SizeF(10F, 19F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(587, 443);
+        ClientSize = new Size(587, 528);
+        Controls.Add(comboBox5);
+        Controls.Add(label10);
         Controls.Add(comboBox4);
         Controls.Add(radioButton2);
         Controls.Add(radioButton1);
@@ -306,4 +330,6 @@ partial class UpdateStaffForm
     private System.Windows.Forms.Label label2;
     private System.Windows.Forms.Label label1;
     private System.Windows.Forms.ComboBox comboBox4;
+    private Label label10;
+    private ComboBox comboBox5;
 }

@@ -36,6 +36,15 @@ public partial class UpdateStaffForm : Form
     private void UpdateStaffForm_Load(object sender, EventArgs e)
     {
         var positions = _ctx.Position;
+        var dict = new Dictionary<int, bool>();
+        dict.Add(0, false);
+        dict.Add(1, true);
+        comboBox5.DataSource = new BindingSource(dict, null);
+        comboBox5.DisplayMember = "Value";
+        comboBox5.ValueMember = "Value";
+
+        
+
 
         foreach (var position in positions)
         {
@@ -103,6 +112,7 @@ public partial class UpdateStaffForm : Form
             textBox2.Text = selectedStaff.Phone;
             comboBox1.SelectedIndex = positionCodes.IndexOf(selectedStaff.PositionCode);
             comboBox2.SelectedIndex = areas.IndexOf(areas.First(x => x.AreaCode == selectedStaff.AreaCode));
+            comboBox5.SelectedIndex = selectedStaff.IsActive ? 1 : 0;
             if (binLocationStaffs.Any(x => x.StaffId == selectedStaff.StaffId))
             {
                 comboBox3.Visible = true;
@@ -135,6 +145,7 @@ public partial class UpdateStaffForm : Form
         string password = textBox5.Text;
         string positionCode = positionCodes[comboBox1.SelectedIndex];
         string areaCode = areas[comboBox2.SelectedIndex].AreaCode;
+        bool isActive = bool.Parse(comboBox5.SelectedValue.ToString());
         if (password.Equals("") || name.Equals("") || gender.Equals("") || address.Equals("") || phone.Equals("") || positionCode.Equals("") || areaCode.Equals(""))
         {
             MessageBox.Show("Please fill in all fields");
@@ -153,6 +164,8 @@ public partial class UpdateStaffForm : Form
         queryStaff.Address = address;
         queryStaff.AreaCode = areaCode;
         queryStaff.PositionCode = positionCode;
+        queryStaff.IsActive = isActive;
+        queryStaff.UpdateAt = DateTime.Now;
         _ctx.Staff.Update(queryStaff);
         try
         {
@@ -224,5 +237,15 @@ public partial class UpdateStaffForm : Form
     private void button1_Click(object sender, EventArgs e)
     {
         textBox5.Text = "abcd1234";
+    }
+
+    private void comboBox5_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
     }
 }
