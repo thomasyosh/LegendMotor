@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+D/dSl/SyM0=",
+  "dgSpecHash": "RE3Hxl0tLAY=",
   "success": true,
-  "projectFilePath": "D:\\test\\LegendMotor.Dal\\LegendMotor.Dal.csproj",
+  "projectFilePath": "D:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\TWKLI_01\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",
     "C:\\Users\\TWKLI_01\\.nuget\\packages\\google.protobuf\\3.25.1\\google.protobuf.3.25.1.nupkg.sha512",

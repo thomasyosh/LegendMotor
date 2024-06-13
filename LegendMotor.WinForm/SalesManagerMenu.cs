@@ -58,10 +58,10 @@ public partial class SalesManagerMenu : Form
 
     private void btn_SalesOverview_Click(object sender, EventArgs e)
     {
-/*      this.Hide();
+        this.Hide();
         SalesOverview form = new SalesOverview();
         form.FormClosed += childForm_FormClosed;
-        form.Show();*/
+        form.Show();
     }
 
     private void childForm_FormClosed(object sender, FormClosedEventArgs e)

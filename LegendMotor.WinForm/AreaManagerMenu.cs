@@ -78,4 +78,12 @@ public partial class AreaManagerMenu : Form
         form.FormClosed += childForm_FormClosed;
         form.Show();
     }
+
+    private void accountInfo_Click(object sender, EventArgs e)
+    {
+        AccountInfoForm accountInfoForm = new AccountInfoForm();
+        accountInfoForm.FormClosed += new FormClosedEventHandler(childForm_FormClosed);
+        this.Hide();
+        accountInfoForm.Show();
+    }
 }

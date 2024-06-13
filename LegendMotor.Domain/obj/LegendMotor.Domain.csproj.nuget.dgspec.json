@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\test\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {}
+    "D:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {}
   },
   "projects": {
-    "D:\\test\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {
+    "D:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\test\\LegendMotor.Domain\\LegendMotor.Domain.csproj",
+        "projectUniqueName": "D:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj",
         "projectName": "LegendMotor.Domain",
-        "projectPath": "D:\\test\\LegendMotor.Domain\\LegendMotor.Domain.csproj",
+        "projectPath": "D:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj",
         "packagesPath": "C:\\Users\\TWKLI_01\\.nuget\\packages\\",
-        "outputPath": "D:\\test\\LegendMotor.Domain\\obj\\",
+        "outputPath": "D:\\LegendMotor\\LegendMotor.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\TWKLI_01\\AppData\\Roaming\\NuGet\\NuGet.Config",

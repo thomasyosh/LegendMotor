@@ -36,6 +36,7 @@
             btn_SalesOverview = new Button();
             btn_viewOrder = new Button();
             btn_manageBinLocation = new Button();
+            accountInfo = new Button();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -118,11 +119,23 @@
             btn_manageBinLocation.UseVisualStyleBackColor = true;
             btn_manageBinLocation.Click += button1_Click;
             // 
+            // accountInfo
+            // 
+            accountInfo.Font = new Font("新細明體", 14F);
+            accountInfo.Location = new Point(16, 328);
+            accountInfo.Name = "accountInfo";
+            accountInfo.Size = new Size(309, 50);
+            accountInfo.TabIndex = 13;
+            accountInfo.Text = "Account Info";
+            accountInfo.UseVisualStyleBackColor = true;
+            accountInfo.Click += accountInfo_Click;
+            // 
             // AreaManagerMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(337, 335);
+            ClientSize = new Size(337, 390);
+            Controls.Add(accountInfo);
             Controls.Add(toolStrip1);
             Controls.Add(btn_viewDealers);
             Controls.Add(btn_searchSpare);
@@ -149,5 +162,6 @@
         private System.Windows.Forms.Button btn_SalesOverview;
         private System.Windows.Forms.Button btn_viewOrder;
         private System.Windows.Forms.Button btn_manageBinLocation;
+        private Button accountInfo;
     }
 }

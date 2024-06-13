@@ -2,6 +2,9 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="AccountInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="AddBinLocationSpareForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -48,6 +51,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="SalesOfficerMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="SalesOrderDetails.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="SalesOverview.cs">

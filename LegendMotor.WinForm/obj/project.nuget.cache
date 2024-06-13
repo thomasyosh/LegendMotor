@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "52Oc36EyObM=",
+  "dgSpecHash": "7xYql2zMgeo=",
   "success": true,
-  "projectFilePath": "D:\\test\\LegendMotor.WinForm\\LegendMotor.WinForm.csproj",
+  "projectFilePath": "D:\\LegendMotor\\LegendMotor.WinForm\\LegendMotor.WinForm.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\TWKLI_01\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\TWKLI_01\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",

@@ -23,7 +23,7 @@ public partial class AdminMenu : Form
     private void btn_searchSpare_Click(object sender, EventArgs e)
     {
         this.Hide();
-       CreateStaffForm createStaffForm = new CreateStaffForm();
+        CreateStaffForm createStaffForm = new CreateStaffForm();
         createStaffForm.FormClosed += new FormClosedEventHandler(childForm_FormClosed);
         this.Hide();
         createStaffForm.Show();
@@ -62,5 +62,13 @@ public partial class AdminMenu : Form
     private void AdminMenu_FormClosed_1(object sender, FormClosedEventArgs e)
     {
         this.logout();
+    }
+
+    private void accountInfo_Click(object sender, EventArgs e)
+    {
+        AccountInfoForm accountInfoForm = new AccountInfoForm();
+        accountInfoForm.FormClosed += new FormClosedEventHandler(childForm_FormClosed);
+        this.Hide();
+        accountInfoForm.Show();
     }
 }

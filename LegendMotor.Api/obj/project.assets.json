@@ -3618,11 +3618,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\test\\LegendMotor.Api\\LegendMotor.Api.csproj",
+      "projectUniqueName": "D:\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj",
       "projectName": "LegendMotor.Api",
-      "projectPath": "D:\\test\\LegendMotor.Api\\LegendMotor.Api.csproj",
+      "projectPath": "D:\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj",
       "packagesPath": "C:\\Users\\TWKLI_01\\.nuget\\packages\\",
-      "outputPath": "D:\\test\\LegendMotor.Api\\obj\\",
+      "outputPath": "D:\\LegendMotor\\LegendMotor.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\TWKLI_01\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3640,8 +3640,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\test\\LegendMotor.Dal\\LegendMotor.Dal.csproj": {
-              "projectPath": "D:\\test\\LegendMotor.Dal\\LegendMotor.Dal.csproj"
+            "D:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj": {
+              "projectPath": "D:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj"
             }
           }
         }

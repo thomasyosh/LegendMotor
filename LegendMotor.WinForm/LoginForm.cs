@@ -3,27 +3,27 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LegendMotor.Dal;
 using BCrypt.Net;
+using Microsoft.VisualBasic.ApplicationServices;
+using LegendMotor.Domain.Abstractions.Repositories;
+using LegendMotor.Dal.Repository;
 
 namespace LegendMotor.WinForm;
 
 public partial class LoginForm : Form
 {
-    private readonly DataContext _ctx;
+    private readonly IStaffRepository _staffRepository;
+    private readonly IBinLocationRepository _binLocationRepository;
     public LoginForm()
     {
         InitializeComponent();
-        this._ctx = new DataContext();
-
-
+        _staffRepository = new StaffRepository();
+        _binLocationRepository = new BinLocationRepository();
     }
 
     private void textBox1_TextChanged(object sender, EventArgs e)
@@ -45,8 +45,7 @@ public partial class LoginForm : Form
         string username = txt_username.Text;
         string password = txt_password.Text;
         Console.WriteLine(password);
-        Staff loginUser = _ctx.Staff.FirstOrDefault(staff => staff.Name.Equals(username));
-
+        Staff loginUser = _staffRepository.GetUserByName(username);
         try
         {
             if (loginUser != null)
@@ -54,18 +53,25 @@ public partial class LoginForm : Form
                 if (!BCrypt.Net.BCrypt.Verify(password, loginUser.Password))
                 {
                     MessageBox.Show("Username or password incorrect");
+                    txt_password.Text = "";
                 }
                 else if (!loginUser.IsActive)
                 {
                     MessageBox.Show("Account is locked");
+                    txt_username.Text = txt_password.Text = "";
                 }
                 else
                 {
-                        MessageBox.Show("Login Successful");
-                        StaffManager.Instance.SetStaff(loginUser);
-                        this.getBinLocationCode();
+                    MessageBox.Show("Login Successful");
+                    StaffManager.Instance.SetStaff(loginUser);
+                    this.getBinLocationCode();
+                    txt_username.Text = txt_password.Text = "";
                 }
-}
+            }
+            else
+            {
+                MessageBox.Show("No such account");
+            }
         }
         catch (Exception ex)
         {
@@ -76,7 +82,8 @@ public partial class LoginForm : Form
 
     private void getBinLocationCode()
     {
-        BinLocationStaff binLocation = _ctx.BinLocationStaff.FirstOrDefault(binLocation => binLocation.StaffId.Equals(StaffManager.Instance.GetStaffId()));
+        BinLocationStaff binLocation = _binLocationRepository.
+                                        GetBinLocationByStaffId(StaffManager.Instance.GetStaffId());
         try
         {
             if (binLocation != null)
@@ -162,5 +169,15 @@ public partial class LoginForm : Form
     private void label1_Click(object sender, EventArgs e)
     {
 
+    }
+
+    private void btn_cancel_Click(object sender, EventArgs e)
+    {
+        txt_username.Text = txt_password.Text = "";
+    }
+
+    private void checkBox1_CheckedChanged(object sender, EventArgs e)
+    {
+        txt_password.UseSystemPasswordChar = !checkBox1.Checked;
     }
 }

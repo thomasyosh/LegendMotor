@@ -13,5 +13,7 @@ namespace LegendMotor.Domain.Abstractions.Repositories
         public List<BinLocation> GetBinLocations();
 
         public BinLocation GetBinLocationById(string id);
+
+        public BinLocationStaff GetBinLocationByStaffId(string staffId);
     }
 }

@@ -14,6 +14,7 @@ public class IncomingOrderDetails
     public string Status { get; set; }
     public Guid OrderHeaderId { get; set; }
     public Dealer Dealer { get; set; }
+    public string InvoiceId { get; set; }
     public string InvoiceName { get; set; }
     public string InvoiceAddress { get; set; }
     public string DeliveryAddress { get; set; }

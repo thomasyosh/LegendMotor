@@ -19,6 +19,11 @@ namespace LegendMotor.Dal.Repository
             return _ctx.BinLocation.FirstOrDefault(s => s.BinLocationCode.Equals(id));
         }
 
+        public BinLocationStaff GetBinLocationByStaffId(string staffId)
+        {
+            return _ctx.BinLocationStaff.FirstOrDefault(s=>s.StaffId.Equals(staffId));
+        }
+
         public List<BinLocation> GetBinLocations()
         {
             return _ctx.BinLocation.ToList();

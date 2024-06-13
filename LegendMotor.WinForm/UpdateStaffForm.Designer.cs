@@ -88,12 +88,12 @@ partial class UpdateStaffForm
         // 
         // button1
         // 
-        button1.Font = new Font("新細明體", 12F);
-        button1.Location = new Point(445, 94);
+        button1.Font = new Font("新細明體", 14F);
+        button1.Location = new Point(15, 465);
         button1.Name = "button1";
-        button1.Size = new Size(130, 30);
+        button1.Size = new Size(263, 43);
         button1.TabIndex = 39;
-        button1.Text = "Default password";
+        button1.Text = "Reset password";
         button1.UseVisualStyleBackColor = true;
         button1.Click += button1_Click;
         // 
@@ -118,7 +118,7 @@ partial class UpdateStaffForm
         // 
         comboBox3.DropDownStyle = ComboBoxStyle.DropDownList;
         comboBox3.FormattingEnabled = true;
-        comboBox3.Location = new Point(127, 359);
+        comboBox3.Location = new Point(127, 414);
         comboBox3.Name = "comboBox3";
         comboBox3.Size = new Size(263, 27);
         comboBox3.TabIndex = 36;
@@ -128,7 +128,7 @@ partial class UpdateStaffForm
         // label7
         // 
         label7.AutoSize = true;
-        label7.Location = new Point(12, 362);
+        label7.Location = new Point(12, 417);
         label7.Name = "label7";
         label7.Size = new Size(109, 19);
         label7.TabIndex = 35;
@@ -209,7 +209,7 @@ partial class UpdateStaffForm
         // label3
         // 
         label3.AutoSize = true;
-        label3.Location = new Point(12, 172);
+        label3.Location = new Point(12, 176);
         label3.Name = "label3";
         label3.Size = new Size(73, 19);
         label3.TabIndex = 26;
@@ -253,17 +253,18 @@ partial class UpdateStaffForm
         // label10
         // 
         label10.AutoSize = true;
-        label10.Location = new Point(12, 410);
+        label10.Font = new Font("新細明體", 14F, FontStyle.Bold);
+        label10.Location = new Point(14, 366);
         label10.Name = "label10";
-        label10.Size = new Size(80, 19);
+        label10.Size = new Size(109, 19);
         label10.TabIndex = 44;
-        label10.Text = "Is Active:";
+        label10.Text = "Active user:";
         // 
         // comboBox5
         // 
         comboBox5.DropDownStyle = ComboBoxStyle.DropDownList;
         comboBox5.FormattingEnabled = true;
-        comboBox5.Location = new Point(127, 407);
+        comboBox5.Location = new Point(127, 363);
         comboBox5.Name = "comboBox5";
         comboBox5.Size = new Size(263, 27);
         comboBox5.TabIndex = 45;

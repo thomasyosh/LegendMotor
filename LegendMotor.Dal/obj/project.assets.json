@@ -4388,11 +4388,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\test\\LegendMotor.Dal\\LegendMotor.Dal.csproj",
+      "projectUniqueName": "D:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj",
       "projectName": "LegendMotor.Dal",
-      "projectPath": "D:\\test\\LegendMotor.Dal\\LegendMotor.Dal.csproj",
+      "projectPath": "D:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj",
       "packagesPath": "C:\\Users\\TWKLI_01\\.nuget\\packages\\",
-      "outputPath": "D:\\test\\LegendMotor.Dal\\obj\\",
+      "outputPath": "D:\\LegendMotor\\LegendMotor.Dal\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\TWKLI_01\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4410,8 +4410,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\test\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {
-              "projectPath": "D:\\test\\LegendMotor.Domain\\LegendMotor.Domain.csproj"
+            "D:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {
+              "projectPath": "D:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj"
             }
           }
         }

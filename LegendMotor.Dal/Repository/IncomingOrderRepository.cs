@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LegendMotor.Dal;
 using LegendMotor.Domain.Models;
+using System.ComponentModel;
 
 namespace LegendMotor.Dal.Repository
 {
@@ -24,6 +25,25 @@ namespace LegendMotor.Dal.Repository
                     Status = combinedEntry.Status,
                     CreatedAt = title.CreatedAt,
                     UpdatedAt = title.UpdatedAt,
+                }
+            )
+            .ToList();
+            return fullEntries;
+        }
+
+        public List<IncomingOrderDetails> GetIncomingOrderByStaffIdAndStatus(string staffId, string statusId)
+        {
+            var fullEntries = _ctx.IncomingOrder.Where(incomingOrder => incomingOrder.staffId.Equals(staffId) && incomingOrder.Status.Equals(statusId))
+            .Join(
+                _ctx.OrderHeader,
+            combinedEntry => combinedEntry.OrderHeaderId,
+            title => title.OrderHeaderId,
+                (combinedEntry, title) => new IncomingOrderDetails
+                {
+                    Status = combinedEntry.Status,
+                    CreatedAt = title.CreatedAt,
+                    UpdatedAt = title.UpdatedAt,
+                    InvoiceId = combinedEntry.InvoiceId
                 }
             )
             .ToList();

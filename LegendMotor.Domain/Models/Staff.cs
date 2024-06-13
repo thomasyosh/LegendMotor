@@ -9,7 +9,6 @@ namespace LegendMotor.Domain.Models
     public class Staff
     {
         public string StaffId { get; set; }
-
         public string Password { get; set; }
         public string Name { get; set; }
         public string Gemder { get; set; }
@@ -20,7 +19,6 @@ namespace LegendMotor.Domain.Models
         public string PositionCode { get; set; }
         public DateTime CreateAt { get; set; }
         public DateTime UpdateAt { get; set; }
-
         public bool IsActive { get; set; }
     }
 }

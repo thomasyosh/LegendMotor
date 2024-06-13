@@ -21,6 +21,12 @@ public partial class CreateStaffForm : Form
     private void CreateStaffForm_Load(object sender, EventArgs e)
     {
         var positions = _ctx.Position;
+        var dict = new Dictionary<int, bool>();
+        dict.Add(0, false);
+        dict.Add(1, true);
+        activeUserComboBox.DataSource = new BindingSource(dict, null);
+        activeUserComboBox.DisplayMember = "Value";
+        activeUserComboBox.ValueMember = "Value";
         foreach (var position in positions)
         {
             positionCodes.Add(position.PositionCode);
@@ -85,6 +91,8 @@ public partial class CreateStaffForm : Form
         staff.Address = address;
         staff.AreaCode = areaCode;
         staff.PositionCode = positionCode;
+        staff.CreateAt = DateTime.Now;
+        staff.IsActive = bool.Parse(activeUserComboBox.SelectedValue.ToString());
 
         try
         {
@@ -182,6 +190,11 @@ public partial class CreateStaffForm : Form
             comboBox3.SelectedIndex = -1;
             label7.Visible = false;
         }
+    }
+
+    private void label10_Click(object sender, EventArgs e)
+    {
+
     }
 }
 

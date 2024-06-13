@@ -42,10 +42,6 @@ public partial class UpdateStaffForm : Form
         comboBox5.DataSource = new BindingSource(dict, null);
         comboBox5.DisplayMember = "Value";
         comboBox5.ValueMember = "Value";
-
-        
-
-
         foreach (var position in positions)
         {
             positionCodes.Add(position.PositionCode);
@@ -65,7 +61,6 @@ public partial class UpdateStaffForm : Form
             binLocationCodes.Add(binLocation.BinLocationCode);
             comboBox3.Items.Add(binLocation.Name);
         }
-
 
         var queryStaffs = _ctx.Staff;
         foreach (var queryStaff in queryStaffs)
@@ -137,7 +132,7 @@ public partial class UpdateStaffForm : Form
         }
     }
 
-    private void button2_Click(object sender, EventArgs e)
+    private async void button2_Click(object sender, EventArgs e)
     {
         string name = textBox4.Text;
         string address = textBox3.Text;
@@ -171,7 +166,7 @@ public partial class UpdateStaffForm : Form
         {
             int failed = 0;
 
-            _ctx.SaveChanges();
+            await _ctx.SaveChangesAsync();
             if (!binLocationCode.Equals(""))
             {
 
@@ -219,8 +214,6 @@ public partial class UpdateStaffForm : Form
         {
             Console.WriteLine(ex.StackTrace);
             MessageBox.Show(ex.Message);
-            // if (con.State == ConnectionState.Open)
-            //     con.Close();
         }
     }
 
