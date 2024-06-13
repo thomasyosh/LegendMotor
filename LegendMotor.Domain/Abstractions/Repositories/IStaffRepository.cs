@@ -13,5 +13,6 @@ namespace LegendMotor.Domain.Abstractions.Repositories
         public StaffDetails GetStaffDetails(string id);
         public Staff GetStaffById(string id);
         public Staff GetUserByName(string name);
+        public Staff UpdateUser(Staff user);
     }
 }

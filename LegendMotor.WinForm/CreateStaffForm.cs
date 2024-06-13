@@ -85,7 +85,7 @@ public partial class CreateStaffForm : Form
         staff.StaffId = staffId;
         staff.Name = name;
         staff.Password = BCrypt.Net.BCrypt.HashPassword(hashedPassword);
-        staff.Gemder = gender;
+        staff.Gender = gender;
         staff.Email = email;
         staff.Phone = phone;
         staff.Address = address;

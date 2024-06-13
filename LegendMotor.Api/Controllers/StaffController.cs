@@ -69,7 +69,7 @@ namespace LegendMotor.Api.Controllers
             var staff = await _ctx.Staff.FirstOrDefaultAsync(staff => staff.StaffId == id);
             staff.Password = updated.Password;
             staff.Name = updated.Name;
-            staff.Gemder = updated.Gemder;
+            staff.Gender = updated.Gender;
             staff.Email = updated.Email;
             staff.Phone = updated.Phone;
             staff.Address = updated.Address;

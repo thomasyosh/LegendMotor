@@ -1,50 +1,70 @@
 ﻿using LegendMotor.Domain.Abstractions.Repositories;
 using LegendMotor.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 using Org.BouncyCastle.Crypto.Engines;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace LegendMotor.Dal.Repository
 {
     public class StaffRepository : IStaffRepository
     {
-        private readonly DataContext _ctx = new DataContext();
         public List<Staff> GetAllStaff()
         {
-            return _ctx.Staff.ToList();
+            using (DataContext _ctx = new DataContext())
+            {
+                return _ctx.Staff.ToList();
+            }
         }
 
         public Staff GetUserByName(string name)
         {
-            var staffList = _ctx.Staff; //GetAllStaff()
-            return staffList.FirstOrDefault(staff => staff.Name.Equals(name));
+            using (DataContext _ctx = new DataContext())
+            {
+                return _ctx.Staff.FirstOrDefault(s => s.Name.Equals(name));
+            }
         }
 
         public Staff GetStaffById(string id)
         {
-            return _ctx.Staff.FirstOrDefault(staff => staff.StaffId.Equals(id));
+            var staffList = GetAllStaff();
+            return staffList.FirstOrDefault(s => s.StaffId.Equals(id));
+        }
+
+        public Staff UpdateUser(Staff user)
+        {
+            using (DataContext _ctx = new DataContext())
+            {
+                _ctx.Staff.Update(user);
+                _ctx.SaveChanges();
+                return user;
+            }
         }
 
         public StaffDetails GetStaffDetails(string id)
         {
-            var appInformationToReturn = _ctx.Staff
-                 .Join(
-                      _ctx.Position,
-                      ai => ai.PositionCode,
-                      al => al.PositionCode,
-                      (ai, al) => new StaffDetails()
-                      {
-                          Name = al.Name,
-                          Email = ai.Email,
-                          Phone = ai.Phone,
-                          Description = al.Description,
-                      })
-                 .Where(x => x.StaffId.Equals(id))
-                 .FirstOrDefault();
-            return appInformationToReturn;
+            using (DataContext _ctx = new DataContext())
+            {
+                var appInformationToReturn = _ctx.Staff
+                  .Join(
+                       _ctx.Position,
+                       ai => ai.PositionCode,
+                       al => al.PositionCode,
+                       (ai, al) => new StaffDetails()
+                       {
+                           Name = al.Name,
+                           Email = ai.Email,
+                           Phone = ai.Phone,
+                           Description = al.Description,
+                       })
+                  .Where(x => x.StaffId.Equals(id))
+                  .FirstOrDefault();
+                return appInformationToReturn;
+            }
         }
     }
 }
