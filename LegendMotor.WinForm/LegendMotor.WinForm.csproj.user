@@ -74,6 +74,9 @@
     <Compile Update="UpdateStaffForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UpdateStockForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="ViewSupplier.cs">
       <SubType>Form</SubType>
     </Compile>

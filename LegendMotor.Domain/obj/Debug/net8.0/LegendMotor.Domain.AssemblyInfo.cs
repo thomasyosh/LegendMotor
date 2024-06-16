@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LegendMotor.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+adda50bcc378c9da26fb72216a48e81fdcb4b5d3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+86977398ceb6b2ec2a87a9a84c34ae0e558dfafc")]
 [assembly: System.Reflection.AssemblyProductAttribute("LegendMotor.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LegendMotor.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -880,3 +880,4 @@ D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\refint\LegendMotor.W
 D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.pdb
 D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.genruntimeconfig.cache
 D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\ref\LegendMotor.WinForm.dll
+D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.UpdateStockForm.resources
