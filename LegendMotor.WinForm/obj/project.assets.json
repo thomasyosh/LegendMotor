@@ -5085,19 +5085,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\220286174\\.nuget\\packages\\": {}
+    "C:\\Users\\thoma\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\LegendMotor\\LegendMotor.WinForm\\LegendMotor.WinForm.csproj",
+      "projectUniqueName": "E:\\LegendMotor\\LegendMotor.WinForm\\LegendMotor.WinForm.csproj",
       "projectName": "LegendMotor.WinForm",
-      "projectPath": "D:\\LegendMotor\\LegendMotor.WinForm\\LegendMotor.WinForm.csproj",
-      "packagesPath": "C:\\Users\\220286174\\.nuget\\packages\\",
-      "outputPath": "D:\\LegendMotor\\LegendMotor.WinForm\\obj\\",
+      "projectPath": "E:\\LegendMotor\\LegendMotor.WinForm\\LegendMotor.WinForm.csproj",
+      "packagesPath": "C:\\Users\\thoma\\.nuget\\packages\\",
+      "outputPath": "E:\\LegendMotor\\LegendMotor.WinForm\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\220286174\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\thoma\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5105,21 +5105,20 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "projectReferences": {
-            "D:\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj": {
-              "projectPath": "D:\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj"
+            "E:\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj": {
+              "projectPath": "E:\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj"
             },
-            "D:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj": {
-              "projectPath": "D:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj"
+            "E:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj": {
+              "projectPath": "E:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj"
             },
-            "D:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {
-              "projectPath": "D:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj"
+            "E:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {
+              "projectPath": "E:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj"
             }
           }
         }
@@ -5199,7 +5198,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

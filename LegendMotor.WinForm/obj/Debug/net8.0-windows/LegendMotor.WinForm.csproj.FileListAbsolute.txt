@@ -881,3 +881,8 @@ D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.
 D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.genruntimeconfig.cache
 D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\ref\LegendMotor.WinForm.dll
 D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.UpdateStockForm.resources
+E:\LegendMotor\LegendMotor.WinForm\bin\Debug\net8.0-windows\BCrypt.Net-Next.dll
+E:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.AccountInfoForm.resources
+E:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.SalesOrderDetails.resources
+E:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.SalesOverview.resources
+E:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.UpdateStockForm.resources

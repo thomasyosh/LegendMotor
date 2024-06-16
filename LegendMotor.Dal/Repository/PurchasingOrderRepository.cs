@@ -27,27 +27,23 @@ namespace LegendMotor.Dal.Repository
             {
                 var record = _ctx.PurchasingOrder.Where(po => !po.Status.Equals("Completed"))
                     .Join(
-                    _ctx.OrderHeader,
-                    po => po.OrderHeaderId,
-                    oh => oh.OrderHeaderId,
-                    (po, oh) => new { po, oh }
+                        _ctx.OrderHeader,
+                        po => po.OrderHeaderId,
+                        oh => oh.OrderHeaderId,
+                        (po, oh) => new { po, oh }
                     )
                     .Join(
-                    _ctx.orderLine,
-                    poWithOl => poWithOl.oh.OrderHeaderId,
-                    ol => ol.OrderHeaderId,
-                    (poWithOl, ol) => new { poWithOl, ol }
+                        _ctx.orderLine,
+                        poWithOl => poWithOl.oh.OrderHeaderId,
+                        ol => ol.OrderHeaderId,
+                        (poWithOl, ol) => new { poWithOl, ol }
                     )
                     .Join(
-                    _ctx.BinLocationSpare,
-                    full=>full.ol.SparePartId,
-                    bs=>bs.Id,
-                    (full,bs) => new PurchasingOrderDetails { }
-                    )
-                    .ToList();
-
-
-
+                        _ctx.BinLocationSpare.Where(bs=>bs.BinLocationCode.Equals(BinLocationCode)),
+                        full => full.ol.SparePartId,
+                        bs => bs.SpareId,
+                        (full, bs) => new PurchasingOrderDetails { }
+                    ).ToList();
                 return record;
             }
         }

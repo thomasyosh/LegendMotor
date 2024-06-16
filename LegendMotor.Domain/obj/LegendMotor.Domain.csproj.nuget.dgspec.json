@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {}
+    "E:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {}
   },
   "projects": {
-    "D:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {
+    "E:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj",
+        "projectUniqueName": "E:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj",
         "projectName": "LegendMotor.Domain",
-        "projectPath": "D:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj",
-        "packagesPath": "C:\\Users\\220286174\\.nuget\\packages\\",
-        "outputPath": "D:\\LegendMotor\\LegendMotor.Domain\\obj\\",
+        "projectPath": "E:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj",
+        "packagesPath": "C:\\Users\\thoma\\.nuget\\packages\\",
+        "outputPath": "E:\\LegendMotor\\LegendMotor.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\220286174\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\thoma\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -61,7 +60,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

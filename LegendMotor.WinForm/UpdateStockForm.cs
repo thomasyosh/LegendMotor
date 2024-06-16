@@ -1,4 +1,6 @@
-﻿using LegendMotor.Domain.Models;
+﻿using LegendMotor.Dal.Repository;
+using LegendMotor.Domain.Abstractions.Repositories;
+using LegendMotor.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,11 +19,13 @@ namespace LegendMotor.WinForm
         private LoginForm loginForm;
         private List<string> orders = new List<string>();
         private List<PurchasingOrderDetails> purchasingOrders = new List<PurchasingOrderDetails>();
+        private readonly IPurchasingOrderRepository _purchasingOrderRepository;
         public UpdateStockForm(LoginForm loginForm)
         {
             InitializeComponent();
             this.loginForm = loginForm;
-        }
+            _purchasingOrderRepository = new PurchasingOrderRepository();
+            }
 
         private void UpdateStockForm_Load(object sender, EventArgs e)
         {
@@ -38,22 +42,15 @@ namespace LegendMotor.WinForm
         {
            comboBox1.Items.Clear();
             orders.Clear();
-/*            using (SqlConnection conn = new SqlConnection(Config.ConnectionString))
-            {
-                conn.Open();
                 string query = "SELECT PurchasingOrder.OrderId FROM PurchasingOrder JOIN OrderHeader ON OrderHeader.OrderHeaderId = PurchasingOrder.OrderHeaderId JOIN OrderLine ON OrderLine.OrderHeaderId = OrderHeader.OrderHeaderId JOIN BinLocation_Spare ON BinLocation_Spare.Id = OrderLine.SparePartId WHERE BinLocation_Spare.BinLocationCode = @BinLocationCode AND PurchasingOrder.Status != 'Completed'";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@BinLocationCode", StaffManager.Instance.GetBinLocationCode());
-                using (SqlDataReader dr = cmd.ExecuteReader())
-                {
-                    while (dr.Read())
+            List<PurchasingOrderDetails> purchasingOrderDetails = _purchasingOrderRepository
+                                .GetPurchasingOrderDetailByBinLocationCode(StaffManager.Instance.GetBinLocationCode());
+                    foreach (PurchasingOrderDetails details in purchasingOrderDetails)
                     {
-                        orders.Add(dr["OrderId"].ToString().Trim());
+                        orders.Add(details.OrderId);
                     }
-                }
-                conn.Close();
-            }
-            comboBox1.Items.AddRange(orders.ToArray());*/
+
+            comboBox1.Items.AddRange(orders.ToArray());
         }
 
         private void GetBinLocationOrders(string orderId)

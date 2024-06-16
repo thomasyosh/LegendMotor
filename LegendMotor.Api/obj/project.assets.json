@@ -3613,19 +3613,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\220286174\\.nuget\\packages\\": {}
+    "C:\\Users\\thoma\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj",
+      "projectUniqueName": "E:\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj",
       "projectName": "LegendMotor.Api",
-      "projectPath": "D:\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj",
-      "packagesPath": "C:\\Users\\220286174\\.nuget\\packages\\",
-      "outputPath": "D:\\LegendMotor\\LegendMotor.Api\\obj\\",
+      "projectPath": "E:\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj",
+      "packagesPath": "C:\\Users\\thoma\\.nuget\\packages\\",
+      "outputPath": "E:\\LegendMotor\\LegendMotor.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\220286174\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\thoma\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3633,15 +3633,14 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj": {
-              "projectPath": "D:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj"
+            "E:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj": {
+              "projectPath": "E:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj"
             }
           }
         }
@@ -3689,7 +3688,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
