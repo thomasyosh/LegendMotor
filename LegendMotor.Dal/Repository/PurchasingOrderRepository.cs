@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LegendMotor.Domain.Abstractions;
 using LegendMotor.Domain.Models;
+using Microsoft.VisualBasic;
 
 namespace LegendMotor.Dal.Repository
 {
@@ -17,7 +18,39 @@ namespace LegendMotor.Dal.Repository
             {
                 return _ctx.PurchasingOrder.FirstOrDefault(po => po.OrderId.Equals(Id));
 
-            }  
+            }
+        }
+
+        public List<PurchasingOrderDetails> GetPurchasingOrderDetailByBinLocationCode(string BinLocationCode)
+        {
+            using (DataContext _ctx = new DataContext())
+            {
+                var record = _ctx.PurchasingOrder.Where(po => !po.Status.Equals("Completed"))
+                    .Join(
+                    _ctx.OrderHeader,
+                    po => po.OrderHeaderId,
+                    oh => oh.OrderHeaderId,
+                    (po, oh) => new { po, oh }
+                    )
+                    .Join(
+                    _ctx.orderLine,
+                    poWithOl => poWithOl.oh.OrderHeaderId,
+                    ol => ol.OrderHeaderId,
+                    (poWithOl, ol) => new { poWithOl, ol }
+                    )
+                    .Join(
+                    _ctx.BinLocationSpare,
+                    full=>full.ol.SparePartId,
+                    bs=>bs.Id,
+                    (full,bs) => new PurchasingOrderDetails { }
+                    )
+                    .ToList();
+
+
+
+                return record;
+            }
         }
     }
 }
+

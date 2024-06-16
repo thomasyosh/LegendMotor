@@ -21,5 +21,5 @@ public class IncomingOrderDetails
     public string StaffId { get; set; }
     public string StaffName { get; set; }
     public string Remark { get; set; }
-    public List<OrderLine> OrderLines { get; set; }
+    public List<OrderLineDetail> OrderLines { get; set; }
 }

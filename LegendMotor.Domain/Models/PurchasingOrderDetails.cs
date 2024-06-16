@@ -15,6 +15,6 @@ namespace LegendMotor.Domain.Models
         public int GRN { get; set; }
         public string OrderHeaderId { get; set; }
         public string IncomingOrderId { get; set; }
-        public List<OrderLine> OrderLines { get; set; }
+        public List<OrderLineDetail> OrderLines { get; set; }
     }
 }

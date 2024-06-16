@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LegendMotor.Dal")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ddb47534110a86a6af8bd36f10af81192bb54466")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4b2e11b8a0b2d9c3391be8f7aa9c31c630f648f2")]
 [assembly: System.Reflection.AssemblyProductAttribute("LegendMotor.Dal")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LegendMotor.Dal")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
