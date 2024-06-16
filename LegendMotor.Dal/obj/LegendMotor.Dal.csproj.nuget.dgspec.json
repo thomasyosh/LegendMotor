@@ -10,11 +10,11 @@
         "projectUniqueName": "D:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj",
         "projectName": "LegendMotor.Dal",
         "projectPath": "D:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj",
-        "packagesPath": "C:\\Users\\TWKLI_01\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\220297115\\.nuget\\packages\\",
         "outputPath": "D:\\LegendMotor\\LegendMotor.Dal\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\TWKLI_01\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\220297115\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -109,11 +109,11 @@
         "projectUniqueName": "D:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj",
         "projectName": "LegendMotor.Domain",
         "projectPath": "D:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj",
-        "packagesPath": "C:\\Users\\TWKLI_01\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\220297115\\.nuget\\packages\\",
         "outputPath": "D:\\LegendMotor\\LegendMotor.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\TWKLI_01\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\220297115\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
