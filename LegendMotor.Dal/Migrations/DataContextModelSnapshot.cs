@@ -297,7 +297,7 @@ namespace LegendMotor.Dal.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime?>("LastLoginDateTime")
+                    b.Property<DateTime>("LastLoginDateTime")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("LoginFailedCounter")

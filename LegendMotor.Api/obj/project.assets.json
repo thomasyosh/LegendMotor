@@ -3613,7 +3613,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\TWKLI_01\\.nuget\\packages\\": {}
+    "C:\\Users\\220286174\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -3621,11 +3621,11 @@
       "projectUniqueName": "D:\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj",
       "projectName": "LegendMotor.Api",
       "projectPath": "D:\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj",
-      "packagesPath": "C:\\Users\\TWKLI_01\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\220286174\\.nuget\\packages\\",
       "outputPath": "D:\\LegendMotor\\LegendMotor.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\TWKLI_01\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\220286174\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
