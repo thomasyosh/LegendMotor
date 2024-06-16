@@ -54,6 +54,12 @@ public partial class LoginForm : Form
                 {
                     MessageBox.Show("Username or password incorrect");
                     txt_password.Text = "";
+                    loginUser.LoginFailedCounter++;
+                    if (loginUser.LoginFailedCounter == 5)
+                        loginUser.IsActive = false;
+                    _staffRepository.UpdateUser(loginUser);
+
+
                 }
                 else if (!loginUser.IsActive)
                 {
@@ -65,6 +71,9 @@ public partial class LoginForm : Form
                     MessageBox.Show("Login Successful");
                     StaffManager.Instance.SetStaff(loginUser);
                     this.getBinLocationCode();
+                    loginUser.LastLoginDateTime = DateTime.Now;
+                    loginUser.LoginFailedCounter = 0;
+                    _staffRepository.UpdateUser(loginUser);
                     txt_username.Text = txt_password.Text = "";
                 }
             }

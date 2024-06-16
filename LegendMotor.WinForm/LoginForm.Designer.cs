@@ -66,7 +66,7 @@ partial class LoginForm
         // 
         lbl_username.AutoSize = true;
         lbl_username.Font = new Font("新細明體", 16F);
-        lbl_username.Location = new Point(75, 324);
+        lbl_username.Location = new Point(72, 325);
         lbl_username.Margin = new Padding(4, 0, 4, 0);
         lbl_username.Name = "lbl_username";
         lbl_username.Size = new Size(99, 22);
@@ -77,7 +77,7 @@ partial class LoginForm
         // 
         lbl_password.AutoSize = true;
         lbl_password.Font = new Font("新細明體", 16F);
-        lbl_password.Location = new Point(81, 379);
+        lbl_password.Location = new Point(72, 378);
         lbl_password.Margin = new Padding(4, 0, 4, 0);
         lbl_password.Name = "lbl_password";
         lbl_password.Size = new Size(94, 22);

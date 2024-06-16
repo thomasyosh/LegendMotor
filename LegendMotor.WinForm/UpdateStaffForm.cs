@@ -121,7 +121,7 @@ public partial class UpdateStaffForm : Form
                 comboBox3.Visible = false;
                 label7.Visible = false;
             }
-            if (selectedStaff.Gemder == "M")
+            if (selectedStaff.Gender == "M")
             {
                 radioButton1.Checked = true;
             }
@@ -161,6 +161,10 @@ public partial class UpdateStaffForm : Form
         queryStaff.PositionCode = positionCode;
         queryStaff.IsActive = isActive;
         queryStaff.UpdateAt = DateTime.Now;
+        if (queryStaff.IsActive)
+        {
+            queryStaff.LoginFailedCounter = 0;
+        }
         _ctx.Staff.Update(queryStaff);
         try
         {

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LegendMotor.Dal.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240607202702_sixth")]
-    partial class sixth
+    [Migration("20240616092050_second")]
+    partial class second
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -221,6 +221,28 @@ namespace LegendMotor.Dal.Migrations
                     b.ToTable("Position");
                 });
 
+            modelBuilder.Entity("LegendMotor.Domain.Models.PurchasingOrder", b =>
+                {
+                    b.Property<string>("OrderId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("IncomingOrderId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("OrderHeaderId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("OrderId");
+
+                    b.ToTable("PurchasingOrder");
+                });
+
             modelBuilder.Entity("LegendMotor.Domain.Models.Spare", b =>
                 {
                     b.Property<string>("SpareId")
@@ -286,13 +308,25 @@ namespace LegendMotor.Dal.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Gemder")
+                    b.Property<string>("Gender")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("LastLoginDateTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("LoginFailedCounter")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -308,6 +342,9 @@ namespace LegendMotor.Dal.Migrations
 
                     b.Property<string>("PositionCode")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("UpdateAt")
                         .HasColumnType("TEXT");
 
                     b.HasKey("StaffId");
