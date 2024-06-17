@@ -44,28 +44,27 @@ public partial class LoginForm : Form
 
         string username = txt_username.Text;
         string password = txt_password.Text;
-        Console.WriteLine(password);
-        Staff loginUser = _staffRepository.GetUserByName(username);
         try
         {
+            Staff loginUser = _staffRepository.GetUserByName(username);
             if (loginUser != null)
             {
-                if (!BCrypt.Net.BCrypt.Verify(password, loginUser.Password))
+                if (!_staffRepository.GetUserByName(username).IsActive)
+                {
+                    MessageBox.Show("Account is locked");
+                    txt_username.Text = txt_password.Text = "";
+                }
+
+                else if (!BCrypt.Net.BCrypt.Verify(password, loginUser.Password))
                 {
                     MessageBox.Show("Username or password incorrect");
                     txt_password.Text = "";
                     loginUser.LoginFailedCounter++;
                     if (loginUser.LoginFailedCounter == 5)
                         loginUser.IsActive = false;
-                    _staffRepository.UpdateUser(loginUser);
-
-
+                    loginUser = _staffRepository.UpdateUser(loginUser);
                 }
-                else if (!loginUser.IsActive)
-                {
-                    MessageBox.Show("Account is locked");
-                    txt_username.Text = txt_password.Text = "";
-                }
+
                 else
                 {
                     MessageBox.Show("Login Successful");

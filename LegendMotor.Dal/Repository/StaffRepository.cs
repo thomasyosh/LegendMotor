@@ -1,13 +1,6 @@
 ﻿using LegendMotor.Domain.Abstractions.Repositories;
 using LegendMotor.Domain.Models;
-using Microsoft.EntityFrameworkCore;
-using Org.BouncyCastle.Crypto.Engines;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+
 
 namespace LegendMotor.Dal.Repository
 {
@@ -31,8 +24,10 @@ namespace LegendMotor.Dal.Repository
 
         public Staff GetStaffById(string id)
         {
-            var staffList = GetAllStaff();
-            return staffList.FirstOrDefault(s => s.StaffId.Equals(id));
+            using (DataContext _ctx = new DataContext())
+            {
+                return _ctx.Staff.FirstOrDefault(s => s.Name.Equals(id));
+            }
         }
 
         public Staff UpdateUser(Staff user)
@@ -40,7 +35,7 @@ namespace LegendMotor.Dal.Repository
             using (DataContext _ctx = new DataContext())
             {
                 _ctx.Staff.Update(user);
-                _ctx.SaveChanges();
+                _ctx.SaveChangesAsync();
                 return user;
             }
         }
