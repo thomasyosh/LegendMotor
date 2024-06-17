@@ -1,15 +1,4 @@
 ﻿using LegendMotor.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using LegendMotor.Dal;
-using BCrypt.Net;
-using Microsoft.VisualBasic.ApplicationServices;
 using LegendMotor.Domain.Abstractions.Repositories;
 using LegendMotor.Dal.Repository;
 
@@ -44,35 +33,37 @@ public partial class LoginForm : Form
 
         string username = txt_username.Text;
         string password = txt_password.Text;
+        Staff loginUser = _staffRepository.GetUserByName(username);
         try
         {
-            Staff loginUser = _staffRepository.GetUserByName(username);
             if (loginUser != null)
             {
+                if (!BCrypt.Net.BCrypt.Verify(password, loginUser.Password))
+                {
+                    MessageBox.Show("Username or password incorrect");
+                    txt_password.Text = "";
+                    if (loginUser.LoginFailedCounter < 5)
+                    {
+                        loginUser.LoginFailedCounter++;
+                    }
+                    if (loginUser.LoginFailedCounter == 5)
+                    {
+                        loginUser.IsActive = false;
+                    }
+                }
+
                 if (!_staffRepository.GetUserByName(username).IsActive)
                 {
                     MessageBox.Show("Account is locked");
                     txt_username.Text = txt_password.Text = "";
                 }
-
-                else if (!BCrypt.Net.BCrypt.Verify(password, loginUser.Password))
-                {
-                    MessageBox.Show("Username or password incorrect");
-                    txt_password.Text = "";
-                    loginUser.LoginFailedCounter++;
-                    if (loginUser.LoginFailedCounter == 5)
-                        loginUser.IsActive = false;
-                    loginUser = _staffRepository.UpdateUser(loginUser);
-                }
-
-                else
+                if (_staffRepository.GetUserByName(username).IsActive && BCrypt.Net.BCrypt.Verify(password, loginUser.Password))
                 {
                     MessageBox.Show("Login Successful");
                     StaffManager.Instance.SetStaff(loginUser);
                     this.getBinLocationCode();
                     loginUser.LastLoginDateTime = DateTime.Now;
                     loginUser.LoginFailedCounter = 0;
-                    _staffRepository.UpdateUser(loginUser);
                     txt_username.Text = txt_password.Text = "";
                 }
             }
@@ -85,6 +76,10 @@ public partial class LoginForm : Form
         {
             Console.WriteLine(ex.StackTrace);
             MessageBox.Show(ex.Message);
+        }
+        finally
+        {
+            _staffRepository.UpdateUser(loginUser);
         }
     }
 
