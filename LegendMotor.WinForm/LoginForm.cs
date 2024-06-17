@@ -135,15 +135,17 @@ public partial class LoginForm : Form
             {
                 PurchasingDepartmentMenu productDepartmentMenu = new PurchasingDepartmentMenu(this);
                 productDepartmentMenu.Show();
-            }/* else if (positionCode.Equals("src"))
+            }
+            else if (positionCode.Equals("src"))
             {
                 UpdateStockForm updateStockForm = new UpdateStockForm(this);
                 updateStockForm.Show();
-            } else if (positionCode.Equals("dm"))
+            }
+            else if (positionCode.Equals("dm"))
             {
                 DeliveryMenMenu deliveryMenMenu = new DeliveryMenMenu(this);
                 deliveryMenMenu.Show();
-            }*/
+            }
         }
     }
 

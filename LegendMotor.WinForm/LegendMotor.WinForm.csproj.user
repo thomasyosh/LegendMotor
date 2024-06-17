@@ -38,6 +38,15 @@
     <Compile Update="DealerOrderForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="DeliveryIncomingOrderList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="DeliveryMenMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="DeliveryPurchasingOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="IncomingOrderDetailsForm.cs">
       <SubType>Form</SubType>
     </Compile>
