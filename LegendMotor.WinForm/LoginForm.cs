@@ -57,7 +57,8 @@ public partial class LoginForm : Form
                     MessageBox.Show("Account is locked");
                     txt_username.Text = txt_password.Text = "";
                 }
-                if (_staffRepository.GetUserByName(username).IsActive && BCrypt.Net.BCrypt.Verify(password, loginUser.Password))
+                if (_staffRepository.GetUserByName(username).IsActive 
+                    && BCrypt.Net.BCrypt.Verify(password, loginUser.Password))
                 {
                     MessageBox.Show("Login Successful");
                     StaffManager.Instance.SetStaff(loginUser);

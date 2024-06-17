@@ -1,6 +1,6 @@
 ﻿namespace LegendMotor.WinForm;
 
-partial class IncomingOrderDetails
+partial class IncomingOrderDetailsForm
 {
     /// <summary>
     /// Required designer variable.

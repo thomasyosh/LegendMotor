@@ -8,11 +8,11 @@ namespace LegendMotor.Domain.Models;
 
 public class IncomingOrderDetails
 {
-    public Guid OrderId { get; set; }
+    public string OrderId { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
     public string Status { get; set; }
-    public Guid OrderHeaderId { get; set; }
+    public string OrderHeaderId { get; set; }
     public Dealer Dealer { get; set; }
     public string InvoiceId { get; set; }
     public string InvoiceName { get; set; }

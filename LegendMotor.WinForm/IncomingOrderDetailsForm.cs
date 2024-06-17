@@ -14,12 +14,12 @@ using LegendMotor.Domain.Models;
 
 namespace LegendMotor.WinForm;
 
-public partial class IncomingOrderDetails : Form
+public partial class IncomingOrderDetailsForm : Form
 {
     private Guid orderId;
-    private IncomingOrderDetails incomingOrderDetails;
+    private IncomingOrderDetailsForm incomingOrderDetails;
     private List<BinLocation> binLocations = new List<BinLocation>();
-    public IncomingOrderDetails(Guid orderId)
+    public IncomingOrderDetailsForm(Guid orderId)
     {
         InitializeComponent();
         this.orderId = orderId;

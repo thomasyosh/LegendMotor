@@ -13,5 +13,6 @@ namespace LegendMotor.Domain.Abstractions.Repositories
         public List<IncomingOrderDetails> GetIncomingOrderByOrderHeadId(string orderHeadId);
 
         public List<IncomingOrderDetails> GetIncomingOrderByStaffIdAndStatus(string staffId, string statusId);
+        public IncomingOrder GetIncomingOrderByOrderId(string orderId);
     }
 }

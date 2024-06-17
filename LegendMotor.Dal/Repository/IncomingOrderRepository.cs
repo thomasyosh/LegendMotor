@@ -13,6 +13,15 @@ namespace LegendMotor.Dal.Repository
     public class IncomingOrderRepository : IIncomingOrderRepository
     {
         private readonly DataContext _ctx = new DataContext();
+        
+        public IncomingOrder GetIncomingOrderByOrderId (string orderId)
+        {
+            using (DataContext _ctx = new DataContext())
+            {
+                return _ctx.IncomingOrder.FirstOrDefault(io => io.Equals(orderId));
+            }
+        }
+        
         public List<IncomingOrderDetails> GetIncomingOrderByOrderHeadId(string staffId)
         {
             var fullEntries = _ctx.IncomingOrder.Where(incomingOrder=>incomingOrder.staffId.Equals(staffId))

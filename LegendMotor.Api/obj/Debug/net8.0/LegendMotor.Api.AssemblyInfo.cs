@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LegendMotor.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9edd373da7c4d1384654b5fad7793e4263603f13")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c4cac0fc04b96058333debaab6aefc876d69251d")]
 [assembly: System.Reflection.AssemblyProductAttribute("LegendMotor.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LegendMotor.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

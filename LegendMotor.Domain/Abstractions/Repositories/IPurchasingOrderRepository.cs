@@ -11,6 +11,9 @@ namespace LegendMotor.Domain.Abstractions.Repositories
     {
         public PurchasingOrder GetPurchasingOrderById(string Id );
         public List<PurchasingOrderDetails> GetPurchasingOrderDetailByBinLocationCode(string BinLocationCode);
+        public List<PurchasingOrderDetails> GetPurchasingOrderDetailWithOrderHeader(string orderId);
+        public PurchasingOrder UpdatePurchaseOrder(PurchasingOrder purchasingOrder);
+
 
 
 

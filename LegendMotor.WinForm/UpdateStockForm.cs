@@ -20,11 +20,19 @@ namespace LegendMotor.WinForm
         private List<string> orders = new List<string>();
         private List<PurchasingOrderDetails> purchasingOrders = new List<PurchasingOrderDetails>();
         private readonly IPurchasingOrderRepository _purchasingOrderRepository;
+        private readonly IOrderLineRepository _orderLineRepository;
+        private readonly IOrderHeaderRepository _orderHeaderRepository;
+        private readonly IBinLocationSpareRepository _binLocationSpareRepository;
+        private readonly IIncomingOrderRepository _incomingOrderRepository;
         public UpdateStockForm(LoginForm loginForm)
         {
             InitializeComponent();
             this.loginForm = loginForm;
             _purchasingOrderRepository = new PurchasingOrderRepository();
+            _orderLineRepository = new OrderLineRepository();
+            _orderHeaderRepository = new OrderHeaderRepository();
+            _binLocationSpareRepository = new BinLocationSpareRepository();
+            _incomingOrderRepository = new IncomingOrderRepository();
             }
 
         private void UpdateStockForm_Load(object sender, EventArgs e)
@@ -57,75 +65,28 @@ namespace LegendMotor.WinForm
         {
             purchasingOrders.Clear();
             dataGridView1.Rows.Clear();
-             /*using (SqlConnection conn = new SqlConnection(Config.ConnectionString))
-            {
-                Model.PurchasingOrderDetails purchasingOrder = new Model.PurchasingOrderDetails();
-                conn.Open();
+
+                List<PurchasingOrderDetails> purchasingOrder = _purchasingOrderRepository.GetPurchasingOrderDetailWithOrderHeader(orderId);
+
                 string query = "SELECT * FROM PurchasingOrder WHERE OrderId = @OrderId AND Status != 'Completed'";
-
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@OrderId", orderId);
-                    using (SqlDataReader dr = cmd.ExecuteReader())
-                    {
-                        while (dr.Read())
-                        {
-                            purchasingOrder.OrderId = Guid.Parse(dr["OrderId"].ToString().Trim());
-                            purchasingOrder.Status = dr["Status"].ToString().Trim();
-                            purchasingOrder.IncomingOrderId = Guid.Parse(dr["IncomingOrderId"].ToString().Trim());
-                            purchasingOrder.OrderHeaderId = Guid.Parse(dr["OrderHeaderId"].ToString().Trim());
-
-                            purchasingOrders.Add(purchasingOrder);
-        }
-    }
-                }
-
-                query = "SELECT * FROM OrderHeader WHERE OrderHeaderId = @OrderHeaderId";
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@OrderHeaderId", purchasingOrder.OrderHeaderId);
-                    using (SqlDataReader dr = cmd.ExecuteReader())
-                    {
-                        while (dr.Read())
-                        {
-                            purchasingOrder.CreatedAt = DateTime.Parse(dr["CreatedAt"].ToString());
-                            purchasingOrder.UpdatedAt = DateTime.Parse(dr["UpdatedAt"].ToString());
-                        }
-                    }
-                }
-
                 query = "SELECT OrderLine.LineId AS LineId, OrderLine.Quantity AS Quantity, OrderLine.Status AS Status, OrderLine.SparePartId AS SparePartId, BinLocation_Spare.BinLocationCode AS BinLocationCode, Spare.Price AS Price, Spare.Name AS Name, Spare.SpareId AS SpareId FROM OrderLine JOIN BinLocation_Spare ON BinLocation_Spare.Id = OrderLine.SparePartId JOIN Spare ON Spare.SpareId = BinLocation_Spare.SpareId WHERE OrderLine.OrderHeaderId = @OrderHeaderId";
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@OrderHeaderId", purchasingOrder.OrderHeaderId);
-                    using (SqlDataReader dr = cmd.ExecuteReader())
+
+                    foreach (PurchasingOrderDetails item in purchasingOrder)
                     {
-                        if (dr.HasRows)
+                        purchasingOrders.Add(item);
+                        foreach (var line in item.OrderLines)
                         {
-                            purchasingOrder.OrderLines = new List<Model.OrderLine>();
-                            while (dr.Read())
-                            {
-                                Model.OrderLine orderLine = new Model.OrderLine();
-                                orderLine.LineId = Guid.Parse(dr["LineId"].ToString().Trim());
-                                orderLine.OrderHeaderId = purchasingOrder.OrderHeaderId;
-                                orderLine.SparePartId = Guid.Parse(dr["SparePartId"].ToString().Trim());
-                                orderLine.Quantity = int.Parse(dr["Quantity"].ToString());
-                                orderLine.BinLocationCode = dr["BinLocationCode"].ToString().Trim();
-                                orderLine.Status = dr["Status"].ToString().Trim();
-                                orderLine.Price = float.Parse(dr["Price"].ToString());
-                                orderLine.Name = dr["Name"].ToString();
-                                orderLine.SpareId = dr["SpareId"].ToString().Trim();
-                                purchasingOrder.OrderLines.Add(orderLine);
-                                if (orderLine.Status.Equals("Completed") && orderLine.BinLocationCode.Equals(StaffManager.Instance.GetBinLocationCode()))
+                                if (line.Status.Equals("Completed") 
+                                    && line.BinLocationCode
+                                       .Equals(StaffManager.Instance.GetBinLocationCode()))
                                 {
-                                    dataGridView1.Rows.Add(orderLine.SpareId, orderLine.Name, orderLine.Quantity, 0, 0);
+                                    dataGridView1.Rows.Add(line.SpareId, line.Name, line.Quantity, 0, 0);
                                 }
-                            }
+                            
+
                         }
+
                     }
-                }
-                conn.Close();
-            }*/
         }
         private void AddDataGridViewColumns()
         {
@@ -205,170 +166,97 @@ namespace LegendMotor.WinForm
 
         private void button1_Click(object sender, EventArgs e)
         {
-            /*using (SqlConnection conn = new SqlConnection(Config.ConnectionString))
+            PurchasingOrderDetails purchasingOrder = purchasingOrders[comboBox1.SelectedIndex];
+            foreach (OrderLineDetail orderLine in purchasingOrder.OrderLines)
             {
-                conn.Open();
-                Model.PurchasingOrderDetails purchasingOrder = purchasingOrders[comboBox1.SelectedIndex];
-                foreach (OrderLine orderLine in purchasingOrder.OrderLines)
+                int index = dataGridView1.Rows.IndexOf(dataGridView1.Rows.Cast<DataGridViewRow>()
+                            .Where(r => r.Cells["Spare ID"].Value.ToString()
+                            .Equals(orderLine.SpareId))
+                            .FirstOrDefault());
+                if (index == -1)
                 {
-                    int index = dataGridView1.Rows.IndexOf(dataGridView1.Rows.Cast<DataGridViewRow>().Where(r => r.Cells["Spare ID"].Value.ToString().Equals(orderLine.SpareId)).FirstOrDefault());
-                    if (index == -1)
-                    {
-                        continue;
-                    }
-                    int discrepancy = int.Parse(dataGridView1.Rows[index].Cells["Discrepancy"].Value.ToString());
-                    int scrap = int.Parse(dataGridView1.Rows[index].Cells["Scarp"].Value.ToString());
-                    int grn = orderLine.Quantity + discrepancy - scrap;
-                    Console.WriteLine("Discrepancy: " + discrepancy + " Scrap: " + scrap + " GRN: " + grn);
-                    string query = "UPDATE OrderLine SET Status = @Status, GRN = @GRN WHERE LineId = @LineId";
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@Status", "Completed");
-                        cmd.Parameters.AddWithValue("@LineId", orderLine.LineId);
-                        cmd.Parameters.AddWithValue("@GRN", grn);
-                        cmd.ExecuteNonQuery();
-                    }
+                    continue;
+                }
+                int discrepancy = int.Parse(dataGridView1.Rows[index].Cells["Discrepancy"].Value.ToString());
+                int scrap = int.Parse(dataGridView1.Rows[index].Cells["Scarp"].Value.ToString());
+                int grn = orderLine.Quantity + discrepancy - scrap;
+                Console.WriteLine("Discrepancy: " + discrepancy + " Scrap: " + scrap + " GRN: " + grn);
+                string query = "UPDATE OrderLine SET Status = @Status, GRN = @GRN WHERE LineId = @LineId";
+                OrderLine ol = _orderLineRepository.GetOrderLineById(orderLine.LineId);
+                ol.Status = "Completed";
+                ol.GRN = grn;
+                _orderLineRepository.UpdateOrderLine(ol);
 
-                    query = "SELECT COUNT(*) FROM OrderLine WHERE OrderHeaderId = @OrderHeaderId AND Status != 'Completed'";
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                query = "SELECT COUNT(*) FROM OrderLine WHERE OrderHeaderId = @OrderHeaderId AND Status != 'Completed'";
+                List<OrderLine> orderLines = _orderLineRepository.GetOrderLineByOrderHeaderId(purchasingOrder.OrderHeaderId);
+                int count = orderLines.Count;
+                if (count == 0)
+                {
+                    query = "UPDATE PurchasingOrder SET Status = @Status WHERE OrderId = @OrderId";
+                    PurchasingOrder po = _purchasingOrderRepository.GetPurchasingOrderById(purchasingOrder.OrderId);
+                    po.Status = "Completed";
+                    _purchasingOrderRepository.UpdatePurchaseOrder(po);
+
+                }
+
+                query = "UPDATE OrderHeader SET UpdatedAt = @UpdatedAt WHERE OrderHeaderId = @OrderHeaderId";
+                OrderHeader orderHeader = _orderHeaderRepository.GetOrderHeaderById(purchasingOrder.OrderHeaderId);
+                orderHeader.UpdatedAt = DateTime.Now;
+                _orderHeaderRepository.UpdateOrderHeader(orderHeader);
+
+
+                query = "UPDATE BinLocation_Spare SET Stock = Stock + @Stock WHERE Id = @Id";
+                BinLocationSpare bs = _binLocationSpareRepository.GetBinLocationSpareBySpareId(orderLine.SparePartId);
+                bs.Stock = grn;
+                _binLocationSpareRepository.UpdateBinLocationSpare(bs);
+                if (purchasingOrder.IncomingOrderId != null)
+                {
+                    IncomingOrder io = _incomingOrderRepository
+                                        .GetIncomingOrderByOrderId(purchasingOrder.IncomingOrderId);
+
+
+
+
+                    IncomingOrderDetails incomingOrderDetails = new IncomingOrderDetails();
+                    if (io != null)
                     {
-                        cmd.Parameters.AddWithValue("@OrderHeaderId", purchasingOrder.OrderHeaderId);
-                        int count = (int)cmd.ExecuteScalar();
-                        if (count == 0)
+                        incomingOrderDetails.OrderId = io.OrderId;
+                        incomingOrderDetails.OrderHeaderId = io.OrderHeaderId;
+
+
+                        OrderHeader queryOrderHeader = _orderHeaderRepository
+                                                       .GetOrderHeaderById(incomingOrderDetails.OrderHeaderId);
+
+                        List<OrderLineDetail> lineDetail = _orderLineRepository.GetOrderLineWithSpare(
+                        incomingOrderDetails.OrderHeaderId,
+                        orderLine.SpareId,
+                        StaffManager.Instance.GetBinLocationCode()
+                        );
+
+                        string LineId;
+
+                        if (queryOrderHeader != null)
                         {
-                            query = "UPDATE PurchasingOrder SET Status = @Status WHERE OrderId = @OrderId";
-                            using (SqlCommand cmd2 = new SqlCommand(query, conn))
-                            {
-                                cmd2.Parameters.AddWithValue("@Status", "Completed");
-                                cmd2.Parameters.AddWithValue("@OrderId", purchasingOrder.OrderId);
-                                cmd2.ExecuteNonQuery();
-                            }
-                        }
-                    }
-
-                    query = "UPDATE OrderHeader SET UpdatedAt = @UpdatedAt WHERE OrderHeaderId = @OrderHeaderId";
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@UpdatedAt", DateTime.Now);
-                        cmd.Parameters.AddWithValue("@OrderHeaderId", purchasingOrder.OrderHeaderId);
-                        cmd.ExecuteNonQuery();
-                    }
-
-                    query = "UPDATE BinLocation_Spare SET Stock = Stock + @Stock WHERE Id = @Id";
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@Stock", grn);
-                        cmd.Parameters.AddWithValue("@Id", orderLine.SparePartId);
-                        cmd.ExecuteNonQuery();
-                    }
-
-                    if (purchasingOrder.IncomingOrderId != null)
-                    {
-                        query = "SELECT * FROM IncomingOrder WHERE OrderId = @OrderId";
-                        Model.IncomingOrderDetails incomingOrderDetails = new Model.IncomingOrderDetails();
-                        using (SqlCommand cmd = new SqlCommand(query, conn))
-                        {
-                            cmd.Parameters.AddWithValue("@OrderId", purchasingOrder.IncomingOrderId);
-                            using (SqlDataReader dr = cmd.ExecuteReader())
-                            {
-                                while (dr.Read())
-                                {
-                                    incomingOrderDetails.OrderId = Guid.Parse(dr["OrderId"].ToString().Trim());
-                                    incomingOrderDetails.OrderHeaderId = Guid.Parse(dr["OrderHeaderId"].ToString().Trim());
-                                }
-                            }
+                            incomingOrderDetails.CreatedAt = queryOrderHeader.CreatedAt;
+                            incomingOrderDetails.UpdatedAt = queryOrderHeader.UpdatedAt;
                         }
 
-                        query = "SELECT * FROM OrderHeader WHERE OrderHeaderId = @OrderHeaderId";
-                        using (SqlCommand cmd = new SqlCommand(query, conn))
+                        foreach (OrderLineDetail line in lineDetail)
                         {
-                            cmd.Parameters.AddWithValue("@OrderHeaderId", incomingOrderDetails.OrderHeaderId);
-                            using (SqlDataReader dr = cmd.ExecuteReader())
-                            {
-                                while (dr.Read())
-                                {
-                                    incomingOrderDetails.CreatedAt = DateTime.Parse(dr["CreatedAt"].ToString());
-                                    incomingOrderDetails.UpdatedAt = DateTime.Parse(dr["UpdatedAt"].ToString());
-                                }
-                            }
+                            LineId = line.LineId;
+                            OrderLine item = _orderLineRepository.GetOrderLineById(LineId);
+                            item.Status = "Available";
+                            _orderLineRepository.UpdateOrderLine(item);
+                            OrderHeader header = _orderHeaderRepository.GetOrderHeaderById(incomingOrderDetails.OrderHeaderId);
+                            _orderHeaderRepository.UpdateOrderHeader(header);
                         }
 
-                        query = "SELECT OrderLine.LineId AS LineId, OrderLine.SparePartId AS SparePartId FROM OrderLine JOIN BinLocation_Spare ON BinLocation_Spare.Id = OrderLine.SparePartId JOIN Spare ON Spare.SpareId = BinLocation_Spare.SpareId WHERE OrderLine.OrderHeaderId = @OrderHeaderId AND BinLocation_Spare.SpareId = @SpareId AND BinLocation_Spare.BinLocationCode = @BinLocationCode";
-
-                        Guid LineId = Guid.Empty;
-                        using (SqlCommand cmd = new SqlCommand(query, conn))
-                        {
-                            cmd.Parameters.AddWithValue("@OrderHeaderId", incomingOrderDetails.OrderHeaderId);
-                            cmd.Parameters.AddWithValue("@SpareId", orderLine.SpareId);
-                            cmd.Parameters.AddWithValue("@BinLocationCode", StaffManager.Instance.GetBinLocationCode());
-                            using (SqlDataReader dr = cmd.ExecuteReader())
-                            {
-                                if (dr.HasRows)
-                                {
-                                    while (dr.Read())
-                                    {
-                                        LineId = Guid.Parse(dr["LineId"].ToString().Trim());
-                                        
-                                    }
-                                }
-                            }
-                        }
-
-                        query = "UPDATE OrderLine SET Status = @Status WHERE LineId = @LineId";
-                        using (SqlCommand cmd = new SqlCommand(query, conn))
-                        {
-                            cmd.Parameters.AddWithValue("@Status", "Available");
-                            cmd.Parameters.AddWithValue("@LineId", LineId);
-                            cmd.ExecuteNonQuery();
-                        }*/
-
-                        //query = "SELECT * FROM OrderLine WHERE OrderHeaderId = @OrderHeaderId";
-                        //bool isReady = true;
-                        //using (SqlCommand cmd = new SqlCommand(query, conn))
-                        //{
-                        //    cmd.Parameters.AddWithValue("@OrderHeaderId", incomingOrderDetails.OrderHeaderId);
-                        //    using (SqlDataReader dr = cmd.ExecuteReader())
-                        //    {
-                        //        if (dr.HasRows)
-                        //        {
-                        //            while (dr.Read())
-                        //            {
-                        //                string status = dr["Status"].ToString().Trim();
-                        //                if (!status.Equals("Available"))
-                        //                {
-                        //                    isReady = false;
-                        //                    break;
-                        //                }
-                        //            }
-                        //        }
-                        //    }
-                        //}
-
-                        //if (isReady)
-                        //{
-                        //    query = "UPDATE IncomingOrder SET Status = @Status WHERE OrderId = @OrderId";
-                        //    using (SqlCommand cmd = new SqlCommand(query, conn))
-                        //    {
-                        //        cmd.Parameters.AddWithValue("@Status", "Ready");
-                        //        cmd.Parameters.AddWithValue("@OrderId", incomingOrderDetails.OrderId);
-                        //        cmd.ExecuteNonQuery();
-                        //    }
-                        //}
-
-                        /*query = "UPDATE OrderHeader SET UpdatedAt = @UpdatedAt WHERE OrderHeaderId = @OrderHeaderId";
-                        using (SqlCommand cmd = new SqlCommand(query, conn))
-                        {
-                            cmd.Parameters.AddWithValue("@UpdatedAt", DateTime.Now);
-                            cmd.Parameters.AddWithValue("@OrderHeaderId", incomingOrderDetails.OrderHeaderId);
-                            cmd.ExecuteNonQuery();
-                        }
                     }
                 }
-                conn.Close();
-
-                this.fetchData();
-            }*/
+            }
         }
+            
+
 
         private void logout()
         {

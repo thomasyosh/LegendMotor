@@ -177,7 +177,7 @@ public partial class DealerOrderForm : Form
         {
             this.Hide();
             Guid orderId = (Guid)dataGridView1.Rows[e.RowIndex].Cells[0].Value;
-            IncomingOrderDetails form = new IncomingOrderDetails(orderId);
+            IncomingOrderDetailsForm form = new IncomingOrderDetailsForm(orderId);
             form.FormClosed += new FormClosedEventHandler(childForm_FormClosed);
             form.Show();
         }

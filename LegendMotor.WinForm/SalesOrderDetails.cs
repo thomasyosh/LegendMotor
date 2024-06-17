@@ -139,7 +139,7 @@ namespace LegendMotor.WinForm
             if (e.ColumnIndex == 4)
             {
                 Guid orderId = (Guid)dataGridView1.Rows[e.RowIndex].Cells[0].Value;
-                IncomingOrderDetails form = new IncomingOrderDetails(orderId);
+                IncomingOrderDetailsForm form = new IncomingOrderDetailsForm(orderId);
                 form.FormClosed += new FormClosedEventHandler(childForm_FormClosed);
                 form.ShowDialog();
             }

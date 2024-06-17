@@ -39,7 +39,7 @@ namespace LegendMotor.Dal.Repository
                         (poWithOl, ol) => new { poWithOl, ol }
                     )
                     .Join(
-                        _ctx.BinLocationSpare.Where(bs=>bs.BinLocationCode.Equals(BinLocationCode)),
+                        _ctx.BinLocationSpare.Where(bs => bs.BinLocationCode.Equals(BinLocationCode)),
                         full => full.ol.SparePartId,
                         bs => bs.SpareId,
                         (full, bs) => new PurchasingOrderDetails { }
@@ -47,6 +47,34 @@ namespace LegendMotor.Dal.Repository
                 return record;
             }
         }
+
+        public List<PurchasingOrderDetails> GetPurchasingOrderDetailWithOrderHeader(string orderId)
+        {
+            using (DataContext _ctx = new DataContext())
+            {
+                var record = _ctx.PurchasingOrder.Where(po => !po.Status.Equals("Completed"))
+                    .Join(
+                        _ctx.OrderHeader,
+                        po => po.OrderHeaderId,
+                        oh => oh.OrderHeaderId,
+                        (po, oh) => new PurchasingOrderDetails { }
+                    )
+                    .ToList();
+                return record;
+            }
+        }
+
+        public PurchasingOrder UpdatePurchaseOrder(PurchasingOrder purchasingOrder)
+        {
+            using (DataContext _ctx = new DataContext())
+            {
+                _ctx.PurchasingOrder.Update( purchasingOrder );
+                _ctx.SaveChangesAsync();
+                
+                return purchasingOrder;
+            }
+        }
     }
 }
+
 
