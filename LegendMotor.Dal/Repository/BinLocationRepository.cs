@@ -1,12 +1,6 @@
 ﻿using LegendMotor.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using LegendMotor.Domain.Abstractions.Repositories;
-using LegendMotor.Dal;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace LegendMotor.Dal.Repository
 {
@@ -29,5 +23,4 @@ namespace LegendMotor.Dal.Repository
             return _ctx.BinLocation.ToList();
         }
     }
-
 }

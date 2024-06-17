@@ -42,7 +42,8 @@ namespace LegendMotor.Dal.Repository
 
         public List<IncomingOrderDetails> GetIncomingOrderByStaffIdAndStatus(string staffId, string statusId)
         {
-            var fullEntries = _ctx.IncomingOrder.Where(incomingOrder => incomingOrder.staffId.Equals(staffId) && incomingOrder.Status.Equals(statusId))
+            var fullEntries = _ctx.IncomingOrder.Where(incomingOrder => incomingOrder.staffId.Equals(staffId) 
+                                                    && incomingOrder.Status.Equals(statusId))
             .Join(
                 _ctx.OrderHeader,
             combinedEntry => combinedEntry.OrderHeaderId,

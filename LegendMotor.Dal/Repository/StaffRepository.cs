@@ -34,8 +34,18 @@ namespace LegendMotor.Dal.Repository
         {
             using (DataContext _ctx = new DataContext())
             {
-                _ctx.Staff.Update(user);
-                _ctx.SaveChangesAsync();
+                try
+                {
+                    _ctx.Staff.Update(user);
+                    
+                }catch (Exception ex)
+                {
+                }
+                finally
+                {
+                    _ctx.SaveChanges();
+                }
+
                 return user;
             }
         }

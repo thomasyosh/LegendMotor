@@ -23,13 +23,12 @@ namespace LegendMotor.Api.Controllers
         private readonly IMapper _mapper;
         private readonly IBinLocationRepository _binLocationRepository;
 
-        public BinLocationController(ILogger<StaffController> logger, IHttpContextAccessor http, DataContext ctx, IMapper mapper, BinLocationRepository binLocationRepository)
+        public BinLocationController(ILogger<StaffController> logger, IHttpContextAccessor http, DataContext ctx, IMapper mapper)
         {
             _logger = logger;
             _http = http.HttpContext;
             _ctx = ctx;
             _mapper = mapper;
-            _binLocationRepository = binLocationRepository;
         }
 
         [HttpGet("/api/GetAllBinLocation")]

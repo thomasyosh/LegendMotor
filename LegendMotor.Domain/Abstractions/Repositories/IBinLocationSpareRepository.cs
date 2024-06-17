@@ -14,5 +14,6 @@ namespace LegendMotor.Domain.Abstractions.Repositories
         public BinLocationSpare UpdateBinLocationSpare(BinLocationSpare binLocationSpare);
 
         public BinLocationSpare CreateBinLocationSpare(BinLocationSpare binLocationSpare);
+        public List<BinLocationSpareDetails> GetBinLocationSpareByCategoryAndName (string category, string name, string binLocationSpare);
     }
 }

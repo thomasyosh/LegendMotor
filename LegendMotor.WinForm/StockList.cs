@@ -1,5 +1,7 @@
 ﻿using LegendMotor.Api.Dtos;
 using LegendMotor.Dal;
+using LegendMotor.Dal.Repository;
+using LegendMotor.Domain.Abstractions.Repositories;
 using LegendMotor.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -17,13 +19,13 @@ namespace LegendMotor.WinForm;
 public partial class StockList : Form
 {
     private Form form;
-    private List<BinLocationSpareDto> spares = new List<BinLocationSpareDto>();
-    private readonly DataContext _ctx;
+    private List<BinLocationSpareDetails> spares = new List<BinLocationSpareDetails>();
+    private readonly IBinLocationSpareRepository _binLocationSpareRepository;
     public StockList(Form form)
     {
         InitializeComponent();
         this.form = form;
-        this._ctx = new DataContext();
+        _binLocationSpareRepository = new BinLocationSpareRepository();
     }
 
     private void StockList_Load(object sender, EventArgs e)
@@ -35,44 +37,18 @@ public partial class StockList : Form
         AddDataGridView1Columns();
     }
 
-    private async void GetStocks(string name, char category)
+    private async void GetStocks(string name, string category)
     {
         dataGridView1.Rows.Clear();
         spares.Clear();
-
-        string binLocationCode = StaffManager.Instance.GetBinLocationCode();
-        var items = _ctx.BinLocationSpare.Join(_ctx.Spare,
-            spare => spare.SpareId,
-            spare2 => spare2.SpareId,
-            (spare, spare2) => new { BinLocationSpare = spare, Spare = spare2 })
-                .Where(p => p.BinLocationSpare.BinLocationCode.Equals(binLocationCode))
-                .Select(s => new BinLocationSpareDto
-    {
-        SpareId = s.BinLocationSpare.SpareId,
-        Name = s.Spare.Name,
-        Description = s.Spare.Description,
-        Category = s.Spare.Category,
-        Weight = s.Spare.Weight,
-        Stock = s.BinLocationSpare.Stock,
-        ROL = s.BinLocationSpare.ROL
-    }
-).Where(s => s.Category.Equals(category) && s.Name.Equals(name))
- .ToList();
-        foreach (BinLocationSpareDto item in items)
+        List<BinLocationSpareDetails> bsd = _binLocationSpareRepository.GetBinLocationSpareByCategoryAndName(category, name, StaffManager.Instance.GetBinLocationCode());
+        foreach(BinLocationSpareDetails item in bsd)
         {
-            BinLocationSpareDto spare = new BinLocationSpareDto();
-            spare.SpareId = item.SpareId;
-            spare.Name = item.Name;
-            spare.Stock = item.Stock;
-            spare.ROL = item.ROL;
-            spare.DL = item.DL;
-            spare.Category = item.Category;
-            spare.Description = item.Description;
-            spare.Weight = item.Weight;
-
-            spares.Add(spare);
-            dataGridView1.Rows.Add(spare.SpareId, spare.Name, spare.Description, spare.Category, spare.Weight, spare.Stock, spare.ROL);
+            spares.Add(item);
+            dataGridView1.Rows.Add(item.SpareId, item.Name, item.Description, item.Category, item.Weight, item.Stock, item.ROL);
         }
+
+        
     }
     private void AddDataGridView1Columns()
     {
@@ -145,17 +121,18 @@ public partial class StockList : Form
 
     private void toolStripButton2_Click(object sender, EventArgs e)
     {
-        GetStocks(textBox1.Text, cbx_category.Text[0]);
+        GetStocks(textBox1.Text, cbx_category.Text[0].ToString());
     }
 
     private void button1_Click(object sender, EventArgs e)
     {
-        GetStocks(textBox1.Text, cbx_category.Text[0]);
+        if (cbx_category.Text != "")
+        GetStocks(textBox1.Text, cbx_category.Text[0].ToString());
     }
 
     private void button1_Click_1(object sender, EventArgs e)
     {
-        GetStocks(textBox1.Text, cbx_category.Text[0]);
+        GetStocks(textBox1.Text, cbx_category.Text[0].ToString());
     }
 }
 /*
