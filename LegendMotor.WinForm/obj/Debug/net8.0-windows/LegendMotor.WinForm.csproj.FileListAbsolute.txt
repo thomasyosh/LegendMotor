@@ -886,3 +886,16 @@ E:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.
 E:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.SalesOverview.resources
 E:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.UpdateStockForm.resources
 D:\legendmotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.IncomingOrderDetailsForm.resources
+D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.DeliveryIncomingOrderList.resources
+D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.DeliveryMenMenu.resources
+D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.DeliveryPurchasingOrder.resources
+D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.BinLocationIncomingOrderForm.resources
+D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.CheckoutForm.resources
+D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.IncomingOrderList.resources
+D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.Invoice.resources
+D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.PurchasingOrderDetailsForm.resources
+D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.PurchasingOrderList.resources
+D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.ReservedForm.resources
+D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.UpdateDealer.resources
+D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.UpdateSpareForm.resources
+D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.UpdateSupplierForm.resources

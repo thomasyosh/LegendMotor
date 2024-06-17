@@ -35,15 +35,15 @@ public partial class StoremenMenu : Form
     private void btn_incomingOrder_Click(object sender, EventArgs e)
     {
         this.Hide();
-        //BinLocationIncomingOrderForm incomingOrderList = new BinLocationIncomingOrderForm(this);
-        //incomingOrderList.Show();
+        BinLocationIncomingOrderForm incomingOrderList = new BinLocationIncomingOrderForm(this);
+        incomingOrderList.Show();
     }
 
     private void btn_purchasingOrder_Click(object sender, EventArgs e)
     {
         this.Hide();
-        //PurchasingOrderList purchasingOrderList = new PurchasingOrderList(this);
-        //purchasingOrderList.Show();
+        PurchasingOrderList purchasingOrderList = new PurchasingOrderList(this);
+        purchasingOrderList.Show();
     }
 
     private void logout()

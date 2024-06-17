@@ -23,10 +23,16 @@
     <Compile Update="AreaManagerMenu.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="BinLocationIncomingOrderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="BinLocationManagement.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="CartForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="CheckoutForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="CreateStaffForm.cs">
@@ -50,10 +56,25 @@
     <Compile Update="IncomingOrderDetailsForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="IncomingOrderList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Invoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="PurchasingDepartmentMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PurchasingOrderDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PurchasingOrderList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ReservedForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="SalesManagerMenu.cs">
@@ -80,10 +101,19 @@
     <Compile Update="StoremenMenu.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UpdateDealer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UpdateSpareForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UpdateStaffForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UpdateStockForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UpdateSupplierForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="ViewSupplier.cs">

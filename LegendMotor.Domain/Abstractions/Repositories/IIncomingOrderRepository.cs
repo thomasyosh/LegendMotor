@@ -14,5 +14,7 @@ namespace LegendMotor.Domain.Abstractions.Repositories
 
         public List<IncomingOrderDetails> GetIncomingOrderByStaffIdAndStatus(string staffId, string statusId);
         public IncomingOrder GetIncomingOrderByOrderId(string orderId);
+        public List<IncomingOrderDetails> GetAllIncomingOrderWithOrderHeader();
+        public IncomingOrder UpdateIncomingOrder(IncomingOrder incomingOrder);
     }
 }

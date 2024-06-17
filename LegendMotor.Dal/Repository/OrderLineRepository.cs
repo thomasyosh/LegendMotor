@@ -18,6 +18,31 @@ namespace LegendMotor.Dal.Repository
             }
         }
 
+        public List<OrderLine> GetOrderLineByIncomingOrderId(string incomingOrderId)
+        {
+            using (DataContext _ctx = new DataContext())
+            {
+                var record = _ctx.orderLine
+                            .Join(
+                                _ctx.OrderHeader,
+                                ol => ol.OrderHeaderId,
+                                oh => oh.OrderHeaderId,
+                                (ol, oh) => new { ol, oh }
+                            )
+                            .Join(
+                                _ctx.IncomingOrder.Where(io=>io.OrderId.Equals(incomingOrderId)),
+                                olWithIo => olWithIo.oh.OrderHeaderId,
+                                io => io.OrderHeaderId,
+                                (olWithIo, io) => new OrderLine
+                                {
+                                    LineId = olWithIo.ol.LineId,
+                                    OrderHeaderId = io.OrderHeaderId,
+                                }
+                                ).ToList();
+                return record;
+            }
+        }
+
         public List<OrderLine> GetOrderLineByOrderHeaderId(string orderHeaderId)
         {
             using (DataContext _ctx = new DataContext())
@@ -26,7 +51,48 @@ namespace LegendMotor.Dal.Repository
             }
         }
 
-        public List<OrderLineDetail> GetOrderLineDetailByBinLocationCode(string orderHeaderId)
+        public List<OrderLineDetail> GetOrderLineDetailByBinLocationCode(string binLocationCode)
+        {
+            using (DataContext _ctx = new DataContext())
+            {
+                var record = _ctx.orderLine
+                    .Join(
+                        _ctx.OrderHeader,
+                        ol => ol.OrderHeaderId,
+                        oh => oh.OrderHeaderId,
+                        (ol, oh) => new { ol, oh }
+                    )
+                    .Join(
+                        _ctx.PurchasingOrder,
+                        olWithPo => olWithPo.oh.OrderHeaderId,
+                        po => po.OrderHeaderId,
+                        (olWithPo, po) => new { olWithPo, po }
+                    )
+                    .Join(
+                        _ctx.BinLocationSpare.Where(bls=>bls.BinLocationCode.Equals(binLocationCode)),
+                        full => full.olWithPo.ol.SparePartId,
+                        bs => bs.SpareId,
+                        (full, bs) => new { full, bs }
+                    )
+                    .Join(
+                        _ctx.Spare,
+                        fullRecord => fullRecord.bs.SpareId,
+                        spare => spare.SpareId,
+                        (fullRecord, spare) => new OrderLineDetail
+                        {
+                            LineId = fullRecord.full.olWithPo.ol.LineId,
+                            OrderId = fullRecord.full.po.OrderId,
+                            OrderHeaderId = fullRecord.full.olWithPo.oh.OrderHeaderId,
+                            IncomingOrderId = fullRecord.full.po.IncomingOrderId,
+                            CreatedAt = fullRecord.full.olWithPo.oh.CreatedAt,
+                            UpdatedAt = fullRecord.full.olWithPo.oh.UpdatedAt,
+                        }
+                        ).ToList();
+                return record;
+            }
+        }
+
+        public List<OrderLineDetail> GetOrderLineDetailByOrderHeaderId(string orderHeaderId)
         {
             using (DataContext _ctx = new DataContext())
             {

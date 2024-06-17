@@ -59,5 +59,36 @@ namespace LegendMotor.Dal.Repository
             .ToList();
             return fullEntries;
         }
+
+        public List<IncomingOrderDetails> GetAllIncomingOrderWithOrderHeader()
+        {
+            using (DataContext _ctx = new DataContext())
+            {
+                var record = _ctx.IncomingOrder
+                            .Join(
+                                _ctx.OrderHeader,
+                                io => io.OrderHeaderId,
+                                oh => oh.OrderHeaderId,
+                                (io, oh) => new IncomingOrderDetails
+                                {
+                                    OrderId = io.OrderHeaderId,
+                                    CreatedAt = oh.CreatedAt,
+                                    UpdatedAt = oh.UpdatedAt,
+                                    Status = io.Status,
+                                }
+                            ).ToList();
+                return record;
+            }
+        }
+
+        public IncomingOrder UpdateIncomingOrder(IncomingOrder incomingOrder)
+        {
+           using (DataContext _ctx = new DataContext())
+            {
+                _ctx.IncomingOrder.Update( incomingOrder );
+                _ctx.SaveChangesAsync();
+                return incomingOrder;
+            }
+        }
     }
 }

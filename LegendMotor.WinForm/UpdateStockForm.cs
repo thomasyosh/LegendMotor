@@ -18,7 +18,7 @@ namespace LegendMotor.WinForm
     {
         private LoginForm loginForm;
         private List<string> orders = new List<string>();
-        private List<PurchasingOrderDetails> purchasingOrders = new List<PurchasingOrderDetails>();
+        private List<PurchasingOrderDetailsForm> purchasingOrders = new List<PurchasingOrderDetailsForm>();
         private readonly IPurchasingOrderRepository _purchasingOrderRepository;
         private readonly IOrderLineRepository _orderLineRepository;
         private readonly IOrderHeaderRepository _orderHeaderRepository;
@@ -51,9 +51,9 @@ namespace LegendMotor.WinForm
            comboBox1.Items.Clear();
             orders.Clear();
                 string query = "SELECT PurchasingOrder.OrderId FROM PurchasingOrder JOIN OrderHeader ON OrderHeader.OrderHeaderId = PurchasingOrder.OrderHeaderId JOIN OrderLine ON OrderLine.OrderHeaderId = OrderHeader.OrderHeaderId JOIN BinLocation_Spare ON BinLocation_Spare.Id = OrderLine.SparePartId WHERE BinLocation_Spare.BinLocationCode = @BinLocationCode AND PurchasingOrder.Status != 'Completed'";
-            List<PurchasingOrderDetails> purchasingOrderDetails = _purchasingOrderRepository
+            List<PurchasingOrderDetailsForm> purchasingOrderDetails = _purchasingOrderRepository
                                 .GetPurchasingOrderDetailByBinLocationCode(StaffManager.Instance.GetBinLocationCode());
-                    foreach (PurchasingOrderDetails details in purchasingOrderDetails)
+                    foreach (PurchasingOrderDetailsForm details in purchasingOrderDetails)
                     {
                         orders.Add(details.OrderId);
                     }
@@ -66,12 +66,12 @@ namespace LegendMotor.WinForm
             purchasingOrders.Clear();
             dataGridView1.Rows.Clear();
 
-                List<PurchasingOrderDetails> purchasingOrder = _purchasingOrderRepository.GetPurchasingOrderDetailWithOrderHeader(orderId);
+                List<PurchasingOrderDetailsForm> purchasingOrder = _purchasingOrderRepository.GetPurchasingOrderDetailWithOrderHeader(orderId);
 
                 string query = "SELECT * FROM PurchasingOrder WHERE OrderId = @OrderId AND Status != 'Completed'";
                 query = "SELECT OrderLine.LineId AS LineId, OrderLine.Quantity AS Quantity, OrderLine.Status AS Status, OrderLine.SparePartId AS SparePartId, BinLocation_Spare.BinLocationCode AS BinLocationCode, Spare.Price AS Price, Spare.Name AS Name, Spare.SpareId AS SpareId FROM OrderLine JOIN BinLocation_Spare ON BinLocation_Spare.Id = OrderLine.SparePartId JOIN Spare ON Spare.SpareId = BinLocation_Spare.SpareId WHERE OrderLine.OrderHeaderId = @OrderHeaderId";
 
-                    foreach (PurchasingOrderDetails item in purchasingOrder)
+                    foreach (PurchasingOrderDetailsForm item in purchasingOrder)
                     {
                         purchasingOrders.Add(item);
                         foreach (var line in item.OrderLines)
@@ -166,7 +166,7 @@ namespace LegendMotor.WinForm
 
         private void button1_Click(object sender, EventArgs e)
         {
-            PurchasingOrderDetails purchasingOrder = purchasingOrders[comboBox1.SelectedIndex];
+            PurchasingOrderDetailsForm purchasingOrder = purchasingOrders[comboBox1.SelectedIndex];
             foreach (OrderLineDetail orderLine in purchasingOrder.OrderLines)
             {
                 int index = dataGridView1.Rows.IndexOf(dataGridView1.Rows.Cast<DataGridViewRow>()

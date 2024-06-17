@@ -1,14 +1,6 @@
-﻿using LegendMotor.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using LegendMotor.Dal.Repository;
+using LegendMotor.Domain.Abstractions.Repositories;
+using LegendMotor.Domain.Models;
 
 namespace LegendMotor.WinForm
 {
@@ -16,9 +8,13 @@ namespace LegendMotor.WinForm
     {
         private List<ListIncomingOrder> incomingOrders = new List<ListIncomingOrder>();
         DataGridViewComboBoxColumn statusColumn = new DataGridViewComboBoxColumn();
+        private readonly IIncomingOrderRepository _incomingOrderRepository;
+        private readonly IOrderHeaderRepository _orderHeaderRepository;
         public DeliveryIncomingOrderList()
         {
             InitializeComponent();
+            _incomingOrderRepository = new IncomingOrderRepository();
+            _orderHeaderRepository = new OrderHeaderRepository();
         }
 
         private void DeliveryIncomingOrderList_Load(object sender, EventArgs e)
@@ -77,54 +73,46 @@ namespace LegendMotor.WinForm
         {
             incomingOrders.Clear();
             dataGridView1.Rows.Clear();
-            using (SqlConnection conn = new SqlConnection(Config.ConnectionString))
-            {
-                conn.Open();
                 string query = "SELECT IncomingOrder.OrderId AS OrderId, OrderHeader.CreatedAt AS CreatedAt, OrderHeader.UpdatedAt AS UpdatedAt, IncomingOrder.Status AS Status FROM IncomingOrder JOIN OrderHeader ON OrderHeader.OrderHeaderId = IncomingOrder.OrderHeaderId";
+                List<IncomingOrderDetails> details = _incomingOrderRepository.GetAllIncomingOrderWithOrderHeader();
                 if (!string.IsNullOrEmpty(orderId) || !string.IsNullOrEmpty(status))
                 {
                     query += " WHERE ";
                     if (!string.IsNullOrEmpty(orderId))
                     {
-                        query += " OrderId = @OrderId AND (Status = 'Ready' OR Status = 'Shipping')";
+                        details = details.Where(ioDetails => ioDetails.OrderId.Equals(orderId)
+                                         && ioDetails.Status.Equals("Ready")
+                                         || ioDetails.Status.Equals("Shipping")).ToList();
                     }
                     if (!string.IsNullOrEmpty(status))
                     {
                         query += " Status = @Status";
+                        details = details.Where(ioDetails => ioDetails.Status.Equals(status)).ToList();
                     }
                 }
                 else if (!string.IsNullOrEmpty(orderId) && !string.IsNullOrEmpty(status))
                 {
                     query += " WHERE OrderId = @OrderId AND Status = @Status";
+                    details = details.Where(ioDetails => ioDetails.Status.Equals(status)
+                                            && ioDetails.OrderId.Equals (orderId)
+                                            ).ToList();
                 } else
                 {
                     query += " WHERE Status = 'Ready' OR Status = 'Shipping'";
+                    details = details.Where(ioDetails => ioDetails.Status.Equals("Ready")
+                                || ioDetails.Status.Equals("Shipping")
+                        ).ToList();
                 }
-                SqlCommand cmd = new SqlCommand(query, conn);
-                if (!string.IsNullOrEmpty(orderId))
-                {
-                    cmd.Parameters.AddWithValue("@OrderId", orderId);
-                }
-                if (!string.IsNullOrEmpty(status))
-                {
-                    cmd.Parameters.AddWithValue("@Status", status);
-                }
-                using (SqlDataReader dr = cmd.ExecuteReader())
-                {
-                    while (dr.Read())
+                    foreach (var item in details)
                     {
                         ListIncomingOrder incomingOrder = new ListIncomingOrder();
-                        incomingOrder.OrderId = Guid.Parse(dr["OrderId"].ToString().Trim());
-                        incomingOrder.CreatedAt = DateTime.Parse(dr["CreatedAt"].ToString().Trim());
-                        incomingOrder.UpdatedAt = DateTime.Parse(dr["UpdatedAt"].ToString().Trim());
-                        incomingOrder.Status = dr["Status"].ToString().Trim();
-
+                        incomingOrder.OrderId = item.OrderId;
+                        incomingOrder.CreatedAt = item.CreatedAt;
+                        incomingOrder.UpdatedAt = item.UpdatedAt;
+                        incomingOrder.Status = item.Status;
                         incomingOrders.Add(incomingOrder);
                         dataGridView1.Rows.Add(incomingOrder.OrderId, incomingOrder.CreatedAt, incomingOrder.Status);
                     }
-                }
-                conn.Close();
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -142,30 +130,22 @@ namespace LegendMotor.WinForm
             ListIncomingOrder order = incomingOrders[e.RowIndex];
             if (e.ColumnIndex == 3)
             {
-                IncomingOrderDetails incomingOrderDetails = new IncomingOrderDetails(order.OrderId);
+                IncomingOrderDetailsForm incomingOrderDetails = new IncomingOrderDetailsForm(order.OrderId);
                 incomingOrderDetails.FormClosed += new FormClosedEventHandler(childForm_FormClosed);
                 incomingOrderDetails.ShowDialog();
             }
             else if (e.ColumnIndex == 4)
             {
                 string status = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                using (SqlConnection conn = new SqlConnection(Config.ConnectionString))
-                {
-                    conn.Open();
                     string query = "UPDATE IncomingOrder SET Status = @Status WHERE OrderId = @OrderId";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@Status", status);
-                    cmd.Parameters.AddWithValue("@OrderId", order.OrderId);
-                    cmd.ExecuteNonQuery();
+                    IncomingOrder incomingOrder = _incomingOrderRepository.GetIncomingOrderByOrderId(order.OrderId);
+                    incomingOrder.Status = status;
+                    _incomingOrderRepository.UpdateIncomingOrder(incomingOrder);
 
                     query = "UPDATE OrderHeader SET UpdatedAt = @UpdatedAt WHERE OrderHeaderId = @OrderHeaderId";
-                    cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@UpdatedAt", DateTime.Now);
-                    cmd.Parameters.AddWithValue("@OrderHeaderId", order.OrderHeaderId);
-                    cmd.ExecuteNonQuery();
-
-                    conn.Close();
-                }
+                    OrderHeader header = _orderHeaderRepository.GetOrderHeaderById(order.OrderHeaderId);
+                    header.UpdatedAt = DateTime.Now;
+                    _orderHeaderRepository.UpdateOrderHeader(header);
                 GetOrders(textBox1.Text, comboBox1.Text);
             }
         }

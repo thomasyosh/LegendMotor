@@ -13,7 +13,6 @@ namespace LegendMotor.Domain.Models
         public string LineId { get; set; }
         public string OrderHeaderId {get; set; }
         public string SparePartId { get; set; }
-      
         public int Quantity { get; set; }
         public string Status { get; set; }
         public int? GRN { get; set; }

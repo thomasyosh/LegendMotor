@@ -16,10 +16,10 @@ namespace LegendMotor.WinForm;
 
 public partial class IncomingOrderDetailsForm : Form
 {
-    private Guid orderId;
+    private string orderId;
     private IncomingOrderDetailsForm incomingOrderDetails;
     private List<BinLocation> binLocations = new List<BinLocation>();
-    public IncomingOrderDetailsForm(Guid orderId)
+    public IncomingOrderDetailsForm(string orderId)
     {
         InitializeComponent();
         this.orderId = orderId;
