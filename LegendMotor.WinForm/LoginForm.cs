@@ -8,10 +8,10 @@ public partial class LoginForm : Form
 {
     private readonly IStaffRepository _staffRepository;
     private readonly IBinLocationRepository _binLocationRepository;
-    public LoginForm()
+    public LoginForm(IStaffRepository staffRepository)
     {
         InitializeComponent();
-        _staffRepository = new StaffRepository();
+        _staffRepository = staffRepository;
         _binLocationRepository = new BinLocationRepository();
     }
 

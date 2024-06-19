@@ -17,7 +17,7 @@ namespace LegendMotor.WinForm
     public partial class PurchasingOrderDetailsForm : Form
     {
         private PurchasingOrderDetails details = new PurchasingOrderDetails();
-        public PurchasingOrderDetailsForm(Guid orderId)
+        public PurchasingOrderDetailsForm(string orderId)
         {
             InitializeComponent();
             details.OrderId = orderId;
@@ -37,7 +37,7 @@ namespace LegendMotor.WinForm
         private void GetOrderDetails()
         {
             dataGridView1.Rows.Clear();
-            using (SqlConnection conn = new SqlConnection(Config.ConnectionString))
+            /*using (SqlConnection conn = new SqlConnection(Config.ConnectionString))
             {
                 conn.Open();
                 string query = "SELECT PurchasingOrder.OrderId AS OrderId, PurchasingOrder.Status AS Status, PurchasingOrder.IncomingOrderId AS IncomingOrderId, PurchasingOrder.OrderHeaderId AS OrderHeaderId" +
@@ -93,7 +93,7 @@ namespace LegendMotor.WinForm
                     }
                 }
                 conn.Close();
-            }
+            }*/
         }
 
         private void AddDataGridViewColumns()

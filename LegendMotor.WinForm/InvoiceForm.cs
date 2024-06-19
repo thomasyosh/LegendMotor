@@ -23,7 +23,7 @@ namespace LegendMotor.WinForm
 
         private void GetInvoiceDetails()
         {
-            using (SqlConnection conn = new SqlConnection(Config.ConnectionString))
+            /*using (SqlConnection conn = new SqlConnection(Config.ConnectionString))
             {
                 conn.Open();
                 string query = "SELECT * FROM IncomingOrder WHERE OrderId = @OrderId";
@@ -58,7 +58,7 @@ namespace LegendMotor.WinForm
                         invoice.OrderLines = new List<OrderLine>();
                         while (dr.Read())
                         {
-                            OrderLineDetail orderLine = new OrderLineDetail();
+                            OrderLine orderLine = new OrderLine();
                             orderLine.LineId = Guid.Parse(dr["LineId"].ToString().Trim());
                             orderLine.Quantity = int.Parse(dr["Quantity"].ToString().Trim());
                             orderLine.Status = dr["Status"].ToString().Trim();
@@ -151,7 +151,7 @@ namespace LegendMotor.WinForm
                 listView1.Items.Add(new ListViewItem(new string[] { (i + 1).ToString(), invoice.OrderLines[i].Name, invoice.OrderLines[i].Price.ToString(), invoice.OrderLines[i].Quantity.ToString(), invoice.OrderLines[i].TotalPrice.ToString() }));
             }
             lbl_totalWeight.Text = "Total Weight: " + weight.ToString();
-            lbl_totalPrice.Text = "Total Price: " + price.ToString();
+            lbl_totalPrice.Text = "Total Price: " + price.ToString();*/
         }
 
         private void label8_Click(object sender, EventArgs e)

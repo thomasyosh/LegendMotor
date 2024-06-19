@@ -41,7 +41,7 @@ namespace LegendMotor.WinForm
 
         private void GetOrders(string orderId, string status)
         {
-            incomingOrders.Clear();
+            /*incomingOrders.Clear();
             dataGridView1.Rows.Clear();
             using (SqlConnection conn = new SqlConnection(Config.ConnectionString))
             {
@@ -86,14 +86,14 @@ namespace LegendMotor.WinForm
                     }
                 }
                 conn.Close();
-            }
+            }*/
         }
 
         private void GetBinLocationOrders(string orderId, string status)
         {
             incomingOrders.Clear();
             dataGridView1.Rows.Clear();
-            using (SqlConnection conn = new SqlConnection(Config.ConnectionString))
+            /*using (SqlConnection conn = new SqlConnection(Config.ConnectionString))
             {
                 conn.Open();
                 string query = "SELECT IncomingOrder.OrderId AS OrderId, OrderHeader.CreatedAt AS CreatedAt, OrderHeader.UpdatedAt AS UpdatedAt, IncomingOrder.Status AS Status FROM IncomingOrder JOIN OrderHeader ON OrderHeader.OrderHeaderId = IncomingOrder.OrderHeaderId JOIN OrderLine ON OrderLine.OrderHeaderId = OrderHeader.OrderHeaderId JOIN BinLocation_Spare ON BinLocation_Spare.Id = OrderLine.SparePartId WHERE BinLocation_Spare.BinLocationCode = @BinLocationCode";
@@ -129,7 +129,7 @@ namespace LegendMotor.WinForm
                     }
                 }
                 conn.Close();
-            }
+            }*/
         }
 
         private void AddDataGridView1Columns()
@@ -188,9 +188,9 @@ namespace LegendMotor.WinForm
             if (e.ColumnIndex == 3)
             {
                 this.Hide();
-                IncomingOrderDetails incomingOrderDetails = new IncomingOrderDetails(incomingOrders[e.RowIndex].OrderId);
+                /*IncomingOrderDetails incomingOrderDetails = new IncomingOrderDetails(incomingOrders[e.RowIndex].OrderId);
                 incomingOrderDetails.FormClosed += new FormClosedEventHandler(childForm_FormClosed);
-                incomingOrderDetails.Show();
+                incomingOrderDetails.Show();*/
 
             }
             else if (e.ColumnIndex == 4)

@@ -892,7 +892,6 @@ D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.
 D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.BinLocationIncomingOrderForm.resources
 D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.CheckoutForm.resources
 D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.IncomingOrderList.resources
-D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.Invoice.resources
 D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.PurchasingOrderDetailsForm.resources
 D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.PurchasingOrderList.resources
 D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.ReservedForm.resources

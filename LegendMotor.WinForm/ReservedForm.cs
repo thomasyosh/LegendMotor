@@ -36,7 +36,7 @@ namespace LegendMotor.WinForm
         {
             dealers.Clear();
             string query = "SELECT * FROM Dealer";
-            using (SqlConnection con = new SqlConnection(Config.ConnectionString))
+            /*using (SqlConnection con = new SqlConnection(Config.ConnectionString))
             {
                 con.Open();
                 SqlCommand cmd = new SqlCommand(query, con);
@@ -57,7 +57,7 @@ namespace LegendMotor.WinForm
                     }
                 }
                 con.Close();
-            }
+            }*/
             if (dealerCode != null)
             {
                 comboBox1.SelectedIndex = comboBox1.FindStringExact(dealers.Find(x => x.DealerCode == dealerCode).Name);
@@ -73,7 +73,7 @@ namespace LegendMotor.WinForm
                 return;
             }
             string query = "SELECT Spare.SpareId AS SpareId, Spare.Name AS Name, Spare.Description AS Description, Spare.Category AS Category, Spare.Weight AS Weight, Spare.Price AS Price, BinLocation.BinLocationCode AS BinLocationCode, BinLocation.Name AS Location, BinLocation_Spare.Stock AS Quantity, BinLocation_Spare.Id AS SparePartId, BinLocation_Spare.Reserved AS Reserved, ReservedSpare.ReservedSpareId AS ReservedId, ReservedSpare.Quantity AS ReservedQuantity, ReservedSpare.ExpiryDate AS ExpiryDate FROM Spare JOIN BinLocation_Spare ON Spare.SpareId = BinLocation_Spare.SpareId JOIN BinLocation ON BinLocation.BinLocationCode = BinLocation_Spare.BinLocationCode JOIN ReservedSpare ON ReservedSpare.SparePartId = BinLocation_Spare.Id WHERE ReservedSpare.DealerCode = @DealerCode AND ReservedSpare.ExpiryDate > @ExpiryDate";
-            using (SqlConnection con = new SqlConnection(Config.ConnectionString))
+            /*using (SqlConnection con = new SqlConnection(Config.ConnectionString))
             {
                 con.Open();
                 SqlCommand cmd = new SqlCommand(query, con);
@@ -102,7 +102,7 @@ namespace LegendMotor.WinForm
                     }
                 }
                 con.Close();
-            }
+            }*/
         }
 
         private void AddDataGridViewColumns()
@@ -199,7 +199,7 @@ namespace LegendMotor.WinForm
             {
                 ReservedDetailItem item = reservedItems[e.RowIndex];
                 string query = "DELETE FROM ReservedSpare WHERE ReservedSpareId = @ReservedSpareId";
-                using (SqlConnection con = new SqlConnection(Config.ConnectionString))
+                /*using (SqlConnection con = new SqlConnection(Config.ConnectionString))
                 {
                     con.Open();
                     SqlCommand cmd = new SqlCommand(query, con);
@@ -212,7 +212,7 @@ namespace LegendMotor.WinForm
                     cmd.Parameters.AddWithValue("@SparePartId", item.SparePartId);
                     cmd.ExecuteNonQuery();
                     con.Close();
-                }
+                }*/
                 dataGridView1.Rows.RemoveAt(e.RowIndex);
                 reservedItems.RemoveAt(e.RowIndex);
             }

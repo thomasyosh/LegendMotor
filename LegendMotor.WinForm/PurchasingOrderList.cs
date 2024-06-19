@@ -36,7 +36,7 @@ namespace LegendMotor.WinForm
         {
             comboBox1.Items.Clear();
             purchasingOrders.Clear();
-            using (SqlConnection conn = new SqlConnection(Config.ConnectionString))
+            /*using (SqlConnection conn = new SqlConnection(Config.ConnectionString))
             {
                 conn.Open();
                 string query = "SELECT PurchasingOrder.OrderId AS OrderId, PurchasingOrder.Status AS Status, PurchasingOrder.IncomingOrderId AS IncomingOrderId, Purchasing.OrderHeaderId AS OrderHeaderId" +
@@ -79,7 +79,7 @@ namespace LegendMotor.WinForm
                     }
                 }
                 conn.Close();
-            }
+            }*/
         }
 
         private void AddDataGridView1Columns()
@@ -137,14 +137,14 @@ namespace LegendMotor.WinForm
             if (e.ColumnIndex == 3)
             {
                 this.Hide();
-                PurchasingOrderDetailsForm purchasingOrderDetails = new PurchasingOrderDetails(purchasingOrders[e.RowIndex].OrderId);
+                /*PurchasingOrderDetailsForm purchasingOrderDetails = new PurchasingOrderDetails(purchasingOrders[e.RowIndex].OrderId);
                 purchasingOrderDetails.FormClosed += new FormClosedEventHandler(childForm_FormClosed);
-                purchasingOrderDetails.Show();
+                purchasingOrderDetails.Show();*/
             } else if (e.ColumnIndex == 4)
             {
                 string status = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
 
-                using (SqlConnection conn = new SqlConnection(Config.ConnectionString))
+                /*using (SqlConnection conn = new SqlConnection(Config.ConnectionString))
                 {
                     conn.Open();
 
@@ -160,7 +160,7 @@ namespace LegendMotor.WinForm
                     cmd.Parameters.AddWithValue("@OrderHeaderId", purchasingOrders[e.RowIndex].OrderHeaderId);
                     cmd.ExecuteNonQuery();
                     conn.Close();
-                }
+                }*/
             }
         }
 
