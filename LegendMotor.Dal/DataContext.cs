@@ -55,7 +55,8 @@ namespace LegendMotor.Dal
         public DbSet<SparePrice> SparePrice { get; set; }
         public DbSet<PurchasingOrder> PurchasingOrder { get; set; }
         public DbSet<OrderLine> orderLine { get; set; }
-
+        public DbSet<ReservedItem> ReservedItem { get; set; }
         public DbSet<Supplier> Supplier { get; set; }
+        public DbSet<Invoice> Invoice { get; set; }
     }
 }

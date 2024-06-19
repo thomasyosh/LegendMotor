@@ -10,6 +10,7 @@ namespace LegendMotor.Domain.Abstractions.Repositories
     public interface IOrderLineRepository
     {
         public OrderLine GetOrderLineById(string lineId);
+        public OrderLine AddOrderLine(OrderLine orderLine);
         public List<OrderLineDetail> GetOrderLineDetailByOrderHeaderId(string orderHeaderId);
         public List<OrderLineDetail> GetOrderLineDetailByBinLocationCode(string binLocationCode);
         public OrderLine UpdateOrderLine(OrderLine orderline);

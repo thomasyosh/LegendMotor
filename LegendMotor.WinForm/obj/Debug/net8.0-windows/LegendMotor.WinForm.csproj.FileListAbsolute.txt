@@ -899,3 +899,4 @@ D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.
 D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.UpdateDealer.resources
 D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.UpdateSpareForm.resources
 D:\LegendMotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.UpdateSupplierForm.resources
+D:\legendmotor\LegendMotor.WinForm\obj\Debug\net8.0-windows\LegendMotor.WinForm.InvoiceForm.resources

@@ -14,9 +14,23 @@ namespace LegendMotor.Dal.Repository
 
         public BinLocationSpare CreateBinLocationSpare(BinLocationSpare binLocationSpare)
         {
-            _ctx.BinLocationSpare.Add(binLocationSpare);
-            _ctx.SaveChanges();
-            return binLocationSpare;
+            using(DataContext _ctx = new DataContext())
+            {
+                _ctx.BinLocationSpare.Add(binLocationSpare);
+                _ctx.SaveChanges();
+                return binLocationSpare;
+            }
+        }
+
+        public BinLocationSpare GetBinLocationSpareByBinLocationCodeAndId(string binLocationCode, string Id)
+        {
+            using (DataContext _ctx = new DataContext())
+            {
+                return _ctx.BinLocationSpare
+                        .FirstOrDefault(bls => bls.BinLocationCode.Equals(binLocationCode)
+                        && bls.Id.Equals(Id)
+                        );
+            }
         }
 
         public List<BinLocationSpareDetails> GetBinLocationSpareByCategoryAndName(string category, string name, string binLocationCode)
@@ -41,6 +55,14 @@ namespace LegendMotor.Dal.Repository
                                      )
                                 .ToList();
                 return record;  
+            }
+        }
+
+        public BinLocationSpare GetBinLocationSpareById(string Id)
+        {
+            using (DataContext _ctx = new DataContext())
+            {
+                return _ctx.BinLocationSpare.FirstOrDefault(bls => bls.Id.Equals(Id));
             }
         }
 

@@ -1,4 +1,6 @@
-﻿using LegendMotor.Domain.Models;
+﻿using LegendMotor.Dal.Repository;
+using LegendMotor.Domain.Abstractions.Repositories;
+using LegendMotor.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,11 +18,17 @@ namespace LegendMotor.WinForm
     {
         private Form form;
         private List<ListIncomingOrder> incomingOrders = new List<ListIncomingOrder>();
-        private List<OrderLine> orderLines = new List<OrderLine>();
+        private List<OrderLineDetail> orderLines = new List<OrderLineDetail>();
+        private readonly IIncomingOrderRepository _incomingOrderRepository;
+        private readonly IOrderLineRepository _orderLineRepository;
+        private readonly IOrderHeaderRepository _orderHeaderRepository;
         public BinLocationIncomingOrderForm(Form form)
         {
             InitializeComponent();
             this.form = form;
+            _incomingOrderRepository = new IncomingOrderRepository();
+            _orderLineRepository = new OrderLineRepository();
+            _orderHeaderRepository = new OrderHeaderRepository();
         }
 
         private void BinLocationIncomingOrderForm_Load(object sender, EventArgs e)
@@ -38,54 +46,45 @@ namespace LegendMotor.WinForm
             incomingOrders.Clear();
             dataGridView1.Rows.Clear();
             orderLines.Clear();
-            using (SqlConnection conn = new SqlConnection(Config.ConnectionString))
-            {
-                conn.Open();
                 string query = "SELECT IncomingOrder.OrderId AS OrderId, OrderHeader.CreatedAt AS CreatedAt, OrderHeader.UpdatedAt AS UpdatedAt, IncomingOrder.Status AS Status, IncomingOrder.OrderHeaderId AS OrderHeaderId FROM IncomingOrder JOIN OrderHeader ON OrderHeader.OrderHeaderId = IncomingOrder.OrderHeaderId WHERE IncomingOrder.Status != 'Completed'";
+                List<IncomingOrderDetails> incomingOrderDetails = _incomingOrderRepository.GetIncompleteIncomingOrderWithOrderHeader();
                 if (!string.IsNullOrEmpty(orderId))
                 {
                     if (!string.IsNullOrEmpty(orderId))
                     {
                         query += " AND IncomingOrder.OrderId Like %@OrderId%";
+                        incomingOrderDetails = incomingOrderDetails
+                            .Where(ioDetails => ioDetails.OrderId.Equals(orderId)).ToList();
                     }
                 }
-                SqlCommand cmd = new SqlCommand(query, conn);
-                if (!string.IsNullOrEmpty(orderId))
-                {
-                    cmd.Parameters.AddWithValue("@OrderId", orderId);
-                }
-                using (SqlDataReader dr = cmd.ExecuteReader())
-                {
-                    while (dr.Read())
+                    foreach (IncomingOrderDetails item in incomingOrderDetails)
                     {
                         ListIncomingOrder incomingOrder = new ListIncomingOrder();
-                        incomingOrder.OrderId = Guid.Parse(dr["OrderId"].ToString().Trim());
-                        incomingOrder.CreatedAt = DateTime.Parse(dr["CreatedAt"].ToString().Trim());
-                        incomingOrder.UpdatedAt = DateTime.Parse(dr["UpdatedAt"].ToString().Trim());
-                        incomingOrder.OrderHeaderId = Guid.Parse(dr["OrderHeaderId"].ToString().Trim());
-                        incomingOrder.Status = dr["Status"].ToString().Trim();
-
+                        incomingOrder.OrderId = item.OrderId;
+                        incomingOrder.CreatedAt = item.CreatedAt;
+                        incomingOrder.UpdatedAt = item.UpdatedAt;
+                        incomingOrder.OrderHeaderId = item.OrderHeaderId;
+                        incomingOrder.Status = item.Status;
                         incomingOrders.Add(incomingOrder);
                     
                         query = "SELECT OrderLine.LineId AS LineId, OrderLine.Quantity AS Quantity, OrderLine.Status AS Status, OrderLine.SparePartId AS SparePartId, BinLocation_Spare.BinLocationCode AS BinLocationCode, Spare.Name AS Name, Spare.SpareId AS SpareId FROM OrderLine JOIN BinLocation_Spare ON BinLocation_Spare.Id = OrderLine.SparePartId JOIN Spare ON Spare.SpareId = BinLocation_Spare.SpareId WHERE OrderLine.OrderHeaderId = @OrderHeaderId";
-                        cmd = new SqlCommand(query, conn);
-                        cmd.Parameters.AddWithValue("@OrderHeaderId", incomingOrder.OrderHeaderId);
-                        cmd.Parameters.AddWithValue("@BinLocationCode", StaffManager.Instance.GetBinLocationCode());
-                        using (SqlDataReader dr2 = cmd.ExecuteReader())
-                        {
-                            if (dr2.HasRows)
+                        List<OrderLineDetail> orderLineDetails = _orderLineRepository
+                                                            .GetOrderLineDetailByBinLocationCode(StaffManager.Instance.GetBinLocationCode())
+                                                            .Where(olDetails=> olDetails.OrderHeaderId.Equals(incomingOrder.OrderHeaderId))
+                                                            .ToList();
+                            if (orderLineDetails != null)
                             {
-                                incomingOrder.OrderLines = new List<OrderLine>();
-                                while (dr2.Read())
+                                incomingOrder.OrderLines = new List<OrderLineDetail>();
+                                foreach (OrderLineDetail line in orderLineDetails)
                                 {
-                                    OrderLine orderLine = new OrderLine();
-                                    orderLine.LineId = Guid.Parse(dr2["LineId"].ToString().Trim());
-                                    orderLine.Quantity = int.Parse(dr2["Quantity"].ToString().Trim());
-                                    orderLine.Status = dr2["Status"].ToString().Trim();
-                                    orderLine.SparePartId = Guid.Parse(dr2["SparePartId"].ToString().Trim());
-                                    orderLine.BinLocationCode = dr2["BinLocationCode"].ToString().Trim();
-                                    orderLine.Name = dr2["Name"].ToString().Trim();
-                                    orderLine.SpareId = dr2["SpareId"].ToString().Trim();
+                                    OrderLineDetail orderLine = new OrderLineDetail();
+                                    orderLine.LineId = line.LineId;
+                                    orderLine.Quantity = line.Quantity;
+                                    orderLine.Status = line.Status;
+                                    orderLine.SparePartId = line.SparePartId;
+                                    orderLine.BinLocationCode = line.BinLocationCode;
+                                    orderLine.Name = line.Name;
+                                    orderLine.SpareId = line.SpareId;
                                     orderLine.OrderHeaderId = incomingOrder.OrderHeaderId;
                                     incomingOrder.OrderLines.Add(orderLine);
                                     if (orderLine.BinLocationCode == StaffManager.Instance.GetBinLocationCode())
@@ -94,12 +93,8 @@ namespace LegendMotor.WinForm
                                         dataGridView1.Rows.Add(incomingOrder.OrderId, orderLine.SpareId, orderLine.Name, incomingOrder.CreatedAt, orderLine.Status);
                                     }
                                 }
-                            }
                         }
                     }
-                }
-                conn.Close();
-            }
         }
         private void AddDataGridView1Columns()
         {
@@ -192,34 +187,24 @@ namespace LegendMotor.WinForm
             else if (e.ColumnIndex == 6)
             {
                 string status = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-                OrderLine orderLine = orderLines[e.RowIndex];
+                OrderLineDetail orderLine = orderLines[e.RowIndex];
                 ListIncomingOrder incomingOrderDetails = incomingOrders.Find(x => x.OrderHeaderId == orderLine.OrderHeaderId);
-                using (SqlConnection conn = new SqlConnection(Config.ConnectionString))
-                {
-                    conn.Open();
-                    string query = "UPDATE OrderLine SET Status = @Status WHERE LineId = @LineId";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@Status", status);
-                    cmd.Parameters.AddWithValue("@LineId", orderLines[e.RowIndex].LineId);
-                    cmd.ExecuteNonQuery();
+                OrderLine ol = _orderLineRepository.GetOrderLineById(orderLines[e.RowIndex].LineId);
+                ol.Status = status;
+                _orderLineRepository.UpdateOrderLine(ol);
+                string query = "UPDATE OrderLine SET Status = @Status WHERE LineId = @LineId";
 
-                    query = "UPDATE IncomingOrder SET Status = @Status WHERE OrderHeaderId = @OrderHeaderId";
-                    cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@Status", "Processing");
-                    cmd.Parameters.AddWithValue("@OrderHeaderId", incomingOrderDetails.OrderHeaderId);
-                    cmd.ExecuteNonQuery();
+                query = "UPDATE IncomingOrder SET Status = @Status WHERE OrderHeaderId = @OrderHeaderId";
+                IncomingOrder io = _incomingOrderRepository.GetIncomingOrderByOrderHeaderId(incomingOrderDetails.OrderHeaderId);
+                io.Status = "Processing";
+                _incomingOrderRepository.UpdateIncomingOrder(io);
 
-                    conn.Close();
-                }
                  if (status == "Ready")
                 {
-                    using (SqlConnection conn = new SqlConnection(Config.ConnectionString))
-                    {
-                        conn.Open();
                         int index = incomingOrderDetails.OrderLines.FindIndex(x => x.LineId == orderLine.LineId);
                         incomingOrderDetails.OrderLines[index].Status = "Ready";
                         bool isAllReady = true;
-                        foreach (OrderLine line in incomingOrderDetails.OrderLines)
+                        foreach (OrderLineDetail line in incomingOrderDetails.OrderLines)
                         {
                             if (line.Status != "Ready")
                             {
@@ -229,26 +214,14 @@ namespace LegendMotor.WinForm
                         }
                         if (isAllReady)
                         {
-                            string query = "UPDATE IncomingOrder SET Status = @Status WHERE OrderHeaderId = @OrderHeaderId";
-                            SqlCommand cmd = new SqlCommand(query, conn);
-                            cmd.Parameters.AddWithValue("@Status", "Ready");
-                            cmd.Parameters.AddWithValue("@OrderHeaderId", incomingOrderDetails.OrderHeaderId);
-                            cmd.ExecuteNonQuery();
+                            IncomingOrder incomingOrder = _incomingOrderRepository.GetIncomingOrderByOrderHeaderId(incomingOrderDetails.OrderHeaderId);
+                            incomingOrder.Status = "Ready";
+                            _incomingOrderRepository.UpdateIncomingOrder(incomingOrder);
                         }
-
-                        conn.Close();
-                    }
                 }
-                using (SqlConnection conn = new SqlConnection(Config.ConnectionString))
-                {
-                    conn.Open();
-                    string query = "UPDATE OrderHeader SET UpdatedAt = @UpdatedAt WHERE OrderHeaderId = @OrderHeaderId";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@UpdatedAt", DateTime.Now);
-                    cmd.Parameters.AddWithValue("@OrderHeaderId", orderLines[e.RowIndex].OrderHeaderId);
-                    cmd.ExecuteNonQuery();
-                    conn.Close();
-                }
+                    OrderHeader orderHeader = _orderHeaderRepository.GetOrderHeaderById(orderLines[e.RowIndex].OrderHeaderId);
+                    orderHeader.UpdatedAt = DateTime.Now;
+                    _orderHeaderRepository.UpdateOrderHeader(orderHeader);
 
                 GetOrders(textBox1.Text);
             }

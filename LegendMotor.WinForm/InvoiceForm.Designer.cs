@@ -1,6 +1,6 @@
 ﻿namespace LegendMotor.WinForm
 {
-    partial class Invoice
+    partial class InvoiceForm
     {
         /// <summary>
         /// Required designer variable.

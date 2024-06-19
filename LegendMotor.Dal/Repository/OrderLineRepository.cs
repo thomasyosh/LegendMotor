@@ -10,6 +10,16 @@ namespace LegendMotor.Dal.Repository
 {
     public class OrderLineRepository : IOrderLineRepository
     {
+        public OrderLine AddOrderLine(OrderLine orderLine)
+        {
+            using (DataContext _ctx = new DataContext())
+            {
+                _ctx.orderLine.Add(orderLine);
+                _ctx.SaveChanges();
+                return orderLine;
+            }
+        }
+
         public OrderLine GetOrderLineById(string lineId)
         {
             using (DataContext _ctx = new DataContext())

@@ -10,6 +10,16 @@ namespace LegendMotor.Dal.Repository
 {
     public class OrderHeaderRepository : IOrderHeaderRepository
     {
+        public OrderHeader AddOrderHeader(OrderHeader orderHeader)
+        {
+            using (DataContext _ctx = new DataContext())
+            {
+                _ctx.OrderHeader.Add(orderHeader);
+                _ctx.SaveChanges();
+                return orderHeader;
+            }
+        }
+
         public OrderHeader GetOrderHeaderById(string id)
         {
             using (DataContext _ctx = new DataContext())

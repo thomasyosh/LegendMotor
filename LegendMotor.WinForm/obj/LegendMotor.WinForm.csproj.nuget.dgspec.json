@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\LegendMotor\\LegendMotor.WinForm\\LegendMotor.WinForm.csproj": {}
+    "D:\\legendmotor\\LegendMotor.WinForm\\LegendMotor.WinForm.csproj": {}
   },
   "projects": {
-    "D:\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj": {
+    "D:\\legendmotor\\LegendMotor.Api\\LegendMotor.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj",
+        "projectUniqueName": "D:\\legendmotor\\LegendMotor.Api\\LegendMotor.Api.csproj",
         "projectName": "LegendMotor.Api",
-        "projectPath": "D:\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj",
-        "packagesPath": "C:\\Users\\220297115\\.nuget\\packages\\",
-        "outputPath": "D:\\LegendMotor\\LegendMotor.Api\\obj\\",
+        "projectPath": "D:\\legendmotor\\LegendMotor.Api\\LegendMotor.Api.csproj",
+        "packagesPath": "C:\\Users\\TWKLI_01\\.nuget\\packages\\",
+        "outputPath": "D:\\legendmotor\\LegendMotor.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\220297115\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\TWKLI_01\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -29,8 +29,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj": {
-                "projectPath": "D:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj"
+              "D:\\legendmotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj": {
+                "projectPath": "D:\\legendmotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj"
               }
             }
           }
@@ -82,17 +82,17 @@
         }
       }
     },
-    "D:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj": {
+    "D:\\legendmotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj",
+        "projectUniqueName": "D:\\legendmotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj",
         "projectName": "LegendMotor.Dal",
-        "projectPath": "D:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj",
-        "packagesPath": "C:\\Users\\220297115\\.nuget\\packages\\",
-        "outputPath": "D:\\LegendMotor\\LegendMotor.Dal\\obj\\",
+        "projectPath": "D:\\legendmotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj",
+        "packagesPath": "C:\\Users\\TWKLI_01\\.nuget\\packages\\",
+        "outputPath": "D:\\legendmotor\\LegendMotor.Dal\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\220297115\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\TWKLI_01\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -107,8 +107,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {
-                "projectPath": "D:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj"
+              "D:\\legendmotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {
+                "projectPath": "D:\\legendmotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj"
               }
             }
           }
@@ -181,17 +181,17 @@
         }
       }
     },
-    "D:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {
+    "D:\\legendmotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj",
+        "projectUniqueName": "D:\\legendmotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj",
         "projectName": "LegendMotor.Domain",
-        "projectPath": "D:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj",
-        "packagesPath": "C:\\Users\\220297115\\.nuget\\packages\\",
-        "outputPath": "D:\\LegendMotor\\LegendMotor.Domain\\obj\\",
+        "projectPath": "D:\\legendmotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj",
+        "packagesPath": "C:\\Users\\TWKLI_01\\.nuget\\packages\\",
+        "outputPath": "D:\\legendmotor\\LegendMotor.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\220297115\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\TWKLI_01\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -242,17 +242,17 @@
         }
       }
     },
-    "D:\\LegendMotor\\LegendMotor.WinForm\\LegendMotor.WinForm.csproj": {
+    "D:\\legendmotor\\LegendMotor.WinForm\\LegendMotor.WinForm.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\LegendMotor\\LegendMotor.WinForm\\LegendMotor.WinForm.csproj",
+        "projectUniqueName": "D:\\legendmotor\\LegendMotor.WinForm\\LegendMotor.WinForm.csproj",
         "projectName": "LegendMotor.WinForm",
-        "projectPath": "D:\\LegendMotor\\LegendMotor.WinForm\\LegendMotor.WinForm.csproj",
-        "packagesPath": "C:\\Users\\220297115\\.nuget\\packages\\",
-        "outputPath": "D:\\LegendMotor\\LegendMotor.WinForm\\obj\\",
+        "projectPath": "D:\\legendmotor\\LegendMotor.WinForm\\LegendMotor.WinForm.csproj",
+        "packagesPath": "C:\\Users\\TWKLI_01\\.nuget\\packages\\",
+        "outputPath": "D:\\legendmotor\\LegendMotor.WinForm\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\220297115\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\TWKLI_01\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -267,14 +267,14 @@
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
             "projectReferences": {
-              "D:\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj": {
-                "projectPath": "D:\\LegendMotor\\LegendMotor.Api\\LegendMotor.Api.csproj"
+              "D:\\legendmotor\\LegendMotor.Api\\LegendMotor.Api.csproj": {
+                "projectPath": "D:\\legendmotor\\LegendMotor.Api\\LegendMotor.Api.csproj"
               },
-              "D:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj": {
-                "projectPath": "D:\\LegendMotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj"
+              "D:\\legendmotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj": {
+                "projectPath": "D:\\legendmotor\\LegendMotor.Dal\\LegendMotor.Dal.csproj"
               },
-              "D:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {
-                "projectPath": "D:\\LegendMotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj"
+              "D:\\legendmotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj": {
+                "projectPath": "D:\\legendmotor\\LegendMotor.Domain\\LegendMotor.Domain.csproj"
               }
             }
           }

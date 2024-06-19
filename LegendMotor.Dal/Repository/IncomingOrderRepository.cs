@@ -90,5 +90,35 @@ namespace LegendMotor.Dal.Repository
                 return incomingOrder;
             }
         }
+
+        public List<IncomingOrderDetails> GetIncompleteIncomingOrderWithOrderHeader()
+        {
+            using (DataContext _ctx = new DataContext())
+            {
+                var record = _ctx.IncomingOrder.Where(io=>!io.Status.Equals("Completed"))
+                            .Join(
+                                _ctx.OrderHeader,
+                                io => io.OrderHeaderId,
+                                oh => oh.OrderHeaderId,
+                                (io, oh) => new IncomingOrderDetails
+                                {
+                                    OrderId = io.OrderHeaderId,
+                                    CreatedAt = oh.CreatedAt,
+                                    UpdatedAt = oh.UpdatedAt,
+                                    Status = io.Status,
+                                    OrderHeaderId = io.OrderHeaderId,
+                                }
+                            ).ToList();
+                return record;
+            }
+        }
+
+        public IncomingOrder GetIncomingOrderByOrderHeaderId(string orderHeadId)
+        {
+            using (DataContext _ctx = new DataContext())
+            {
+                return _ctx.IncomingOrder.FirstOrDefault(io => io.OrderHeaderId.Equals(orderHeadId));
+            }
+        }
     }
 }

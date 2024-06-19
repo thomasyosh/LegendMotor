@@ -11,6 +11,7 @@ namespace LegendMotor.Domain.Abstractions.Repositories
     {
         public OrderHeader GetOrderHeaderById (string id);
         public OrderHeader UpdateOrderHeader (OrderHeader orderHeader);
+        public OrderHeader AddOrderHeader (OrderHeader orderHeader);
 
     }
 }

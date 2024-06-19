@@ -12,6 +12,17 @@ namespace LegendMotor.Dal.Repository
 {
     public class PurchasingOrderRepository : IPurchasingOrderRepository
     {
+        public PurchasingOrder AddPurchaseOrder(PurchasingOrder purchasingOrder)
+        {
+            using (DataContext _ctx = new DataContext())
+            {
+                _ctx.PurchasingOrder.Add(purchasingOrder);
+                _ctx.SaveChanges();
+                return purchasingOrder;
+
+            }
+        }
+
         public PurchasingOrder GetPurchasingOrderById(string Id)
         {
             using (DataContext _ctx = new DataContext())

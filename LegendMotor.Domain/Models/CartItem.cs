@@ -19,6 +19,7 @@ namespace LegendMotor.Domain.Models
         public int Quantity { get; set; }
         public double Price { get; set; }
         public double Weight { get; set; }
+        public string ReservedItemId { get; set; }
 
         public double TotalPrice
         {

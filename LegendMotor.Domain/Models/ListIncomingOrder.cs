@@ -14,5 +14,6 @@ public class ListIncomingOrder
     public string Status { get; set; }
     public string OrderHeaderId { get; set; }
     public string InvoiceId { get; set; }
+    public List<OrderLineDetail> OrderLines { get; set; }
 
 }

@@ -1,14 +1,7 @@
-﻿using LegendMotor.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using LegendMotor.Dal.Repository;
+using LegendMotor.Domain.Abstractions.Repositories;
+using LegendMotor.Domain.Models;
+
 
 namespace LegendMotor.WinForm
 {
@@ -16,6 +9,12 @@ namespace LegendMotor.WinForm
     {
         private Form form;
         private Dealer dealer;
+        private readonly IOrderHeaderRepository _orderHeaderRepository;
+        private readonly IBinLocationSpareRepository _binLocationSpareRepository;
+        private readonly IOrderLineRepository _orderLineRepository;
+        private readonly IReservedSpareRepository _reservedSpareRepository;
+        private readonly IInvoiceRepository _invoiceRepository;
+        private readonly IPurchasingOrderRepository _purchasingOrderRepository;
         public CheckoutForm(Form form, Dealer dealer)
         {
             InitializeComponent();
@@ -24,6 +23,12 @@ namespace LegendMotor.WinForm
             lbl_dealer_value.Text = dealer.Name;
             txt_invoiceAddress.Text = dealer.Address;
             txt_invoiceName.Text = dealer.Name;
+            _orderHeaderRepository = new OrderHeaderRepository();
+            _binLocationSpareRepository = new BinLocationSpareRepository();
+            _orderLineRepository = new OrderLineRepository();
+            _reservedSpareRepository = new ReservedSpareRepository();
+            _invoiceRepository = new InvoiceRepository();
+            _purchasingOrderRepository = new PurchasingOrderRepository();
         }
 
         private void CheckoutForm_Load(object sender, EventArgs e)
@@ -141,40 +146,31 @@ namespace LegendMotor.WinForm
                 MessageBox.Show("Please select a contact type");
                 return;
             }
-            using (SqlConnection con = new SqlConnection(Config.ConnectionString))
-            {
-                con.Open();
                 string query = "INSERT INTO OrderHeader (OrderHeaderId, CreatedAt, UpdatedAt) VALUES (@OrderHeaderId, @CreatedAt, @UpdatedAt)";
-                Guid orderHeaderId = Guid.NewGuid();
-                using (SqlCommand cmd = new SqlCommand(query, con))
+                OrderHeader header = new OrderHeader();
+                header.OrderHeaderId = Guid.NewGuid().ToString();
+                header.CreatedAt = header.UpdatedAt = DateTime.Now;
+                
+                try
                 {
-                    cmd.Parameters.AddWithValue("@OrderHeaderId", orderHeaderId);
-                    cmd.Parameters.AddWithValue("@CreatedAt", DateTime.Now);
-                    cmd.Parameters.AddWithValue("@UpdatedAt", DateTime.Now);
-                    int result = cmd.ExecuteNonQuery();
-                    if (result == 0)
-                    {
-                        MessageBox.Show("Failed to create order");
-                        con.Close();
-                        return;
-                    }
+                    _orderHeaderRepository.AddOrderHeader(header);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Failed to create order");
+                    return;
                 }
 
                 List<RequireOrderItem> items = new List<RequireOrderItem>();
                 bool needWaitingPurhcingOrder = false;
                 foreach (CartItem item in CartManager.Instance.GetItems())
                 {
-                    query = "SELECT * FROM BinLocation_Spare WHERE Id = @Id";
+                    BinLocationSpare binLocationSpare = _binLocationSpareRepository.GetBinLocationSpareById(item.SparePartId);
                     bool needWaitingPurhcingOrderLine = false;
-                    using (SqlCommand cmd = new SqlCommand(query, con))
-                    {
-                        cmd.Parameters.AddWithValue("@Id", item.SparePartId);
-                        using (SqlDataReader dr = cmd.ExecuteReader())
-                        {
-                            while (dr.Read())
+                            if (binLocationSpare != null)
                             {
-                                int reorderLevel = Convert.ToInt32(dr["ROL"]);
-                                int curStock = Convert.ToInt32(dr["Stock"]);
+                                int reorderLevel = binLocationSpare.ROL;
+                                int curStock = binLocationSpare.Stock;
                                 int newStock = curStock - item.Quantity > 0 ? curStock - item.Quantity : 0;
                                 if (newStock == 0)
                                 {
@@ -190,128 +186,97 @@ namespace LegendMotor.WinForm
                                     items.Add(requireOrderItem);
                                     if (newStock >= 0)
                                     {
-                                        query = "UPDATE BinLocation_Spare SET Stock = @Stock WHERE BinLocationCode = @BinLocationCode AND Id = @Id";
-                                        using (SqlCommand cmd2 = new SqlCommand(query, con))
-                                        {
-                                            cmd2.Parameters.AddWithValue("@Stock", newStock);
-                                            cmd2.Parameters.AddWithValue("@BinLocationCode", dr["BinLocationCode"].ToString());
-                                            cmd2.Parameters.AddWithValue("@Id", item.SparePartId);
-                                            cmd2.ExecuteNonQuery();
-                                        }
+                                        BinLocationSpare bls = _binLocationSpareRepository.GetBinLocationSpareById(item.SparePartId);
+                                        bls.Stock = newStock;
+                                        bls.BinLocationCode = binLocationSpare.BinLocationCode;
+                                        _binLocationSpareRepository.UpdateBinLocationSpare(bls);
                                     }
                                 } else
                                 {
-                                    query = "UPDATE BinLocation_Spare SET Stock = @Stock WHERE BinLocationCode = @BinLocationCode AND Id = @Id";
-                                    using (SqlCommand cmd2 = new SqlCommand(query, con))
-                                    {
-                                        cmd2.Parameters.AddWithValue("@Stock", newStock);
-                                        cmd2.Parameters.AddWithValue("@BinLocationCode", dr["BinLocationCode"].ToString());
-                                        cmd2.Parameters.AddWithValue("@Id", item.SparePartId);
-                                        cmd2.ExecuteNonQuery();
-                                    }
+                                    BinLocationSpare bls = _binLocationSpareRepository
+                                                    .GetBinLocationSpareByBinLocationCodeAndId
+                                                    (
+                                                        binLocationSpare.BinLocationCode,
+                                                        item.SparePartId
+                                                    );
+                                    bls.Stock = newStock;
+                                    _binLocationSpareRepository .UpdateBinLocationSpare(bls);
                                 }
-                                
-                            }
-                        }
-                    }
 
                     query = "INSERT INTO OrderLine (LineId, OrderHeaderId, SparePartId, Quantity, Status) VALUES (@LineId, @OrderHeaderId, @SparePartId, @Quantity, @Status)";
-                    using (SqlCommand cmd = new SqlCommand(query, con))
-                    {
-                        cmd.Parameters.AddWithValue("@LineId", Guid.NewGuid());
-                        cmd.Parameters.AddWithValue("@OrderHeaderId", orderHeaderId);
-                        cmd.Parameters.AddWithValue("@SparePartId", item.SparePartId);
-                        cmd.Parameters.AddWithValue("@Quantity", item.Quantity);
-                        cmd.Parameters.AddWithValue("@Price", item.Price);
-                        cmd.Parameters.AddWithValue("@Status", needWaitingPurhcingOrderLine ? "Pending" : "Available");
+                    OrderLine line = new OrderLine();
+                    line.LineId = Guid.NewGuid().ToString();
+                    line.OrderHeaderId = header.OrderHeaderId;
+                    line.SparePartId = item.SparePartId;
+                    line.Quantity = item.Quantity;
+                    line.Status = needWaitingPurhcingOrderLine ? "Pending" : "Available";
+                    _orderLineRepository.AddOrderLine(line);
 
-                        cmd.ExecuteNonQuery();
-                    }
-
-                    if (item.ReservedItemId != Guid.Empty)
+                    if (item.ReservedItemId != "")
                     {
                         query = "DELETE FROM ReservedSpare WHERE ReservedSpareId = @ReservedSpareId";
-                        using (SqlCommand cmd = new SqlCommand(query, con))
-                        {
-                            cmd.Parameters.AddWithValue("@ReservedSpareId", item.ReservedItemId);
-                            cmd.ExecuteNonQuery();
-                        }
+                        _reservedSpareRepository.RemoveReservedItemById(item.ReservedItemId);
 
                         query = "UPDATE BinLocation_Spare SET Reserved = Reserved - @ReservedQuantity WHERE Id = @SparePartId";
-                        using (SqlCommand cmd = new SqlCommand(query, con))
-                        {
-                            cmd.Parameters.AddWithValue("@ReservedQuantity", item.Quantity);
-                            cmd.Parameters.AddWithValue("@SparePartId", item.SparePartId);
-                            cmd.ExecuteNonQuery();
-                        }
+                        BinLocationSpare bls = _binLocationSpareRepository.GetBinLocationSpareById(item.SparePartId);
+                        bls.Reserved = item.Quantity;
+                        _binLocationSpareRepository.UpdateBinLocationSpare(bls);
                     }
                 }
                 
 
                 query = "INSERT INTO Invoice (InvoiceId, InvoiceDate, InvoiceAmount) VALUES (@InvoiceId, @InvoiceDate, @InvoiceAmount)";
-                Guid invoiceId = Guid.NewGuid();
-                using (SqlCommand cmd = new SqlCommand(query, con))
-                {
-                    cmd.Parameters.AddWithValue("@InvoiceId", invoiceId);
-                    cmd.Parameters.AddWithValue("@InvoiceDate", DateTime.Now);
-                    cmd.Parameters.AddWithValue("@InvoiceAmount", CartManager.Instance.GetTotalPrice());
-                    cmd.ExecuteNonQuery();
-                }
+                Invoice invoice = new Invoice();
+                invoice.InvoiceId = Guid.NewGuid().ToString();
+                invoice.InvoiceDate = DateTime.Now;
+                invoice.InvoiceAmount = CartManager.Instance.GetTotalPrice();
+                _invoiceRepository.AddInvoice(invoice);
+
+
 
                 query = "INSERT INTO IncomingOrder (OrderId, InvoiceName, InvoiceAddress, DeliveryAddress, DealerCode, Type, Remark, Status, StaffId, OrderHeaderId, InvoiceId) VALUES (@OrderId, @InvoiceName, @InvoiceAddress, @DeliveryAddress, @DealerCode, @Type, @Remark, @Status, @StaffId, @OrderHeaderId, @InvoiceId)";
-                Guid incomingOrderId = Guid.NewGuid();
-                using (SqlCommand cmd = new SqlCommand(query, con))
-                {
-                    cmd.Parameters.AddWithValue("@OrderId", incomingOrderId);
-                    cmd.Parameters.AddWithValue("@InvoiceName", txt_invoiceName.Text);
-                    cmd.Parameters.AddWithValue("@InvoiceAddress", txt_invoiceAddress.Text);
-                    cmd.Parameters.AddWithValue("@DeliveryAddress", txt_delivery.Text);
-                    cmd.Parameters.AddWithValue("@DealerCode", dealer.DealerCode);
-                    cmd.Parameters.AddWithValue("@Type", comboBox1.SelectedItem.ToString());
-                    cmd.Parameters.AddWithValue("@Remark", richTextBox1.Text);
-                    cmd.Parameters.AddWithValue("@Status", needWaitingPurhcingOrder ? "Pending" : "Available");
-                    cmd.Parameters.AddWithValue("@StaffId", StaffManager.Instance.GetStaffId());
-                    cmd.Parameters.AddWithValue("@OrderHeaderId", orderHeaderId);
-                    cmd.Parameters.AddWithValue("@InvoiceId", invoiceId);
-                    cmd.ExecuteNonQuery();
-                }
+                IncomingOrder incomingOrder = new IncomingOrder();
+                incomingOrder.OrderId = Guid.NewGuid().ToString();
+                incomingOrder.InvoiceName = txt_invoiceName.Text;
+                incomingOrder.InvoiceAddress = txt_invoiceAddress.Text;
+                incomingOrder.DeliveryAddress = txt_delivery.Text;
+                incomingOrder.DealerCode = dealer.DealerCode;
+                incomingOrder.Type = comboBox1.SelectedItem.ToString();
+                incomingOrder.Remark = richTextBox1.Text;
+                incomingOrder.Status = needWaitingPurhcingOrder ? "Pending" : "Available";
+                incomingOrder.staffId = StaffManager.Instance.GetStaffId();
+                incomingOrder.OrderHeaderId = header.OrderHeaderId;
+                incomingOrder.InvoiceId = invoice.InvoiceId;
 
                 if (items.Count > 0)
                 {
                     query = "INSERT INTO OrderHeader (OrderHeaderId, CreatedAt, UpdatedAt) VALUES (@OrderHeaderId, @CreatedAt, @UpdatedAt)";
-                    Guid purchasingOrderHeaderId = Guid.NewGuid();
-
-                    using (SqlCommand cmd = new SqlCommand(query, con))
-                    {
-                        cmd.Parameters.AddWithValue("@OrderHeaderId", purchasingOrderHeaderId);
-                        cmd.Parameters.AddWithValue("@CreatedAt", DateTime.Now);
-                        cmd.Parameters.AddWithValue("@UpdatedAt", DateTime.Now);
-                        cmd.ExecuteNonQuery();
-                    }
+                    string purchasingOrderHeaderId = Guid.NewGuid().ToString();
+                    OrderHeader orderHeader = new OrderHeader();
+                    orderHeader.OrderHeaderId = purchasingOrderHeaderId;
+                    orderHeader.CreatedAt = DateTime.Now;
+                    orderHeader.UpdatedAt = DateTime.Now;
+                    _orderHeaderRepository.AddOrderHeader(orderHeader);
 
                     query = "INSERT INTO OrderLine (LineId, OrderHeaderId, SparePartId, Quantity) VALUES (@LineId, @OrderHeaderId, @SparePartId, @Quantity)";
-                    foreach (RequireOrderItem item in items)
+
+                    foreach (RequireOrderItem requireOrderItem in items)
                     {
-                        using (SqlCommand cmd = new SqlCommand(query, con))
-                        {
-                            cmd.Parameters.AddWithValue("@LineId", Guid.NewGuid());
-                            cmd.Parameters.AddWithValue("@OrderHeaderId", purchasingOrderHeaderId);
-                            cmd.Parameters.AddWithValue("@SparePartId", item.SparePartId);
-                            cmd.Parameters.AddWithValue("@Quantity", item.Quantity);
-                            cmd.Parameters.AddWithValue("@Price", item.Price);
-                            cmd.ExecuteNonQuery();
-                        }
+                        OrderLine line = new OrderLine();
+                        line.LineId = Guid.NewGuid().ToString();
+                        line.OrderHeaderId = purchasingOrderHeaderId;
+                        line.SparePartId = requireOrderItem.SparePartId;
+                        line.Quantity = requireOrderItem.Quantity;
+                        _orderLineRepository.AddOrderLine(line);
                     }
 
                     query = "INSERT INTO PurchasingOrder (OrderId, Status, IncomingOrderId, OrderHeaderId) VALUES (@OrderId, @Status, @IncomingOrderId, @OrderHeaderId)";
-                    using (SqlCommand cmd = new SqlCommand(query, con))
-                    {
-                        cmd.Parameters.AddWithValue("@OrderId", Guid.NewGuid());
-                        cmd.Parameters.AddWithValue("@Status", "Pending");
-                        cmd.Parameters.AddWithValue("@IncomingOrderId", incomingOrderId);
-                        cmd.Parameters.AddWithValue("@OrderHeaderId", purchasingOrderHeaderId);
-                        cmd.ExecuteNonQuery();
-                    }
+                    PurchasingOrder purchasingOrder = new PurchasingOrder();
+                    purchasingOrder.OrderId = Guid.NewGuid().ToString();
+                    purchasingOrder.Status = "Pending";
+                    purchasingOrder.IncomingOrderId = incomingOrder.OrderId;
+                    purchasingOrder.OrderHeaderId = purchasingOrderHeaderId;
+                    _purchasingOrderRepository.AddPurchaseOrder(purchasingOrder);
                 }
 
                 CartManager.Instance.Clear();

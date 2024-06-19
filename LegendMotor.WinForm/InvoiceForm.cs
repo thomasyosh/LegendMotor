@@ -12,10 +12,10 @@ using System.Windows.Forms;
 
 namespace LegendMotor.WinForm
 {
-    public partial class Invoice : Form
+    public partial class InvoiceForm : Form
     {
         private InvoiceDetails invoice = new InvoiceDetails();
-        public Invoice(Guid orderId)
+        public InvoiceForm(string orderId)
         {
             InitializeComponent();
             invoice.OrderId = orderId;
@@ -58,7 +58,7 @@ namespace LegendMotor.WinForm
                         invoice.OrderLines = new List<OrderLine>();
                         while (dr.Read())
                         {
-                            OrderLine orderLine = new OrderLine();
+                            OrderLineDetail orderLine = new OrderLineDetail();
                             orderLine.LineId = Guid.Parse(dr["LineId"].ToString().Trim());
                             orderLine.Quantity = int.Parse(dr["Quantity"].ToString().Trim());
                             orderLine.Status = dr["Status"].ToString().Trim();
